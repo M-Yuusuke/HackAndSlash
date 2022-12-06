@@ -15,7 +15,7 @@ namespace Calculation
     * GameObjectManagerのインスタンスを生成する
     * @note staticメソッドを内部で使用する際に必要
     */
-    void GameObjectManager::InstanceCreate()
+    void GameObjectManager::CreateInstance()
     {
         if (!Instance)
         {
@@ -28,9 +28,8 @@ namespace Calculation
     * @detail アプリケーション終了前に呼び出し、マネージャが確保した領域と
     * マネージャ自身の解放処理を行う。
     */
-    void GameObjectManager::InstanceDestory()
+    void GameObjectManager::DestoryInstance()
     {
-        ReleaseAllObj();
         if (Instance)
         {
             delete Instance;
@@ -109,27 +108,85 @@ namespace Calculation
     */
     void GameObjectManager::Update(float deltaTime)
     {
+        //全てのアクターの更新
         for (auto& tag : ObjectTagAll)
         {
+            //該当タグにある全てのオブジェクトを更新
             for (int i = 0; i < Instance->Objects[tag].size(); i++)
             {
                 Instance->Objects[tag][i]->Update(deltaTime);
             }
         }
+        //ペンディング中のオブジェクトをアクティブリストに追加
+        for (auto pending : Instance->PendingObjects)
+        {
+            ObjectTag tag = pending->GetTag();
+            Instance->Objects[tag].emplace_back(pending);
+        }
+        Instance->PendingObjects.clear();
+
+        //全てのアクター内で死んでいるアクターをDeadObjectへ一時保管
+        std::vector<GameObjectBase*> DeadObjects;
+        for (auto& tag : ObjectTagAll)
+        {
+            for (int i = 0; i < Instance->Objects[tag].size(); i++)
+            {
+                if (!Instance->Objects[tag][i]->IsAlive())
+                {
+                    DeadObjects.emplace_back(Instance->Objects[tag][i]);
+                }
+            }
+        }
+
+        //死んでいるオブジェクトを削除
+        for (auto& DeadObj : DeadObjects)
+        {
+            delete DeadObj;
+        }
+        DeadObjects.clear();
     }
 
+    //全オブジェクトの描画処理
     void GameObjectManager::Draw()
     {
+        for (auto& tag : ObjectTagAll)
+        {
+            for (int i = 0; i < Instance->Objects[tag].size(); i++)
+            {
+                if (Instance->Objects[tag][i]->IsAlive())
+                {
+                    Instance->Objects[tag][i]->Draw();
+                }
+            }
+        }
     }
 
+    //全オブジェクトの当たり判定
     void GameObjectManager::Collision()
     {
+        //プレイヤーとエネミーの当たり判定
+        for (int enemynum = 0; enemynum < Instance->Objects[ObjectTag::Enemy].size(); enemynum++)
+        {
+            Instance->Objects[ObjectTag::Player][0]->OnCollisionEnter(Instance->Objects[ObjectTag::Enemy][enemynum]);
+        }
+
+        //プレイヤーとステージの当たり判定
+        for (int bgnum = 0; bgnum < Instance->Objects[ObjectTag::BackGround].size(); bgnum++)
+        {
+            Instance->Objects[ObjectTag::Player][0]->OnCollisionEnter(Instance->Objects[ObjectTag::BackGround][bgnum]);
+        }
     }
 
+    /**
+    * 指定タグの最初のオブジェクトを返す
+    * @param[in] tag ObjectTagの種類
+    */
     GameObjectBase* GameObjectManager::GetFirstGameObject(ObjectTag tag)
     {
-        return nullptr;
+        if (Instance->Objects[tag].size() == 0)
+        {
+            return nullptr;
+        }
+        return Instance->Objects[tag][0];
     }
-
-
 }

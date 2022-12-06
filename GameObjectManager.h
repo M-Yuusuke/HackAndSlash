@@ -11,9 +11,9 @@ namespace Calculation
     {
     public:
         //このインスタンス生成
-        static void InstanceCreate();
+        static void CreateInstance();
         //このインスタンス破棄
-        static void InstanceDestory();
+        static void DestoryInstance();
         //ゲームオブジェクトの登録
         static void Entry(GameObjectBase* newObj);
         //ゲームオブジェクトの削除
