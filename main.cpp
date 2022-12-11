@@ -1,9 +1,9 @@
 #include "DxLib.h"
-#include "SceneBase.h"
-#include "SceneManager.h"
-#include "GameObjectBase.h"
-#include "GameObjectManager.h"
-#include "AssetManager.h"
+#include "Scene/SceneBase/SceneBase.h"
+#include "Scene/SceneManager/SceneManager.h"
+#include "GameObject/GameObjectBase/GameObjectBase.h"
+#include "GameObject/GameObjectManager/GameObjectManager.h"
+#include "GameObject/AssetManager/AssetManager.h"
 
 // ƒvƒƒOƒ‰ƒ€‚Í WinMain ‚©‚çn‚Ü‚è‚Ü‚·
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)

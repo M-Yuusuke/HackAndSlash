@@ -19,9 +19,6 @@
     <Filter Include="Scene\SceneBase">
       <UniqueIdentifier>{8688a87b-42bf-4b70-8791-1995468e71a6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scene\Initialize">
-      <UniqueIdentifier>{6f42152f-f0c9-4204-8aa1-739d90a7a955}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Scene\Title">
       <UniqueIdentifier>{8e5db3a8-6d55-4997-854f-e15f72886f01}</UniqueIdentifier>
     </Filter>
@@ -35,173 +32,185 @@
       <UniqueIdentifier>{0ef7de04-7454-4794-85b0-0c0dc0a7fbd2}</UniqueIdentifier>
     </Filter>
     <Filter Include="GameObject">
-      <UniqueIdentifier>{153ea70f-2e25-4419-9f2c-c425336a12b0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObject\Collision">
-      <UniqueIdentifier>{1944ee0b-cfc1-4b11-acc7-f0c6605aec06}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObject\Collision\CollisionBase">
-      <UniqueIdentifier>{a6916cbc-c858-4b16-b111-6d2363a475e9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObject\Collision\LineSegment">
-      <UniqueIdentifier>{98debdcb-90bb-4018-98c7-7d7c0b2ee367}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObject\Collision\Sphere">
-      <UniqueIdentifier>{07a7dd88-2ce0-4274-b044-84e9e1a45771}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObject\Collision\Capsule">
-      <UniqueIdentifier>{b4135cb3-bb5a-4450-a273-437a9fe2bba1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObject\GameObjectBase">
-      <UniqueIdentifier>{f0d47205-af1f-4138-b5fa-d03be6da5f1f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObject\Manager">
-      <UniqueIdentifier>{9e7166f1-a39c-43b4-8567-750d944a37ee}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObject\Manager\GameObjectManager">
-      <UniqueIdentifier>{fdc85697-6ae9-40b5-a375-3d55575cee61}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObject\Manager\AssetManager">
-      <UniqueIdentifier>{f142484f-9b53-4274-a37a-2e785b0eb1ac}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObject\Camera">
-      <UniqueIdentifier>{70bbbf10-8d40-4d45-b940-b78959e1b208}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Rule">
-      <UniqueIdentifier>{49d6e143-8fd1-495c-8b6b-5ccfab633820}</UniqueIdentifier>
+      <UniqueIdentifier>{6d925ec3-2428-4cb3-8115-a0e66f870284}</UniqueIdentifier>
     </Filter>
     <Filter Include="GameObject\AnimationController">
-      <UniqueIdentifier>{9124c18d-96a6-4cf8-b854-ce357ef217ee}</UniqueIdentifier>
+      <UniqueIdentifier>{e7d04a5d-041c-4e2d-b67f-13cd338bf2a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\AssetManager">
+      <UniqueIdentifier>{e2be714a-cb74-4f50-ae53-cddca9399faf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\VectorCalculation">
+      <UniqueIdentifier>{4da7be0e-87e7-48b8-a791-ddaa6a8a7661}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Collision">
+      <UniqueIdentifier>{276ba487-d675-4376-9f90-5215a0f1afee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Collision\Capsule">
+      <UniqueIdentifier>{ba64092c-bf76-4299-838c-5d9e742fb29c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Collision\CollisionBase">
+      <UniqueIdentifier>{4bed8cda-50b6-4bf0-ad10-5c8c43e66fab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Collision\LineSegment">
+      <UniqueIdentifier>{4f96cf96-97dc-4a40-a232-491873ff5daf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Collision\Sphere">
+      <UniqueIdentifier>{d674b05c-abc5-4f03-b861-ee40cdee4fe2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\GameObjectBase">
+      <UniqueIdentifier>{dae8f2ea-6651-4efc-b505-02dcc5950339}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\GameObjectManager">
+      <UniqueIdentifier>{69ce8133-3896-4a56-86ad-f3b538add33d}</UniqueIdentifier>
     </Filter>
     <Filter Include="GameObject\Stage">
-      <UniqueIdentifier>{9ffd21fb-633f-41a0-9eb6-15f12661b1f4}</UniqueIdentifier>
+      <UniqueIdentifier>{261bae79-5246-4407-9167-b36ce4add1e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System">
+      <UniqueIdentifier>{c4ce771e-0658-4a17-9c1c-748ae6cfecc0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System\Rule">
+      <UniqueIdentifier>{49d6e143-8fd1-495c-8b6b-5ccfab633820}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\Initialize">
+      <UniqueIdentifier>{baef372b-05f8-4088-b563-e83c01ea1d9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Collision\CollisionFunction">
+      <UniqueIdentifier>{d42fd125-7c3a-4298-b27b-9b5f8d420aab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Objects">
+      <UniqueIdentifier>{089ecbd1-0d5c-4b98-9845-4db88c78a854}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Objects\Camera">
+      <UniqueIdentifier>{fabbe40c-dc58-41bb-8bd3-43148a82e727}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="SceneBase.cpp">
-      <Filter>Scene\SceneBase</Filter>
-    </ClCompile>
-    <ClCompile Include="Initialize.cpp">
-      <Filter>Scene\Initialize</Filter>
-    </ClCompile>
-    <ClCompile Include="Title.cpp">
-      <Filter>Scene\Title</Filter>
-    </ClCompile>
-    <ClCompile Include="Result.cpp">
-      <Filter>Scene\Result</Filter>
-    </ClCompile>
-    <ClCompile Include="Play.cpp">
-      <Filter>Scene\Play</Filter>
-    </ClCompile>
-    <ClCompile Include="VectorCalculation.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneManager.cpp">
-      <Filter>Scene\SceneManger</Filter>
-    </ClCompile>
-    <ClCompile Include="CollisionBase.cpp">
-      <Filter>GameObject\Collision\CollisionBase</Filter>
-    </ClCompile>
-    <ClCompile Include="LineSegment.cpp">
-      <Filter>GameObject\Collision\LineSegment</Filter>
-    </ClCompile>
-    <ClCompile Include="Sphere.cpp">
-      <Filter>GameObject\Collision\Sphere</Filter>
-    </ClCompile>
-    <ClCompile Include="Capsule.cpp">
-      <Filter>GameObject\Collision\Capsule</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObjectBase.cpp">
-      <Filter>GameObject\GameObjectBase</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObjectManager.cpp">
-      <Filter>GameObject\Manager\GameObjectManager</Filter>
-    </ClCompile>
-    <ClCompile Include="AssetManager.cpp">
-      <Filter>GameObject\Manager\AssetManager</Filter>
-    </ClCompile>
-    <ClCompile Include="Collision.cpp">
-      <Filter>GameObject\Collision</Filter>
-    </ClCompile>
-    <ClCompile Include="Camera.cpp">
-      <Filter>GameObject\Camera</Filter>
-    </ClCompile>
-    <ClCompile Include="Rule.cpp">
-      <Filter>Rule</Filter>
-    </ClCompile>
-    <ClCompile Include="AnimationController.cpp">
+    <ClCompile Include="GameObject\AnimationController\AnimationController.cpp">
       <Filter>GameObject\AnimationController</Filter>
     </ClCompile>
-    <ClCompile Include="Stage.cpp">
+    <ClCompile Include="GameObject\AssetManager\AssetManager.cpp">
+      <Filter>GameObject\AssetManager</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject\VectorCalculation\VectorCalculation.cpp">
+      <Filter>GameObject\VectorCalculation</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject\Collision\Capsule\Capsule.cpp">
+      <Filter>GameObject\Collision\Capsule</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject\Collision\CollisionBase\CollisionBase.cpp">
+      <Filter>GameObject\Collision\CollisionBase</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject\Collision\LineSegment\LineSegment.cpp">
+      <Filter>GameObject\Collision\LineSegment</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject\Collision\Sphere\Sphere.cpp">
+      <Filter>GameObject\Collision\Sphere</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject\GameObjectBase\GameObjectBase.cpp">
+      <Filter>GameObject\GameObjectBase</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject\GameObjectManager\GameObjectManager.cpp">
+      <Filter>GameObject\GameObjectManager</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject\Stage\Stage.cpp">
       <Filter>GameObject\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="System\Rule\Rule.cpp">
+      <Filter>System\Rule</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\Play\Play.cpp">
+      <Filter>Scene\Play</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\Initialize\Initialize.cpp">
+      <Filter>Scene\Initialize</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\Result\Result.cpp">
+      <Filter>Scene\Result</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\SceneBase\SceneBase.cpp">
+      <Filter>Scene\SceneBase</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\SceneManager\SceneManager.cpp">
+      <Filter>Scene\SceneManger</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\Title\Title.cpp">
+      <Filter>Scene\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject\Objects\Camera\Camera.cpp">
+      <Filter>GameObject\Objects\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject\Collision\CollisionFunction\CollisionFunction.cpp">
+      <Filter>GameObject\Collision\CollisionFunction</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="SceneBase.h">
-      <Filter>Scene\SceneBase</Filter>
-    </ClInclude>
-    <ClInclude Include="Initialize.h">
-      <Filter>Scene\Initialize</Filter>
-    </ClInclude>
-    <ClInclude Include="Title.h">
-      <Filter>Scene\Title</Filter>
-    </ClInclude>
-    <ClInclude Include="Result.h">
-      <Filter>Scene\Result</Filter>
-    </ClInclude>
-    <ClInclude Include="Play.h">
-      <Filter>Scene\Play</Filter>
-    </ClInclude>
-    <ClInclude Include="VectorCalculation.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneManager.h">
-      <Filter>Scene\SceneManger</Filter>
-    </ClInclude>
-    <ClInclude Include="CollisionType.h">
-      <Filter>GameObject\Collision</Filter>
-    </ClInclude>
-    <ClInclude Include="CollisionBase.h">
-      <Filter>GameObject\Collision\CollisionBase</Filter>
-    </ClInclude>
-    <ClInclude Include="LineSegment.h">
-      <Filter>GameObject\Collision\LineSegment</Filter>
-    </ClInclude>
-    <ClInclude Include="Sphere.h">
-      <Filter>GameObject\Collision\Sphere</Filter>
-    </ClInclude>
-    <ClInclude Include="Capsule.h">
-      <Filter>GameObject\Collision\Capsule</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObjectBase.h">
-      <Filter>GameObject\GameObjectBase</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjectTag.h">
-      <Filter>GameObject\GameObjectBase</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObjectManager.h">
-      <Filter>GameObject\Manager\GameObjectManager</Filter>
-    </ClInclude>
-    <ClInclude Include="AssetManager.h">
-      <Filter>GameObject\Manager\AssetManager</Filter>
-    </ClInclude>
-    <ClInclude Include="Collision.h">
-      <Filter>GameObject\Collision</Filter>
-    </ClInclude>
-    <ClInclude Include="Camera.h">
-      <Filter>GameObject\Camera</Filter>
-    </ClInclude>
-    <ClInclude Include="Rule.h">
-      <Filter>Rule</Filter>
-    </ClInclude>
-    <ClInclude Include="AnimationController.h">
+    <ClInclude Include="GameObject\AnimationController\AnimationController.h">
       <Filter>GameObject\AnimationController</Filter>
     </ClInclude>
-    <ClInclude Include="Stage.h">
+    <ClInclude Include="GameObject\AssetManager\AssetManager.h">
+      <Filter>GameObject\AssetManager</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\VectorCalculation\VectorCalculation.h">
+      <Filter>GameObject\VectorCalculation</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\Collision\CollisionType.h">
+      <Filter>GameObject\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\Collision\Capsule\Capsule.h">
+      <Filter>GameObject\Collision\Capsule</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\Collision\CollisionBase\CollisionBase.h">
+      <Filter>GameObject\Collision\CollisionBase</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\Collision\LineSegment\LineSegment.h">
+      <Filter>GameObject\Collision\LineSegment</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\Collision\Sphere\Sphere.h">
+      <Filter>GameObject\Collision\Sphere</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\GameObjectBase\GameObjectBase.h">
+      <Filter>GameObject\GameObjectBase</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\GameObjectManager\GameObjectManager.h">
+      <Filter>GameObject\GameObjectManager</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\Stage\Stage.h">
       <Filter>GameObject\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\ObjectTag.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="System\Rule\Rule.h">
+      <Filter>System\Rule</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\Play\Play.h">
+      <Filter>Scene\Play</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\Initialize\Initialize.h">
+      <Filter>Scene\Initialize</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\Result\Result.h">
+      <Filter>Scene\Result</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\SceneBase\SceneBase.h">
+      <Filter>Scene\SceneBase</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\SceneManager\SceneManager.h">
+      <Filter>Scene\SceneManger</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\Title\Title.h">
+      <Filter>Scene\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\Objects\Camera\Camera.h">
+      <Filter>GameObject\Objects\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\Collision\CollisionFunction\CollisionFunction.h">
+      <Filter>GameObject\Collision\CollisionFunction</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
