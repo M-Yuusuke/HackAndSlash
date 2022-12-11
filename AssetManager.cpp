@@ -5,10 +5,6 @@
 namespace Calculation
 {
     AssetManager* AssetManager::Instance = nullptr;
-    AssetManager::~AssetManager()
-    {
-        ReleaseAllAsset();
-    }
 
     /**
     * AssetManagerのインスタンスを生成する

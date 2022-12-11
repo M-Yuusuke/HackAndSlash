@@ -1,15 +1,10 @@
 #include "DxLib.h"
 #include "GameObjectManager.h"
-#include "GameObjectBase.h"
+
 
 namespace Calculation
 {
     GameObjectManager* GameObjectManager::Instance = nullptr;
-
-    GameObjectManager::~GameObjectManager()
-    {
-        ReleaseAllObj();
-    }
 
     /**
     * GameObjectManagerのインスタンスを生成する
@@ -69,7 +64,7 @@ namespace Calculation
         //解放するオブジェクトのタグを得る
         ObjectTag tag = releaseObj->GetTag();
 
-        //アクティブオブジェクトないから削除オブジェクトを検索
+        //アクティブオブジェクト内から削除オブジェクトを検索
         itr = std::find(Instance->Objects[tag].begin(), Instance->Objects[tag].end(), releaseObj);
         if (itr != Instance->Objects[tag].end())
         {
@@ -96,6 +91,20 @@ namespace Calculation
             {
                 delete Instance->Objects[tag].back();
                 Instance->Objects[tag].pop_back();
+            }
+        }
+    }
+
+    /**
+    * 全オブジェクトの初期化処理
+    */
+    void GameObjectManager::Init()
+    {
+        for (auto& tag : ObjectTagAll)
+        {
+            for (int i = 0; i < Instance->Objects[tag].size(); i++)
+            {
+                Instance->Objects[tag][i]->Initialize();
             }
         }
     }
@@ -171,9 +180,9 @@ namespace Calculation
         }
 
         //プレイヤーとステージの当たり判定
-        for (int bgnum = 0; bgnum < Instance->Objects[ObjectTag::BackGround].size(); bgnum++)
+        for (int bgnum = 0; bgnum < Instance->Objects[ObjectTag::Stage].size(); bgnum++)
         {
-            Instance->Objects[ObjectTag::Player][0]->OnCollisionEnter(Instance->Objects[ObjectTag::BackGround][bgnum]);
+            Instance->Objects[ObjectTag::Player][0]->OnCollisionEnter(Instance->Objects[ObjectTag::Stage][bgnum]);
         }
     }
 

@@ -5,11 +5,11 @@ class Initialize : public SceneBase
 {
 public:
     //シングルトンの生成
-    static Initialize* Create();
+    static Initialize* CreateInstance();
     //シングルトンの破棄
-    static void Destroy();
+    static void DestroyInstance();
 
-    SceneBase* Update(SceneManager* sceneManager)override;
+    SceneBase* Update()override;
 
 private:
     Initialize();

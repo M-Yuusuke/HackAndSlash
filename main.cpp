@@ -1,11 +1,15 @@
 #include "DxLib.h"
 #include "SceneBase.h"
 #include "SceneManager.h"
+#include "GameObjectBase.h"
+#include "GameObjectManager.h"
+#include "AssetManager.h"
 
 // プログラムは WinMain から始まります
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
 	// ＤＸライブラリ初期化処理
+	SetUseDirect3DVersion(DX_DIRECT3D_11);
 	if (DxLib_Init() == -1)
 	{
 		// エラーが起きたら直ちに終了
@@ -16,6 +20,12 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	//解像度・カラービット数の指定
 	SetGraphMode(1920, 1080, 32);
 
+	// Ｚバッファを有効にする
+	SetUseZBuffer3D(TRUE);
+
+	// Ｚバッファへの書き込みを有効にする
+	SetWriteZBuffer3D(TRUE);
+
 	SceneManager* sceneManager = SceneManager::Create();
 	SceneBase* scene = nullptr;
 	scene = sceneManager->NextScene(scene);
@@ -23,7 +33,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	//ゲームループ
 	while (!ProcessMessage())
 	{
-		scene = scene->Update(sceneManager);
+		scene = scene->Update();
 		scene->Draw();
 	}
 

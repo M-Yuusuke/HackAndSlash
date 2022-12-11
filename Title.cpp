@@ -12,7 +12,7 @@ Title::~Title()
 {
 }
 
-Title* Title::Create()
+Title* Title::CreateInstance()
 {
     if (!Instance)
     {
@@ -21,17 +21,17 @@ Title* Title::Create()
     return Instance;
 }
 
-void Title::Destroy()
+void Title::DestroyInstance()
 {
     delete Instance;
     Instance = nullptr;
 }
 
-SceneBase* Title::Update(SceneManager* sceneManager)
+SceneBase* Title::Update()
 {
     if (CheckHitKey(KEY_INPUT_SPACE))
     {
-        return sceneManager->NextScene(this);
+        return SceneManager::NextScene(this);
     }
     return this;
 }

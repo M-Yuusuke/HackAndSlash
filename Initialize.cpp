@@ -13,7 +13,7 @@ Initialize::~Initialize()
 
 }
 
-Initialize* Initialize::Create()
+Initialize* Initialize::CreateInstance()
 {
     if (!Instance)
     {
@@ -22,18 +22,21 @@ Initialize* Initialize::Create()
     return Instance;
 }
 
-void Initialize::Destroy()
+void Initialize::DestroyInstance()
 {
-    delete Instance;
-    Instance = nullptr;
+    if (Instance)
+    {
+        delete Instance;
+        Instance = nullptr;
+    }
 }
 
-SceneBase* Initialize::Update(SceneManager* sceneManager)
+SceneBase* Initialize::Update()
 {
     ClearDrawScreen();
     
     ScreenFlip();
-    return sceneManager->NextScene(this);
+    return SceneManager::NextScene(this);
 }
 
 

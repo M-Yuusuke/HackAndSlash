@@ -11,7 +11,7 @@ Result::~Result()
 {
 }
 
-Result* Result::Create()
+Result* Result::CreateInstance()
 {
     if (!Instance)
     {
@@ -20,17 +20,17 @@ Result* Result::Create()
     return Instance;
 }
 
-void Result::Destroy()
+void Result::DestroyInstance()
 {
     delete Instance;
     Instance = nullptr;
 }
 
-SceneBase* Result::Update(SceneManager* sceneManager)
+SceneBase* Result::Update()
 {
     if (CheckHitKey(KEY_INPUT_SPACE))
     {
-        return sceneManager->NextScene(this);
+        return SceneManager::NextScene(this);
     }
     return this;
 }

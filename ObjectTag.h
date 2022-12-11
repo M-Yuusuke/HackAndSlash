@@ -11,7 +11,7 @@ namespace Calculation
         PlayerWeapon,
         Enemy,
         EnemyWeapon,
-        BackGround,
+        Stage,
         Camera,
         Effect
     };
@@ -28,7 +28,7 @@ namespace Calculation
         ObjectTag::PlayerWeapon,
         ObjectTag::Enemy,
         ObjectTag::EnemyWeapon,
-        ObjectTag::BackGround,
+        ObjectTag::Stage,
         ObjectTag::Camera,
         ObjectTag::Effect
     };

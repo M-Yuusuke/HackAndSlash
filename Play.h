@@ -4,11 +4,11 @@ class Play : public SceneBase
 {
 public:
     //シングルトンの生成
-    static Play* Create();
+    static Play* CreateInstance();
     //シングルトンの破棄
-    static void Destroy();
+    static void DestroyInstance();
 
-    SceneBase* Update(SceneManager* sceneManager)override;
+    SceneBase* Update()override;
     void Draw()override;
 
 private:

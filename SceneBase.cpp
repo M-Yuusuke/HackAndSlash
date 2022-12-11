@@ -1,13 +1,13 @@
 #include "SceneBase.h"
+#include "Rule.h"
 
-SceneBase::SceneBase()
+SceneBase::SceneBase() :
+    rule(Rule::CreateInstance())
 {
 }
 
 SceneBase::~SceneBase()
 {
-}
-
-void SceneBase::Draw()
-{
+    Rule::DestoryInstance();
+    rule = nullptr;
 }

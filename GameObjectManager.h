@@ -1,9 +1,11 @@
 #pragma once
 #include <vector>
 #include <unordered_map>
+#include "GameObjectBase.h"
+#include "ObjectTag.h" 
 
-class GameObjectBase;
-class ObjectTag;
+//class GameObjectBase;
+//class ObjectTag;
 
 namespace Calculation
 {
@@ -20,8 +22,10 @@ namespace Calculation
         static void Release(GameObjectBase* releaseObj);
         //全オブジェクト削除
         static void ReleaseAllObj();
-        void Update(float deltaTime);
-        void Draw();
+
+        static void Init();
+        static void Update(float deltaTime);
+        static void Draw();
 
         //当たり判定
         void Collision();
@@ -29,8 +33,8 @@ namespace Calculation
 
     private:
         //シングルトン
-        GameObjectManager();
-        ~GameObjectManager();
+        GameObjectManager() {}
+        ~GameObjectManager() { ReleaseAllObj(); }
         //マネージャーのインスタンス
         static GameObjectManager* Instance;
 

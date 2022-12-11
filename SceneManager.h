@@ -12,16 +12,16 @@ public:
     //ƒVƒ“ƒOƒ‹ƒgƒ“‚Ì”jŠü
     static void Destroy();
 
-    SceneBase* NextScene(SceneBase* NowScene)const;
+    static SceneBase* NextScene(SceneBase* NowScene);
 
 private:
     SceneManager();
     ~SceneManager();
     static SceneManager* Instance;
 
-    Initialize* initialize;
-    Title* title;
-    Play* play;
-    Result* result;
+    static Initialize* initialize;
+    static Title* title;
+    static Play* play;
+    static Result* result;
 };
 

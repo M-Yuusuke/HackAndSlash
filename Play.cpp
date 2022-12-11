@@ -1,6 +1,9 @@
 #include "DxLib.h"
 #include "Play.h"
 #include "SceneManager.h"
+#include "VectorCalculation.h"
+#include "GameObjectManager.h"
+#include "Rule.h"
 
 Play* Play::Instance = nullptr;
 
@@ -11,7 +14,7 @@ Play::Play()
 Play::~Play()
 {
 }
-Play* Play::Create()
+Play* Play::CreateInstance()
 {
     if (!Instance)
     {
@@ -20,24 +23,28 @@ Play* Play::Create()
     return Instance;
 }
 
-void Play::Destroy()
+void Play::DestroyInstance()
 {
     delete Instance;
     Instance = nullptr;
 }
 
-SceneBase* Play::Update(SceneManager* sceneManager)
+SceneBase* Play::Update()
 {
+    rule->SetNowTime();
+    rule->SetDeltaTime();
+    Calculation::GameObjectManager::Update(rule->GetDeltaTime());
     if (CheckHitKey(KEY_INPUT_SPACE))
     {
-        return sceneManager->NextScene(this);
+        return SceneManager::NextScene(this);
     }
+    rule->SetPrevTime();
     return this;
 }
 
 void Play::Draw()
 {
     ClearDrawScreen();
-    
+    Calculation::GameObjectManager::Draw();
     ScreenFlip();
 }

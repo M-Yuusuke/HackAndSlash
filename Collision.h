@@ -1,8 +1,11 @@
 #pragma once
 #include "DxLib.h"
-class Sphere;
-class LineSegment;
-class Capsule;
+#include "Sphere.h"
+#include "LineSegment.h"
+#include "Capsule.h"
+//class Sphere;
+//class LineSegment;
+//class Capsule;
 
 namespace Calculation
 {

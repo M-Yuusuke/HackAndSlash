@@ -55,6 +55,27 @@
     <Filter Include="GameObject\GameObjectBase">
       <UniqueIdentifier>{f0d47205-af1f-4138-b5fa-d03be6da5f1f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\Manager">
+      <UniqueIdentifier>{9e7166f1-a39c-43b4-8567-750d944a37ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Manager\GameObjectManager">
+      <UniqueIdentifier>{fdc85697-6ae9-40b5-a375-3d55575cee61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Manager\AssetManager">
+      <UniqueIdentifier>{f142484f-9b53-4274-a37a-2e785b0eb1ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Camera">
+      <UniqueIdentifier>{70bbbf10-8d40-4d45-b940-b78959e1b208}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rule">
+      <UniqueIdentifier>{49d6e143-8fd1-495c-8b6b-5ccfab633820}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\AnimationController">
+      <UniqueIdentifier>{9124c18d-96a6-4cf8-b854-ce357ef217ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Stage">
+      <UniqueIdentifier>{9ffd21fb-633f-41a0-9eb6-15f12661b1f4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -93,14 +114,29 @@
     <ClCompile Include="Capsule.cpp">
       <Filter>GameObject\Collision\Capsule</Filter>
     </ClCompile>
-    <ClCompile Include="Collision.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObjectManager.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="GameObjectBase.cpp">
       <Filter>GameObject\GameObjectBase</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjectManager.cpp">
+      <Filter>GameObject\Manager\GameObjectManager</Filter>
+    </ClCompile>
+    <ClCompile Include="AssetManager.cpp">
+      <Filter>GameObject\Manager\AssetManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision.cpp">
+      <Filter>GameObject\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>GameObject\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Rule.cpp">
+      <Filter>Rule</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimationController.cpp">
+      <Filter>GameObject\AnimationController</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage.cpp">
+      <Filter>GameObject\Stage</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -140,17 +176,32 @@
     <ClInclude Include="Capsule.h">
       <Filter>GameObject\Collision\Capsule</Filter>
     </ClInclude>
-    <ClInclude Include="Collision.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObjectManager.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="GameObjectBase.h">
       <Filter>GameObject\GameObjectBase</Filter>
     </ClInclude>
     <ClInclude Include="ObjectTag.h">
       <Filter>GameObject\GameObjectBase</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjectManager.h">
+      <Filter>GameObject\Manager\GameObjectManager</Filter>
+    </ClInclude>
+    <ClInclude Include="AssetManager.h">
+      <Filter>GameObject\Manager\AssetManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision.h">
+      <Filter>GameObject\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>GameObject\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Rule.h">
+      <Filter>Rule</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationController.h">
+      <Filter>GameObject\AnimationController</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage.h">
+      <Filter>GameObject\Stage</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

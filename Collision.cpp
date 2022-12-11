@@ -1,7 +1,4 @@
 #include "Collision.h"
-#include "Sphere.h"
-#include "LineSegment.h"
-#include "Capsule.h"
 #include "VectorCalculation.h"
 namespace Calculation
 {
@@ -9,15 +6,16 @@ namespace Calculation
     * 球同士の当たり判定
     * @return 衝突している場合にはtrueを返す
     */
-    bool Calculation::Collision::CollisionPair(const Sphere& sphereL, const Sphere& sphereR)
+    bool Collision::CollisionPair(const Sphere& sphereL, const Sphere& sphereR)
     {
         return HitCheck_Sphere_Sphere(sphereL.GetWorldCenter(),sphereL.GetRadius(), sphereR.GetWorldCenter(), sphereR.GetRadius());
     }
+
     /**
     * 線分と球の当たり判定
     * @return 衝突している場合にはtrueを返す
     */
-    bool Calculation::Collision::CollisionPair(const LineSegment& line, const Sphere& sphere)
+    bool Collision::CollisionPair(const LineSegment& line, const Sphere& sphere)
     {
         return HitCheck_Line_Sphere(line.GetWorldStart(), line.GetWorldEnd(), sphere.GetWorldCenter(), sphere.GetRadius());
     }
@@ -26,7 +24,7 @@ namespace Calculation
     * 球とメッシュの当たり判定
     * @return 衝突している場合にはtrueを返す
     */
-    bool Calculation::Collision::CollisionPair(const Sphere& sphere, const int modelHandle, MV1_COLL_RESULT_POLY_DIM& collisionInfo)
+    bool Collision::CollisionPair(const Sphere& sphere, const int modelHandle, MV1_COLL_RESULT_POLY_DIM& collisionInfo)
     {
         collisionInfo = MV1CollCheck_Sphere(modelHandle, -1, sphere.GetWorldCenter(), sphere.GetRadius());
         if (collisionInfo.HitNum == 0)
@@ -40,7 +38,7 @@ namespace Calculation
     * 線分とメッシュの当たり判定
     * @return 衝突している場合にはtrueを返す
     */
-    bool Calculation::Collision::CollisionPair(const LineSegment& line, const int modelHandle, MV1_COLL_RESULT_POLY& collisionInfo)
+    bool Collision::CollisionPair(const LineSegment& line, const int modelHandle, MV1_COLL_RESULT_POLY& collisionInfo)
     {
         collisionInfo = MV1CollCheck_Line(modelHandle, -1, line.GetWorldStart(), line.GetWorldEnd());
         return collisionInfo.HitFlag;
@@ -50,7 +48,7 @@ namespace Calculation
     * 球とメッシュのめり込みを計算する
     * @return VECTOR 球がメッシュから離れる向きの移動ベクトルを返す
     */
-    VECTOR Calculation::Collision::CalcSpherePushBackVecFormMesh(const Sphere& sphere, const MV1_COLL_RESULT_POLY_DIM& collisionInfo)
+    VECTOR Collision::CalcSpherePushBackVecFormMesh(const Sphere& sphere, const MV1_COLL_RESULT_POLY_DIM& collisionInfo)
     {
         //衝突球
 
@@ -91,7 +89,7 @@ namespace Calculation
             if (HitCheck_Sphere_Triangle(MoveCandidate, Radius,
                 collisionInfo.Dim[i].Position[0],
                 collisionInfo.Dim[i].Position[1],
-                collisionInfo.Dim[i].Position[2]) == true)
+                collisionInfo.Dim[i].Position[2]) == TRUE)
             {
                 //めり込みが解消するまで押し戻す
                 VECTOR MoveVec;

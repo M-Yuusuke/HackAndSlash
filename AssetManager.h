@@ -23,14 +23,14 @@ namespace Calculation
 
     private:
         //シングルトン
-        AssetManager();
-        ~AssetManager();
+        AssetManager() {}
+        ~AssetManager() { ReleaseAllAsset(); }
         static AssetManager* Instance;
 
-        //メッシュ原本(原本とｓちえ保存だけ行い、Duplicateされたものを返す)
+        //メッシュ原本(原本として保存だけ行い、Duplicateされたものを返す)
         std::unordered_map<std::string, int> MeshMap;
         //アニメーション原本
-        std::unordered_map < std::string, int > AnimationMap;
+        std::unordered_map < std::string, int> AnimationMap;
         //メッシュをコピーしたもの(これを使用する)
         std::vector<int> DuplicatesMesh;
     };

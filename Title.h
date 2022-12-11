@@ -4,11 +4,11 @@ class Title : public SceneBase
 {
 public:
     //シングルトンの生成
-    static Title* Create();
+    static Title* CreateInstance();
     //シングルトンの破棄
-    static void Destroy();
+    static void DestroyInstance();
 
-    SceneBase* Update(SceneManager* sceneManager)override;
+    SceneBase* Update()override;
     void Draw()override;
 
 private:

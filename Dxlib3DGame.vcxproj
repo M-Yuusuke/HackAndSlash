@@ -151,6 +151,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AnimationController.cpp" />
+    <ClCompile Include="AssetManager.cpp" />
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Capsule.cpp" />
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="CollisionBase.cpp" />
@@ -161,13 +164,18 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Play.cpp" />
     <ClCompile Include="Result.cpp" />
+    <ClCompile Include="Rule.cpp" />
     <ClCompile Include="SceneBase.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="Sphere.cpp" />
+    <ClCompile Include="Stage.cpp" />
     <ClCompile Include="Title.cpp" />
     <ClCompile Include="VectorCalculation.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AnimationController.h" />
+    <ClInclude Include="AssetManager.h" />
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="Capsule.h" />
     <ClInclude Include="Collision.h" />
     <ClInclude Include="CollisionBase.h" />
@@ -179,9 +187,11 @@
     <ClInclude Include="ObjectTag.h" />
     <ClInclude Include="Play.h" />
     <ClInclude Include="Result.h" />
+    <ClInclude Include="Rule.h" />
     <ClInclude Include="SceneBase.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="Sphere.h" />
+    <ClInclude Include="Stage.h" />
     <ClInclude Include="Title.h" />
     <ClInclude Include="VectorCalculation.h" />
   </ItemGroup>
