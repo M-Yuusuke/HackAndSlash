@@ -34,10 +34,7 @@ SceneBase* Play::Update()
     rule->SetNowTime();
     rule->SetDeltaTime();
     Calculation::GameObjectManager::Update(rule->GetDeltaTime());
-    if (CheckHitKey(KEY_INPUT_SPACE))
-    {
-        return SceneManager::NextScene(this);
-    }
+    Calculation::GameObjectManager::Collision();
     rule->SetPrevTime();
     return this;
 }

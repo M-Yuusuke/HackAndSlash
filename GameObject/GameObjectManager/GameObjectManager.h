@@ -25,7 +25,7 @@ namespace Calculation
         static void Draw();
 
         //“–‚½‚è”»’è
-        void Collision();
+        static void Collision();
         static GameObjectBase* GetFirstGameObject(ObjectTag tag);
 
     private:

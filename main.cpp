@@ -39,7 +39,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	scene = sceneManager->NextScene(scene);
 
 	//ƒQ[ƒ€ƒ‹[ƒv
-	while (!ProcessMessage())
+	while (!ProcessMessage() && CheckHitKey(KEY_INPUT_ESCAPE) == 0)
 	{
 		Rule::SetNowTime();
 		Rule::SetDeltaTime();
