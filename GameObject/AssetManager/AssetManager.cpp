@@ -23,7 +23,7 @@ namespace Calculation
     * @detail アプリケーション終了前に呼び出し、マネージャが確保した領域と
     * マネージャ自身の解放処理を行う。
     */
-    void Calculation::AssetManager::DestoryInstance()
+    void Calculation::AssetManager::DestroyInstance()
     {
         if (Instance)
         {

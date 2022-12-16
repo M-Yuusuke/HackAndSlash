@@ -9,10 +9,10 @@ public:
     void Initialize();
 
     //ŽžŠÔŠÖŒWˆ—
-    void SetNowTime() { NowTime = GetNowCount(); }
-    void SetDeltaTime() { DeltaTime = (NowTime - PrevTime) / 1000.0f; }
+    static void SetNowTime() { Instance->NowTime = GetNowCount(); }
+    static void SetDeltaTime() { Instance->DeltaTime = (Instance->NowTime - Instance->PrevTime) / 1000.0f; }
     float GetDeltaTime()const { return DeltaTime; }
-    void SetPrevTime() { PrevTime = NowTime; }
+    static void SetPrevTime() { Instance->PrevTime = Instance->NowTime; }
 
 
 private:

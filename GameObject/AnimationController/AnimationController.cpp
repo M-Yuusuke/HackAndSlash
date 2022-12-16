@@ -5,9 +5,9 @@
 namespace Calculation
 {
     /**
-* コンストラクタ
-* @param[in] modelHandle アニメーションを適用するモデルハンドル
-*/
+    * コンストラクタ
+    * @param[in] modelHandle アニメーションを適用するモデルハンドル
+    */
     AnimationController::AnimationController(int modelHandle) :
         ModelHandle(modelHandle),
         NowAnimTypeNum(-1),
@@ -64,7 +64,7 @@ namespace Calculation
     * 毎フレームAddAnimationTimeを呼び出す必要がある
     */
     void AnimationController::AddAnimaitonTime(float deltaTime)
-    {
+     {
         NowAnimTime += deltaTime * AnimDatas[NowAnimTypeNum].AnimationPlayFps;
         if (AnimDatas[NowAnimTypeNum].LoopAnimation &&
             NowAnimTime > AnimDatas[NowAnimTypeNum].AnimationTotalTime)
@@ -93,8 +93,10 @@ namespace Calculation
             }
             //新規アニメーションをセット
             NowAnimTypeNum = animID;
-            AttachedIndex = MV1AttachAnim(ModelHandle, AttachedIndex, NowAnimTime);
+            AttachedIndex = MV1AttachAnim(ModelHandle, AnimDatas[animID].AnimationIndex, AnimDatas[NowAnimTypeNum].AnimationHandle, TRUE);
         }
+        NowAnimTime = 0.0f;
+        MV1SetAttachAnimTime(ModelHandle, AttachedIndex, NowAnimTime);
     }
 
     /**

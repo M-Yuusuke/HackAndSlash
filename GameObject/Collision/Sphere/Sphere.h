@@ -9,6 +9,10 @@ namespace Calculation
         Sphere(const VECTOR& center, float radius);
         void Move(const VECTOR& pos)override;
 
+        void SetLocalCenter(const VECTOR& pos) { LocalCenter = pos; }
+        void SetRadius(const float radius) { Radius = radius; }
+
+
         VECTOR GetWorldCenter() const { return WorldCenter; }
 
     private:

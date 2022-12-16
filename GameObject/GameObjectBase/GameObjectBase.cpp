@@ -8,16 +8,16 @@ namespace Calculation
     * @param[in] tag オブジェクトの種類
     */
     GameObjectBase::GameObjectBase(ObjectTag tag) :
-        Tag(tag),
-        Pos(),
-        ModelHandle(-1),
-        Visible(true),
-        Alive(true),
+        tag(tag),
+        pos(),
+        modelHandle(-1),
+        visible(true),
+        alive(true),
         collisionType(),
         collisionLine(),
         collisionSphere(),
         collisionCapsule(),
-        CollisionModel(-1)
+        collisionModel(-1)
     {
     }
 
@@ -27,29 +27,29 @@ namespace Calculation
     * @param[in] pos オブジェクトの位置
     */
     GameObjectBase::GameObjectBase(ObjectTag tag, VECTOR pos):
-        Tag(tag),
-        Pos(pos),
-        ModelHandle(-1),
-        Visible(true),
-        Alive(true),
+        tag(tag),
+        pos(pos),
+        modelHandle(-1),
+        visible(true),
+        alive(true),
         collisionType(),
         collisionLine(),
         collisionSphere(),
         collisionCapsule(),
-        CollisionModel(-1)
+        collisionModel(-1)
     {
     }
 
     /**ゲームオブジェクトデストラクタ*/
     GameObjectBase::~GameObjectBase()
     {
-        if (ModelHandle != -1)
+        if (modelHandle != -1)
         {
             //コリジョン情報の後始末
-            MV1TerminateCollInfo(CollisionModel);
+            MV1TerminateCollInfo(collisionModel);
             //モデルデータの後始末
-            //AssetManager::ReleaseMesh(ModelHandle);
-            ModelHandle = -1;
+            //AssetManager::ReleaseMesh(modelHandle);
+            modelHandle = -1;
         }
     }
 
@@ -61,15 +61,15 @@ namespace Calculation
     */
     void GameObjectBase::CollisionUpdate()
     {
-        collisionSphere.Move(Pos);
-        collisionLine.Move(Pos);
-        collisionCapsule.Move(Pos);
+        collisionSphere.Move(pos);
+        collisionLine.Move(pos);
+        collisionCapsule.Move(pos);
 
         //モデルの当たり判定情報を再構築
-        if (CollisionModel != -1)
+        if (collisionModel != -1)
         {
-            MV1SetPosition(CollisionModel, Pos);
-            MV1SetupCollInfo(CollisionModel);
+            MV1SetPosition(collisionModel, pos);
+            MV1SetupCollInfo(collisionModel);
         }
     }
 
@@ -80,11 +80,11 @@ namespace Calculation
         DrawSphere3D(collisionSphere.GetWorldCenter(), collisionSphere.GetRadius(), 8, GetColor(255, 0, 0), GetColor(0, 0, 0), FALSE);
         DrawCapsule3D(collisionCapsule.GetWorldStart(), collisionCapsule.GetWorldEnd(), collisionCapsule.GetRadius(), 8, GetColor(0, 255, 0), GetColor(0, 0, 0),FALSE);
         //コリジョンモデルが存在していたら半透明描画
-        if (CollisionModel != -1)
+        if (collisionModel != -1)
         {
             //半透明にする
             SetDrawBlendMode(DX_BLENDMODE_ALPHA, 128);
-            MV1DrawModel(CollisionModel);
+            MV1DrawModel(collisionModel);
             //元に戻す
             SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 255);
         }

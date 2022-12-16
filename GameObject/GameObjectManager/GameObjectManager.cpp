@@ -21,7 +21,7 @@ namespace Calculation
     * @detail アプリケーション終了前に呼び出し、マネージャが確保した領域と
     * マネージャ自身の解放処理を行う。
     */
-    void GameObjectManager::DestoryInstance()
+    void GameObjectManager::DestroyInstance()
     {
         if (Instance)
         {

@@ -64,9 +64,6 @@
     <Filter Include="GameObject\GameObjectManager">
       <UniqueIdentifier>{69ce8133-3896-4a56-86ad-f3b538add33d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameObject\Stage">
-      <UniqueIdentifier>{261bae79-5246-4407-9167-b36ce4add1e3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="System">
       <UniqueIdentifier>{c4ce771e-0658-4a17-9c1c-748ae6cfecc0}</UniqueIdentifier>
     </Filter>
@@ -84,6 +81,12 @@
     </Filter>
     <Filter Include="GameObject\Objects\Camera">
       <UniqueIdentifier>{fabbe40c-dc58-41bb-8bd3-43148a82e727}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Objects\Player">
+      <UniqueIdentifier>{6ffb282e-b8bb-43c1-958f-06a6e0c9b86a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Objects\Stage">
+      <UniqueIdentifier>{261bae79-5246-4407-9167-b36ce4add1e3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -117,9 +120,6 @@
     <ClCompile Include="GameObject\GameObjectManager\GameObjectManager.cpp">
       <Filter>GameObject\GameObjectManager</Filter>
     </ClCompile>
-    <ClCompile Include="GameObject\Stage\Stage.cpp">
-      <Filter>GameObject\Stage</Filter>
-    </ClCompile>
     <ClCompile Include="System\Rule\Rule.cpp">
       <Filter>System\Rule</Filter>
     </ClCompile>
@@ -146,6 +146,12 @@
     </ClCompile>
     <ClCompile Include="GameObject\Collision\CollisionFunction\CollisionFunction.cpp">
       <Filter>GameObject\Collision\CollisionFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject\Objects\Stage\Stage.cpp">
+      <Filter>GameObject\Objects\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject\Objects\Player\Player.cpp">
+      <Filter>GameObject\Objects\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -179,9 +185,6 @@
     <ClInclude Include="GameObject\GameObjectManager\GameObjectManager.h">
       <Filter>GameObject\GameObjectManager</Filter>
     </ClInclude>
-    <ClInclude Include="GameObject\Stage\Stage.h">
-      <Filter>GameObject\Stage</Filter>
-    </ClInclude>
     <ClInclude Include="GameObject\ObjectTag.h">
       <Filter>GameObject</Filter>
     </ClInclude>
@@ -211,6 +214,12 @@
     </ClInclude>
     <ClInclude Include="GameObject\Collision\CollisionFunction\CollisionFunction.h">
       <Filter>GameObject\Collision\CollisionFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\Objects\Stage\Stage.h">
+      <Filter>GameObject\Objects\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\Objects\Player\Player.h">
+      <Filter>GameObject\Objects\Player</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

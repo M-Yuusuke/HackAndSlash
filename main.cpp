@@ -2,8 +2,9 @@
 #include "Scene/SceneBase/SceneBase.h"
 #include "Scene/SceneManager/SceneManager.h"
 #include "GameObject/GameObjectBase/GameObjectBase.h"
-#include "GameObject/GameObjectManager/GameObjectManager.h"
+#include "../GameObject/GameObjectManager/GameObjectManager.h"
 #include "GameObject/AssetManager/AssetManager.h"
+#include "System/Rule/Rule.h"
 
 // プログラムは WinMain から始まります
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
@@ -26,18 +27,30 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	// Ｚバッファへの書き込みを有効にする
 	SetWriteZBuffer3D(TRUE);
 
-	SceneManager* sceneManager = SceneManager::Create();
+	//ゲームオブジェクトマネージャを生成
+	Calculation::GameObjectManager::CreateInstance();
+	//アセットマネージャを生成
+	Calculation::AssetManager::CreateInstance();
+	//ルールクラスの生成
+	Rule::CreateInstance();
+
+	SceneManager* sceneManager = SceneManager::CreateInstance();
 	SceneBase* scene = nullptr;
 	scene = sceneManager->NextScene(scene);
 
 	//ゲームループ
 	while (!ProcessMessage())
 	{
+		Rule::SetNowTime();
+		Rule::SetDeltaTime();
 		scene = scene->Update();
 		scene->Draw();
+		Rule::SetPrevTime();
 	}
-
-	SceneManager::Destroy();
+	
+	Calculation::GameObjectManager::DestroyInstance();
+	Calculation::AssetManager::DestroyInstance();
+	SceneManager::DestroyInstance();
 	sceneManager = nullptr;
 	scene = nullptr;
 	DxLib_End();				// ＤＸライブラリ使用の終了処理

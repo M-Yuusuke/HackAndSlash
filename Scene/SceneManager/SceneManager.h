@@ -8,9 +8,9 @@ class SceneManager
 {
 public:
     //シングルトンの生成
-    static SceneManager* Create();
+    static SceneManager* CreateInstance();
     //シングルトンの破棄
-    static void Destroy();
+    static void DestroyInstance();
 
     static SceneBase* NextScene(SceneBase* NowScene);
 

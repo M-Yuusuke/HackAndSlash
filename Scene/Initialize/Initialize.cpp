@@ -2,12 +2,18 @@
 #include "Initialize.h"
 #include "../SceneManager/SceneManager.h"
 #include "../GameObject/GameObjectManager/GameObjectManager.h"
+#include "../GameObject/Objects/Player/Player.h"
+#include "../GameObject/Objects/Stage/Stage.h"
+#include "../GameObject/Objects/Camera/Camera.h"
 
 Initialize* Initialize::Instance = nullptr;
 
 Initialize::Initialize()
 {
-    Calculation::GameObjectManager::Init();
+    Calculation::GameObjectManager::Entry(Calculation::Player::CreateInstance());
+    Calculation::GameObjectManager::Entry(Calculation::Stage::CreateInstance());
+    Calculation::GameObjectManager::Entry(Calculation::Camera::CreateInstance());
+
 }
 
 Initialize::~Initialize()
@@ -36,7 +42,7 @@ void Initialize::DestroyInstance()
 SceneBase* Initialize::Update()
 {
     ClearDrawScreen();
-    
+    Calculation::GameObjectManager::Init();
     ScreenFlip();
     return SceneManager::NextScene(this);
 }

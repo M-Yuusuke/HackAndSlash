@@ -39,7 +39,7 @@ SceneBase* Title::Update()
 void Title::Draw()
 {
     ClearDrawScreen();
-    
+    DrawString(50, 50, "Title\n Start To Space", GetColor(255, 255, 255));
     ScreenFlip();
 }
 

@@ -12,7 +12,7 @@ namespace Calculation
         //このインスタンス生成
         static void CreateInstance();
         //このインスタンス破棄
-        static void DestoryInstance();
+        static void DestroyInstance();
         //ゲームオブジェクトの登録
         static void Entry(GameObjectBase* newObj);
         //ゲームオブジェクトの削除

@@ -25,7 +25,7 @@ SceneManager::~SceneManager()
     result = nullptr;
 }
 
-SceneManager* SceneManager::Create()
+SceneManager* SceneManager::CreateInstance()
 {
     if (!Instance)
     {
@@ -38,7 +38,7 @@ SceneManager* SceneManager::Create()
     return Instance;
 }
 
-void SceneManager::Destroy()
+void SceneManager::DestroyInstance()
 {
     if (Instance)
     {

@@ -8,11 +8,12 @@ namespace Calculation
     Camera* Camera::Instance = nullptr;
     Camera::Camera():
     Calculation::GameObjectBase(ObjectTag::Camera),
-    LookPos(VGet(0, 0, 0)),
-    CameraOffset(VGet(0,0,0)),
-    AimCameraPos(VGet(0, 0, 0)),
-    AimLookPos(VGet(0, 0, 0))
+    lookPos({0,0,0}),
+    cameraOffset({ 0,0,0 }),
+    aimCameraPos({ 0,0,0 }),
+    aimLookPos({ 0,0,0 })
     {
+        cameraOffset = firstCameraPos;
     }
 
     Camera::~Camera()
@@ -38,10 +39,11 @@ namespace Calculation
 
     void Camera::Initialize()
     {
-        //(0,80,-200)の視点から(0,80,0)のターゲットを見る角度にカメラを設置
-        SetCameraPositionAndTarget_UpVecY(VGet(0, 80, -200), VGet(0, 80, 0));
-        Instance->Pos = VGet(0, Instance->CameraYPos, Instance->CameraZPos);
+        //カメラの位置をセット
+        Instance->pos = firstCameraPos;
         SetCameraNearFar(Instance->Near, Instance->Far);
+        //カメラのポジションの視点からプレイヤーの位置のターゲットを見る角度にカメラを設置
+        SetCameraPositionAndTarget_UpVecY(Instance->pos, GameObjectManager::GetFirstGameObject(ObjectTag::Player)->GetPos());
         //ゲームオブジェクトマネージャーにカメラを登録
         Calculation::GameObjectManager::Entry(Instance);
     }
@@ -50,18 +52,18 @@ namespace Calculation
         GameObjectBase* Player = GameObjectManager::GetFirstGameObject(ObjectTag::Player);
         if (Player)
         {
-            AimLookPos = Player->GetPos();
-            AimCameraPos = AimLookPos + CameraOffset;
+            aimLookPos = Player->GetPos();
+            aimCameraPos = aimLookPos + cameraOffset;
 
             //カメラ位置から目標転移向かうベクトルを算出
-            VECTOR LookMoveDir = AimLookPos - LookPos;
-            VECTOR PosMoveDir = AimCameraPos - Pos;
+            VECTOR LookMoveDir = aimLookPos - lookPos;
+            VECTOR PosMoveDir = aimCameraPos - pos;
 
             //注視点とカメラ位置を徐々に目標地点に近づける
-            LookPos += LookMoveDir * CameraSpringStrength * deltaTime;
-            Pos += PosMoveDir * CameraSpringStrength * deltaTime;
+            lookPos += LookMoveDir * CameraSpringStrength * deltaTime;
+            pos += PosMoveDir * CameraSpringStrength * deltaTime;
 
-            SetCameraPositionAndTarget_UpVecY(Pos, LookPos);
+            SetCameraPositionAndTarget_UpVecY(pos, lookPos);
         }
     }
 

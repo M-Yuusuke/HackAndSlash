@@ -11,7 +11,7 @@ namespace Calculation
         //インスタンス生成
         static void CreateInstance();
         //インスタンス破棄
-        static void DestoryInstance();
+        static void DestroyInstance();
         //メッシュ(モデル)の取得
         static int GetMesh(std::string meshFileName);
         //アニメーションの取得
