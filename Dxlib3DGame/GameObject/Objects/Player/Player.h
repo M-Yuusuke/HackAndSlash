@@ -69,6 +69,12 @@ namespace Calculation
         /// </summary>
         void Rotate();
 
+        /// <summary>
+        /// プレイヤーとステージの当たり判定
+        /// </summary>
+        /// <param name="other">当たっているオブジェクトのポインタ</param>
+        void OnCollisionStage(const GameObjectBase* other);
+
         //Playerクラスのインスタンスを保持
         static Player* Instance;
 
@@ -105,7 +111,7 @@ namespace Calculation
         //アニメーション種類ID
         int animTypeID;
 
-        //回転中か
+        //回転中かどうか
         bool rotateNow;
     };
 }

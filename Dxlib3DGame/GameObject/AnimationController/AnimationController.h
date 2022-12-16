@@ -5,6 +5,9 @@
 
 namespace Calculation
 {
+    /// <summary>
+    /// アニメーション関連の処理を行うクラス
+    /// </summary>
     class AnimationController final
     {
     public:
@@ -15,19 +18,21 @@ namespace Calculation
         /// アニメーションの追加
         /// </summary>
         /// <param name="animFileName">アニメーションのファイルパス</param>
-        /// <param name="animFps">アニメーション再生のフレームレート（デフォルトで30FPS）</param>
-        /// <param name="isLoop">アニメーションのループ再生</param>
+        /// <param name="animFps">アニメーション再生のフレームレート（省略可。デフォルトで30fps）</param>
+        /// <param name="isLoop">アニメーションのループ再生させるか（省略可。デフォルトでループさせる）</param>
         /// <returns>アニメーション再生に必要なID</returns>
         int AddAnimation(std::string animFileName, float animFps = 30.0f, bool isLoop = true);
 
         /// <summary>
-        /// アニメーションの時間のセット
+        /// アニメーションの増分時刻を設定
+        /// 毎フレームAddAnimationを呼び出す必要がある
         /// </summary>
         /// <param name="deltaTime">1フレームの経過時間</param>
         void AddAnimaitonTime(float deltaTime);
         
         /// <summary>
         /// アニメーションの再生開始
+        /// 同じアニメーションが指定された場合、始めから再生する
         /// </summary>
         /// <param name="animID">アニメーションID</param>
         void StartAnimaiton(int animID);
@@ -47,7 +52,11 @@ namespace Calculation
         struct AnimData
         {
         public:
+            /// <summary>
+            /// アニメーションデータ構造体 コンストラクタ
+            /// </summary>
             AnimData();
+
             int animationHandle;
             //アタッチするアニメーション番号
             int animationIndex;

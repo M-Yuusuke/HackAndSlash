@@ -5,20 +5,45 @@
 
 namespace Calculation
 {
+    /// <summary>
+    /// モデル・アニメーションの管理を行うクラス
+    /// </summary>
     class AssetManager final
     {
     public:
-        //インスタンス生成
+        /// <summary>
+        /// インスタンス生成
+        /// </summary>
         static void CreateInstance();
-        //インスタンス破棄
+
+        /// <summary>
+        /// インスタンス破棄
+        /// </summary>
         static void DestroyInstance();
-        //メッシュ(モデル)の取得
+
+        /// <summary>
+        /// メッシュ(モデル)ハンドルの取得
+        /// </summary>
+        /// <param name="meshFileName">モデルのファイルパス</param>
+        /// <returns>メッシュハンドル</returns>
         static int GetMesh(std::string meshFileName);
-        //アニメーションの取得
+
+        /// <summary>
+        /// アニメーションハンドルの取得
+        /// </summary>
+        /// <param name="animationFileName">アニメーションのファイルパス</param>
+        /// <returns>アニメーションハンドル</returns>
         static int GetAnimation(std::string animationFileName);
-        //メッシュ(モデル)の削除
+
+        /// <summary>
+        /// メッシュ(モデル)の削除
+        /// </summary>
+        /// <param name="meshID">削除したいメッシュハンドル</param>
         static void ReleaseMesh(int meshID);
-        //全メッシュ・アニメーションの削除
+
+        /// <summary>
+        /// 全メッシュ・アニメーションの削除
+        /// </summary>
         static void ReleaseAllAsset();
 
     private:

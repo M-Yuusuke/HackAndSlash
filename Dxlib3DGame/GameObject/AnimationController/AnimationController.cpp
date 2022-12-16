@@ -20,15 +20,13 @@ namespace Calculation
     {
     }
 
-    /**
-    * アニメーションの追加
-    * @param[in] animFileName 追加したいアニメーションファイル名
-    * @param[in] animFps アニメーションの再生速度(省略可。デフォルトで30fps)
-    * @param[in] isLoop アニメーションをループさせるか(省略可。デフォルトでループさせる)
-    * @return int アニメーション再生用ID
-    * @details コンストラクタで指定したモデルハンドルに対し、アニメーションを追加する
-    * アニメーションが追加できた時はアニメーション再生IDを返す。失敗時は-1を返す
-    */
+    /// <summary>
+    /// アニメーションの追加
+    /// </summary>
+    /// <param name="animFileName">アニメーションのファイルパス</param>
+    /// <param name="animFps">アニメーション再生のフレームレート（省略可。デフォルトで30fps）</param>
+    /// <param name="isLoop">アニメーションのループ再生させるか（省略可。デフォルトでループさせる）</param>
+    /// <returns>アニメーション再生に必要なID</returns>
     int AnimationController::AddAnimation(std::string animFileName, float animFps, bool isLoop)
     {
         AnimData Anim;
@@ -57,12 +55,11 @@ namespace Calculation
         return static_cast<int> (animDatas.size() - 1);
     }
 
-    /**
-    * アニメーションの増分時刻を設定
-    * @param[in] deltaTime 1フレームの増分時刻 秒単位
-    * @detailes StartAnimationで設定されたアニメーションの再生を進める。
-    * 毎フレームAddAnimationTimeを呼び出す必要がある
-    */
+    /// <summary>
+     /// アニメーションの増分時刻を設定
+     /// 毎フレームAddAnimationを呼び出す必要がある
+     /// </summary>
+     /// <param name="deltaTime">1フレームの経過時間</param>
     void AnimationController::AddAnimaitonTime(float deltaTime)
      {
         nowAnimTime += deltaTime * animDatas[nowAnimTypeNum].animationPlayFps;
@@ -75,13 +72,11 @@ namespace Calculation
         Test = MV1SetAttachAnimTime(modelHandle, attachedIndex, nowAnimTime);
     }
 
-    /**
-    * アニメーションの再生を開始
-    * @param[in] animID 
-    * 
-    * @detailes animIDで指定したアニメーションの再生を開始する
-    * お同じアニメーションが指定された場合、始めから再生する
-    */
+    /// <summary>
+    /// アニメーションの再生開始
+    /// 同じアニメーションが指定された場合、始めから再生する
+    /// </summary>
+    /// <param name="animID">アニメーションID</param>
     void AnimationController::StartAnimaiton(int animID)
     {
         //以前のアニメーションと違うアニメーションが来たら一度デタッチ
@@ -99,22 +94,18 @@ namespace Calculation
         MV1SetAttachAnimTime(modelHandle, attachedIndex, nowAnimTime);
     }
 
-    /**
-    * 現在指定されているアニメーションの再生を終了
-    * @detailes 現在指定されているアニメーションが終了時刻でストップする
-    * 再生途中のポーズで止まらないことに注意。ループ再生指定のアニメーションは無視される
-    */
+    /// <summary>
+    /// アニメーションの再生をストップ
+    /// </summary>
     void AnimationController::StopAnimation()
     {
         nowAnimTime = animDatas[nowAnimTypeNum].animationTotalTime;
     }
 
-    /**
-    * 現在指定されているアニメーションは再生中か？
-    * @return true:再生中 false:再生終了
-    * @detailes 現在指定されているアニメーションが再生中かを返す
-    * ループ指定されたものは常にtrueを返す
-    */
+    /// <summary>
+    /// 現在再生中か
+    /// </summary>
+    /// <returns>再生中ならtrue、停止していればfalse</returns>
     bool AnimationController::IsPlaying()
     {
         if (animDatas[nowAnimTypeNum].loopAnimation &&
@@ -125,7 +116,9 @@ namespace Calculation
         return true;
     }
 
-    /**アニメーションデータ構造体 コンストラクタ*/
+    /// <summary>
+    /// アニメーションデータ構造体 コンストラクタ
+    /// </summary>
     AnimationController::AnimData::AnimData() :
         animationHandle(-1),
         animationIndex(-1),

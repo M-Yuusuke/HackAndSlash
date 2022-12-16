@@ -153,29 +153,11 @@ namespace Calculation
         //ステージとの衝突
         if (tag == ObjectTag::Stage)
         {
-            int ColModel = other->GetCollisionModel();
+            OnCollisionStage(other);
+        }
+        if (tag == ObjectTag::Enemy)
+        {
 
-            //ステージと自分の境界球との当たり判定
-            MV1_COLL_RESULT_POLY_DIM colInfo;
-            if (collisionFunction.CollisionPair(collisionSphere, ColModel, colInfo))
-            {
-                //当たっている場合は押し戻し量を計算
-                VECTOR pushBackVec = collisionFunction.CalcSpherePushBackVecFormMesh(collisionSphere, colInfo);
-                pos += pushBackVec;
-
-                //コリジョン情報の解放
-                MV1CollResultPolyDimTerminate(colInfo);
-                CollisionUpdate();
-            }
-
-            //ステージと足元線分当たり判定
-            MV1_COLL_RESULT_POLY colInfoLine;
-            if (collisionFunction.CollisionPair(collisionLine, ColModel, colInfoLine))
-            {
-                //当たっている場合は足元を衝突点に合わせる
-                pos = colInfoLine.HitPosition;
-                CollisionUpdate();
-            }
         }
     }
 
@@ -297,6 +279,37 @@ namespace Calculation
                 //目標ベクトルに10度だけ近づけた角度
                 dir = interPolateDir;
             }
+        }
+    }
+
+    /// <summary>
+    /// プレイヤーとステージの当たり判定
+    /// </summary>
+    /// <param name="other">当たっているオブジェクトのポインタ</param>
+    void Player::OnCollisionStage(const GameObjectBase* other)
+    {
+        int ColModel = other->GetCollisionModel();
+
+        //ステージと自分の境界球との当たり判定
+        MV1_COLL_RESULT_POLY_DIM colInfo;
+        if (collisionFunction.CollisionPair(collisionSphere, ColModel, colInfo))
+        {
+            //当たっている場合は押し戻し量を計算
+            VECTOR pushBackVec = collisionFunction.CalcSpherePushBackVecFormMesh(collisionSphere, colInfo);
+            pos += pushBackVec;
+
+            //コリジョン情報の解放
+            MV1CollResultPolyDimTerminate(colInfo);
+            CollisionUpdate();
+        }
+
+        //ステージと足元線分当たり判定
+        MV1_COLL_RESULT_POLY colInfoLine;
+        if (collisionFunction.CollisionPair(collisionLine, ColModel, colInfoLine))
+        {
+            //当たっている場合は足元を衝突点に合わせる
+            pos = colInfoLine.HitPosition;
+            CollisionUpdate();
         }
     }
 }

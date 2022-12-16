@@ -6,10 +6,9 @@ namespace Calculation
 {
     AssetManager* AssetManager::Instance = nullptr;
 
-    /**
-    * AssetManagerのインスタンスを生成する
-    * @note staticメソッドを内部で使用する際に必要
-    */
+    /// <summary>
+    /// インスタンス生成
+    /// </summary>
     void Calculation::AssetManager::CreateInstance()
     {
         if (!Instance)
@@ -18,11 +17,9 @@ namespace Calculation
         }
     }
 
-    /**
-    * AssetManagerの後始末処理
-    * @detail アプリケーション終了前に呼び出し、マネージャが確保した領域と
-    * マネージャ自身の解放処理を行う。
-    */
+    /// <summary>
+    /// インスタンス破棄
+    /// </summary>
     void Calculation::AssetManager::DestroyInstance()
     {
         if (Instance)
@@ -32,15 +29,11 @@ namespace Calculation
         }
     }
 
-    /**
-    * メッシュの取得
-    * @param[in] meshFileName 取得したいメッシュファイル名
-    * @return int メッシュハンドル
-    * 
-    * @detailes メッシュ(モデル)ハンドルを取得する
-    * 同じファイル名を2度以上指定したときはファイル読み込みは行われず、複製されたハンドルを返す
-    * ファイルが見つからないときは-1を返す
-    */
+    /// <summary>
+    /// メッシュ(モデル)ハンドルの取得
+    /// </summary>
+    /// <param name="meshFileName">モデルのファイルパス</param>
+    /// <returns>メッシュハンドル</returns>
     int AssetManager::GetMesh(std::string meshFileName)
     {
         int meshID = 0;
@@ -65,15 +58,11 @@ namespace Calculation
         return meshID;
     }
 
-    /**
-    * アニメーションの読み込み
-    * @param[in] animaitonFileName 読み込みたいアニメーションファイル名
-    * @return int アニメーションハンドル
-    * 
-    * @details アニメーションをファイル読み込みし、アニメーションハンドルを返す
-    * 同じファイル名で2度以上読み込まれた場合は、読み込みを行わず、ハンドルのみ返す
-    * アニメーションは複製されない
-    */
+    /// <summary>
+    /// アニメーションハンドルの取得
+    /// </summary>
+    /// <param name="animationFileName">アニメーションのファイルパス</param>
+    /// <returns>アニメーションハンドル</returns>
     int AssetManager::GetAnimation(std::string animationFileName)
     {
         int animID = 0;
@@ -92,13 +81,10 @@ namespace Calculation
         return Instance->AnimationMap[animationFileName];
     }
 
-    /**
-    * メッシュの解放
-    * @param[in] meshID 解放したいモデルハンドル
-    * 
-    * @details　複製サれたモデルハンドルを解放する
-    * 複製されたモデルハンドルなので、全部消しても原本のモデルハンドルは残る
-    */
+    /// <summary>
+    /// メッシュ(モデル)の削除
+    /// </summary>
+    /// <param name="meshID">削除したいメッシュハンドル</param>
     void AssetManager::ReleaseMesh(int meshID)
     {
         //Duplicateの中のメッシュを検索し、削除
@@ -114,12 +100,9 @@ namespace Calculation
         Instance->DuplicatesMesh.pop_back();
     }
 
-    /**
-    * 全てのメッシュの解放
-    * 
-    * @details 複製、原本のモデルハンドル、アニメーションを全て解放する
-    * アプリケーションの終了時にDxlib_End()より前に呼び出す必要がある。
-    */
+    /// <summary>
+    /// 全メッシュ・アニメーションの削除
+    /// </summary>
     void AssetManager::ReleaseAllAsset()
     {
         //全てのアニメーションを解放
