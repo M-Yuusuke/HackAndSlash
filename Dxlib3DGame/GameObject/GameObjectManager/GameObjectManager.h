@@ -9,27 +9,64 @@ namespace Calculation
     class GameObjectManager final
     {
     public:
-        //このインスタンス生成
+        /// <summary>
+        /// このクラスのインスタンス生成
+        /// </summary>
         static void CreateInstance();
-        //このインスタンス破棄
+
+        /// <summary>
+        /// このクラスのインスタンス破棄
+        /// </summary>
         static void DestroyInstance();
-        //ゲームオブジェクトの登録
+
+        /// <summary>
+        /// ゲームオブジェクトの登録
+        /// </summary>
+        /// <param name="newObj">登録するオブジェクトのポインタ</param>
         static void Entry(GameObjectBase* newObj);
-        //ゲームオブジェクトの削除
+        
+        /// <summary>
+        /// ゲームオブジェクトの削除
+        /// </summary>
+        /// <param name="releaseObj">削除するオブジェクトのポインタ</param>
         static void Release(GameObjectBase* releaseObj);
-        //全オブジェクト削除
+
+        /// <summary>
+        /// 全オブジェクト削除
+        /// </summary>
         static void ReleaseAllObj();
 
+        /// <summary>
+        /// 登録されているオブジェクトの初期化処理
+        /// </summary>
         static void Init();
+
+        /// <summary>
+        /// 登録されているオブジェクトの更新処理
+        /// </summary>
+        /// <param name="deltaTime">1フレームの経過時間</param>
         static void Update(float deltaTime);
+
+        /// <summary>
+        /// 描画処理
+        /// </summary>
         static void Draw();
 
         //当たり判定
+
+        /// <summary>
+        /// 他のオブジェクトとの当たり判定
+        /// </summary>
         static void Collision();
+
+        /// <summary>
+        /// 対象のタグの生きている最初のオブジェクト
+        /// </summary>
+        /// <param name="tag">検索したいオブジェクトのタグ</param>
+        /// <returns>対象のタグの一番最初に登録されているオブジェクトのポインタ</returns>
         static GameObjectBase* GetFirstGameObject(ObjectTag tag);
 
     private:
-        //シングルトン
         GameObjectManager() {}
         ~GameObjectManager() { ReleaseAllObj(); }
         //マネージャーのインスタンス

@@ -11,8 +11,8 @@ namespace Calculation
     public:
 
         /// <summary>
-    /// コンストラクタ（シングルトン）
-    /// </summary>
+        /// コンストラクタ
+        /// </summary>
         Player();
 
         /// <summary>

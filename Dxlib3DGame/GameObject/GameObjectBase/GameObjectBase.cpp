@@ -48,7 +48,7 @@ namespace Calculation
             //コリジョン情報の後始末
             MV1TerminateCollInfo(collisionModel);
             //モデルデータの後始末
-            //AssetManager::ReleaseMesh(modelHandle);
+            AssetManager::ReleaseMesh(modelHandle);
             modelHandle = -1;
         }
     }

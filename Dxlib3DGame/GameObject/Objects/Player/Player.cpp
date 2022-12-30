@@ -8,7 +8,7 @@
 namespace Calculation
 {
     /// <summary>
-    /// コンストラクタ（シングルトン）
+    /// コンストラクタ
     /// </summary>
     Player::Player() :
         CharacterBase(ObjectTag::Player)
@@ -30,11 +30,11 @@ namespace Calculation
     Player::~Player()
     {
         AssetManager::ReleaseMesh(modelHandle);
-        delete animControl;
-        //AssetManager::ReleaseMesh(collisionModel);
+        AssetManager::ReleaseMesh(collisionModel);
         //GameObjectManager::Release(this);
-        //modelHandle = -1;
-        //collisionModel = -1;
+        delete animControl;
+        modelHandle = -1;
+        collisionModel = -1;
     }
 
     /// <summary>

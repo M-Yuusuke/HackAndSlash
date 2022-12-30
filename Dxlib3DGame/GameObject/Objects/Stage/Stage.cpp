@@ -25,7 +25,7 @@ namespace Calculation
     {
         AssetManager::ReleaseMesh(modelHandle);
         AssetManager::ReleaseMesh(collisionModel);
-        GameObjectManager::Release(Instance);
+        //GameObjectManager::Release(Instance);
         modelHandle = -1;
         collisionModel = -1;
     }

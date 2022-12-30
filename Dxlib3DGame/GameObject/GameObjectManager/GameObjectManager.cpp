@@ -4,10 +4,9 @@ namespace Calculation
 {
     GameObjectManager* GameObjectManager::Instance = nullptr;
 
-    /**
-    * GameObjectManagerのインスタンスを生成する
-    * @note staticメソッドを内部で使用する際に必要
-    */
+    /// <summary>
+    /// このクラスのインスタンス生成
+    /// </summary>
     void GameObjectManager::CreateInstance()
     {
         if (!Instance)
@@ -16,11 +15,9 @@ namespace Calculation
         }
     }
 
-    /**
-    * GameObjectManagerの後始末処理
-    * @detail アプリケーション終了前に呼び出し、マネージャが確保した領域と
-    * マネージャ自身の解放処理を行う。
-    */
+    /// <summary>
+    /// このクラスのインスタンス破棄
+    /// </summary>
     void GameObjectManager::DestroyInstance()
     {
         if (Instance)
@@ -30,22 +27,19 @@ namespace Calculation
         }
     }
 
-    /**
-    * GameobjectをManagerに追加
-    * @param[in] 新規作成ゲームオブジェクト
-    * @detail 新規GameObjectをManagerに追加する
-    * 内部で一時保管された後、Updateメソッド内でタグごとに分類され管理される
-    */
+    /// <summary>
+    /// ゲームオブジェクトの登録
+    /// </summary>
+    /// <param name="newObj">登録するオブジェクトのポインタ</param>
     void GameObjectManager::Entry(GameObjectBase* newObj)
     {
         Instance->PendingObjects.push_back(newObj);
     }
 
-    /**
-    * GameObjectをManagerから削除
-    * @param[in] releaseObj 削除したいオブジェクトのポインタ
-    * @detail 削除したオブジェクトのポインタをManager内で検索し削除する
-    */
+    /// <summary>
+    /// ゲームオブジェクトの削除
+    /// </summary>
+    /// <param name="releaseObj">削除するオブジェクトのポインタ</param>
     void GameObjectManager::Release(GameObjectBase* releaseObj)
     {
         //ペンディングオブジェクト内から検索
@@ -72,7 +66,9 @@ namespace Calculation
         }
     }
 
-    //全オブジェクト削除
+    /// <summary>
+    /// 全オブジェクト削除
+    /// </summary>
     void GameObjectManager::ReleaseAllObj()
     {
         //末尾からペンディングオブジェクトを全て削除
@@ -87,15 +83,15 @@ namespace Calculation
             //末尾から削除
             while (!Instance->Objects[tag].empty())
             {
-                delete Instance->Objects[tag].back();
+                delete Instance->Objects[tag].back();   //ステージの当たり判定のモデルをdeleteする際にアクセス違反を起こしている
                 Instance->Objects[tag].pop_back();
             }
         }
     }
 
-    /**
-    * 全オブジェクトの初期化処理
-    */
+    /// <summary>
+    /// 登録されているオブジェクトの初期化処理
+    /// </summary>
     void GameObjectManager::Init()
     {
         for (auto& tag : ObjectTagAll)
@@ -107,12 +103,10 @@ namespace Calculation
         }
     }
 
-    /**
-    * 全オブジェクトの更新処理
-    * @detail 全オブジェクトのUpdateメソッドを呼んだ後、
-    * 新規オブジェクトをアクティブリストに追加
-    * 死亡オブジェクトをアクティブリストから削除
-    */
+    /// <summary>
+    /// 登録されているオブジェクトの更新処理
+    /// </summary>
+    /// <param name="deltaTime">1フレームの経過時間</param>
     void GameObjectManager::Update(float deltaTime)
     {
         //全てのアクターの更新
@@ -153,7 +147,9 @@ namespace Calculation
         DeadObjects.clear();
     }
 
-    //全オブジェクトの描画処理
+    /// <summary>
+    /// 描画処理
+    /// </summary>
     void GameObjectManager::Draw()
     {
         for (auto& tag : ObjectTagAll)
@@ -168,7 +164,9 @@ namespace Calculation
         }
     }
 
-    //全オブジェクトの当たり判定
+    /// <summary>
+    /// 他のオブジェクトとの当たり判定
+    /// </summary>
     void GameObjectManager::Collision()
     {
         //プレイヤーとエネミーの当たり判定
@@ -193,10 +191,11 @@ namespace Calculation
         }
     }
 
-    /**
-    * 指定タグの最初のオブジェクトを返す
-    * @param[in] tag ObjectTagの種類
-    */
+    /// <summary>
+    /// 対象のタグの生きている最初のオブジェクト
+    /// </summary>
+    /// <param name="tag">検索したいオブジェクトのタグ</param>
+    /// <returns>対象のタグの一番最初に登録されているオブジェクトのポインタ</returns>
     GameObjectBase* GameObjectManager::GetFirstGameObject(ObjectTag tag)
     {
         if (Instance->Objects[tag].size() == 0)
