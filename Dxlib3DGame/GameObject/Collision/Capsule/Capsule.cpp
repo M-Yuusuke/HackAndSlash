@@ -11,7 +11,10 @@ namespace Calculation
         WorldEnd = end;
     }
 
-    //カプセルのワールド座標を移動する
+    /// <summary>
+    /// 当たり判定のワールド座標の移動
+    /// </summary>
+    /// <param name="pos">対象のキャラクターの現在地</param>
     void Capsule::Move(const VECTOR& pos)
     {
         WorldStart = LocalStart + pos;

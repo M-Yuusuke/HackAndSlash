@@ -5,15 +5,16 @@
 #include "../GameObject/Objects/Player/Player.h"
 #include "../GameObject/Objects/Stage/Stage.h"
 #include "../GameObject/Objects/Camera/Camera.h"
+#include "../GameObject/Objects/Enemy/Mutant/Mutant.h"
 
 Initialize* Initialize::Instance = nullptr;
 
 Initialize::Initialize()
 {
-    Calculation::GameObjectManager::Entry(Calculation::Player::CreateInstance());
+    Calculation::GameObjectManager::Entry(new Calculation::Player);
     Calculation::GameObjectManager::Entry(Calculation::Stage::CreateInstance());
     Calculation::GameObjectManager::Entry(Calculation::Camera::CreateInstance());
-
+    Calculation::GameObjectManager::Entry(new Calculation::Mutant);
 }
 
 Initialize::~Initialize()

@@ -29,7 +29,8 @@ void Title::DestroyInstance()
 
 SceneBase* Title::Update()
 {
-    if (CheckHitKey(KEY_INPUT_SPACE))
+    GetJoypadXInputState(DX_INPUT_PAD1, &gamePadState);
+    if (CheckHitKey(KEY_INPUT_SPACE) || gamePadState.Buttons[13])
     {
         return SceneManager::NextScene(this);
     }
@@ -39,7 +40,7 @@ SceneBase* Title::Update()
 void Title::Draw()
 {
     ClearDrawScreen();
-    DrawString(50, 50, "Title\n Start To Space", GetColor(255, 255, 255));
+    DrawString(50, 50, "Title\n Start To Space or B", GetColor(255, 255, 255));
     ScreenFlip();
 }
 

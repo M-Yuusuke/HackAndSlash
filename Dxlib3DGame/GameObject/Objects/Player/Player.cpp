@@ -7,20 +7,20 @@
 
 namespace Calculation
 {
-    Player* Player::Instance = nullptr;
-
     /// <summary>
     /// コンストラクタ（シングルトン）
     /// </summary>
     Player::Player() :
-        GameObjectBase(ObjectTag::Player),
-        dir({ 0,0,0 }),
-        aimDir({ 0,0,0 }),
-        velocity({ 0,0,0 }),
-        animControl(nullptr),
-        animTypeID(0),
-        rotateNow(false)
+        CharacterBase(ObjectTag::Player)
     {
+        dir = { 0,0,0 };
+        aimDir = { 0,0,0 };
+        velocity = { 0,0,0 };
+        animControl = nullptr;
+        animTypeID = 0;
+        rotateNow = false;
+        input = false;
+        attack = false;
         ModelLoad();
     }
 
@@ -30,34 +30,11 @@ namespace Calculation
     Player::~Player()
     {
         AssetManager::ReleaseMesh(modelHandle);
-        AssetManager::ReleaseMesh(collisionModel);
-        GameObjectManager::Release(Instance);
-        modelHandle = -1;
-        collisionModel = -1;
-    }
-
-    /// <summary>
-    /// Playerクラスのインスタンス生成
-    /// </summary>
-    /// <returns>Playerクラスのインスタンス</returns>
-    Player* Player::CreateInstance()
-    {
-        if (!Instance)
-        {
-            Instance = new Player;
-        }
-        return Instance;
-    }
-
-    /// <summary>
-    /// Playerクラスのインスタンス破棄
-    /// </summary>
-    void Player::DestoryInstance()
-    {
-        if (Instance)
-        {
-            delete Instance;
-        }
+        delete animControl;
+        //AssetManager::ReleaseMesh(collisionModel);
+        //GameObjectManager::Release(this);
+        //modelHandle = -1;
+        //collisionModel = -1;
     }
 
     /// <summary>
@@ -66,31 +43,31 @@ namespace Calculation
     void Player::ModelLoad()
     {
         //モデルロード
-        //modelHandle = AssetManager::GetMesh("../Data/Assets/Player/Model.mv1");
-        modelHandle = AssetManager::GetMesh("../Data/Assets/UnityChan/unityChanModel.mv1");
+        modelHandle = AssetManager::GetMesh("../Data/Assets/Player/Model.mv1");
+
         //そのままだとステージに対してモデルが大きいので縮小
         MV1SetScale(modelHandle, PlayerScale);
 
         //アニメーションコントローラーの生成
         animControl = new AnimationController(modelHandle);
 
-        ////アニメーションロード
-        //animControl->AddAnimation("../Data/Assets/Player/Idle.mv1");
-        //animControl->AddAnimation("../Data/Assets/Player/Run.mv1");
-        //animControl->AddAnimation("../Data/Assets/Player/Attack.mv1");
+        //アニメーションロード
+        animControl->AddAnimation("../Data/Assets/Player/Idle.mv1");                                //待機モーション
+        animControl->AddAnimation("../Data/Assets/Player/Run.mv1");                                 //移動モーション
+        animControl->AddAnimation("../Data/Assets/Player/Damage.mv1");                              //ダメージモーション
+        animControl->AddAnimation("../Data/Assets/Player/Deth.mv1");                                //死亡モーション
+        animControl->AddAnimation("../Data/Assets/Player/Attack.mv1", 30.0f, false);                //通常攻撃モーション
+        animControl->AddAnimation("../Data/Assets/Player/FrontRangeAttack.mv1", 30.0f, false);      //範囲攻撃モーション
 
-        animControl->AddAnimation("../Data/Assets/UnityChan/unityChanAnimIdle.mv1");
-        animControl->AddAnimation("../Data/Assets/UnityChan/unityChanAnimRun.mv1");
-        animControl->AddAnimation("../Data/Assets/UnityChan/unityChanAnimPunch.mv1");
-
+        //待機モーションをセット
         animControl->StartAnimaiton(animTypeID);
-        pos = { 0,0,0 };
-        dir = { 1,0,0 };
+        pos = FirstPos;
+        dir = FirstDir;
         aimDir = dir;
 
         //当たり判定球セット
         collisionType = CollisionType::Sphere;
-        collisionSphere.SetLocalCenter(firstLocalPos);
+        collisionSphere.SetLocalCenter(FirstLocalPos);
         collisionSphere.SetRadius(Radius);
 
         //足元当たり判定線分セット
@@ -111,8 +88,10 @@ namespace Calculation
     void Player::Update(float deltaTime)
     {
         animControl->AddAnimaitonTime(deltaTime);
+
         Rotate();
         Move(deltaTime);
+        Attack(deltaTime);
 
         //移動処理
         pos += velocity;
@@ -175,31 +154,33 @@ namespace Calculation
         VECTOR RIGHT = { 1,0,0 };
 
         VECTOR inputVec = { 0,0,0 };
-        bool input = false;
-
-        //上を入力していたら上に進む
-        if (CheckHitKey(KEY_INPUT_W) || gamePadState.ThumbLY > 0)
+        input = false;
+        if (!attack)
         {
-            inputVec += UP;
-            input = true;
-        }
-        //下を入力していたら下に進む
-        if (CheckHitKey(KEY_INPUT_S) || gamePadState.ThumbLY < 0)
-        {
-            inputVec += DOWN;
-            input = true;
-        }
-        //左を入力していたら左に進む
-        if (CheckHitKey(KEY_INPUT_A) || gamePadState.ThumbLX < 0)
-        {
-            inputVec += LEFT;
-            input = true;
-        }
-        //右を入力していたら右に進む
-        if (CheckHitKey(KEY_INPUT_D) || gamePadState.ThumbLX > 0)
-        {
-            inputVec += RIGHT;
-            input = true;
+            //上を入力していたら上に進む
+            if (CheckHitKey(KEY_INPUT_W) || gamePadState.ThumbLY > 0)
+            {
+                inputVec += UP;
+                input = true;
+            }
+            //下を入力していたら下に進む
+            if (CheckHitKey(KEY_INPUT_S) || gamePadState.ThumbLY < 0)
+            {
+                inputVec += DOWN;
+                input = true;
+            }
+            //左を入力していたら左に進む
+            if (CheckHitKey(KEY_INPUT_A) || gamePadState.ThumbLX < 0)
+            {
+                inputVec += LEFT;
+                input = true;
+            }
+            //右を入力していたら右に進む
+            if (CheckHitKey(KEY_INPUT_D) || gamePadState.ThumbLX > 0)
+            {
+                inputVec += RIGHT;
+                input = true;
+            }
         }
 
 
@@ -237,8 +218,8 @@ namespace Calculation
         else
         {
             velocity *= 0.9f;
-            //もしほかのモーション中だったら歩きモーションへ
-            if (animTypeID != 0)
+            //もし待機モーションでなければ待機モーションにする
+            if (!attack && animTypeID != 0)
             {
                 animTypeID = 0;
                 animControl->StartAnimaiton(animTypeID);
@@ -247,38 +228,32 @@ namespace Calculation
     }
 
     /// <summary>
-    /// 回転処理
+    /// 攻撃関連処理
     /// </summary>
-    void Player::Rotate()
+    /// <param name="deltaTime">1フレームの経過時間</param>
+    void Player::Attack(float deltaTime)
     {
-        if (rotateNow)
+        //キー入力状態取得
+        GetJoypadXInputState(DX_INPUT_PAD1, &gamePadState);
+        //FキーもしくはゲームパッドのBボタンが押された、かつ攻撃モーションが再生中でなければ攻撃モーションをセット
+        if ((CheckHitKey(KEY_INPUT_F) || gamePadState.Buttons[13]) && !(animControl->IsPlaying(4)))
         {
-            //回転が目標角度に十分近ければ回転モード終了
-            if (IsNearAngle(aimDir, dir))
-            {
-                dir = aimDir;
-                rotateNow = false;
-            }
-            else
-            {
-                //回転させる
-                VECTOR interPolateDir;
-                interPolateDir = RotateForAimVecYAxis(dir, aimDir, RotateVelocity);
+            attack = true;
+            animTypeID = 4;
+            animControl->StartAnimaiton(animTypeID);
+        }
+        //RキーもしくはゲームパッドのYボタンが押された、かつ攻撃モーションが再生中でなければ範囲攻撃モーションをセット
+        if ((CheckHitKey(KEY_INPUT_R) || gamePadState.Buttons[15]) && !(animControl->IsPlaying(5)))
+        {
+            attack = true;
+            animTypeID = 5;
+            animControl->StartAnimaiton(animTypeID);
+        }
 
-                //回転が目標角度を超えていないか
-                VECTOR cross1, cross2;
-                cross1 = VCross(dir, aimDir);
-                cross2 = VCross(interPolateDir, aimDir);
-
-                //目標角度を超えたら終了
-                if (cross1.y * cross2.y < 0)
-                {
-                    interPolateDir = aimDir;
-                    rotateNow = false;
-                }
-                //目標ベクトルに10度だけ近づけた角度
-                dir = interPolateDir;
-            }
+        //通常もしくは範囲攻撃モーション再生中でなければ攻撃フラグを倒す
+        if (!animControl->IsPlaying(4) || !animControl->IsPlaying(5))
+        {
+            attack = false;
         }
     }
 
@@ -286,30 +261,30 @@ namespace Calculation
     /// プレイヤーとステージの当たり判定
     /// </summary>
     /// <param name="other">当たっているオブジェクトのポインタ</param>
-    void Player::OnCollisionStage(const GameObjectBase* other)
-    {
-        int ColModel = other->GetCollisionModel();
+    //void Player::OnCollisionStage(const GameObjectBase* other)
+    //{
+    //    int ColModel = other->GetCollisionModel();
 
-        //ステージと自分の境界球との当たり判定
-        MV1_COLL_RESULT_POLY_DIM colInfo;
-        if (collisionFunction.CollisionPair(collisionSphere, ColModel, colInfo))
-        {
-            //当たっている場合は押し戻し量を計算
-            VECTOR pushBackVec = collisionFunction.CalcSpherePushBackVecFormMesh(collisionSphere, colInfo);
-            pos += pushBackVec;
+    //    //ステージと自分の境界球との当たり判定
+    //    MV1_COLL_RESULT_POLY_DIM colInfo;
+    //    if (collisionFunction.CollisionPair(collisionSphere, ColModel, colInfo))
+    //    {
+    //        //当たっている場合は押し戻し量を計算
+    //        VECTOR pushBackVec = collisionFunction.CalcSpherePushBackVecFormMesh(collisionSphere, colInfo);
+    //        pos += pushBackVec;
 
-            //コリジョン情報の解放
-            MV1CollResultPolyDimTerminate(colInfo);
-            CollisionUpdate();
-        }
+    //        //コリジョン情報の解放
+    //        MV1CollResultPolyDimTerminate(colInfo);
+    //        CollisionUpdate();
+    //    }
 
-        //ステージと足元線分当たり判定
-        MV1_COLL_RESULT_POLY colInfoLine;
-        if (collisionFunction.CollisionPair(collisionLine, ColModel, colInfoLine))
-        {
-            //当たっている場合は足元を衝突点に合わせる
-            pos = colInfoLine.HitPosition;
-            CollisionUpdate();
-        }
-    }
+    //    //ステージと足元線分当たり判定
+    //    MV1_COLL_RESULT_POLY colInfoLine;
+    //    if (collisionFunction.CollisionPair(collisionLine, ColModel, colInfoLine))
+    //    {
+    //        //当たっている場合は足元を衝突点に合わせる
+    //        pos = colInfoLine.HitPosition;
+    //        CollisionUpdate();
+    //    }
+    //}
 }

@@ -1,4 +1,5 @@
 #pragma once
+#include "DxLib.h"
 class Rule;
 class SceneBase
 {
@@ -10,5 +11,6 @@ public:
 
 protected:
     Rule* rule;
+    XINPUT_STATE gamePadState;
 };
 

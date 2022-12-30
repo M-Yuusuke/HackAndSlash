@@ -82,11 +82,23 @@
     <Filter Include="GameObject\Objects\Camera">
       <UniqueIdentifier>{fabbe40c-dc58-41bb-8bd3-43148a82e727}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameObject\Objects\Player">
-      <UniqueIdentifier>{6ffb282e-b8bb-43c1-958f-06a6e0c9b86a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameObject\Objects\Stage">
       <UniqueIdentifier>{261bae79-5246-4407-9167-b36ce4add1e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Objects\Characters">
+      <UniqueIdentifier>{71bec1d2-e8c4-428b-b461-1260d64d1cee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Objects\Characters\CharacterBase">
+      <UniqueIdentifier>{ba2e8b4c-5fb0-4f20-83dc-2edc2f8e8b61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Objects\Characters\Enemy">
+      <UniqueIdentifier>{b6da9f66-7111-47b1-b2cb-d74ce6ff11ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Objects\Characters\Player">
+      <UniqueIdentifier>{6ffb282e-b8bb-43c1-958f-06a6e0c9b86a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Objects\Characters\Enemy\Mutant">
+      <UniqueIdentifier>{42a2576c-0fba-4626-9ee9-9394a7b4e5ca}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -151,7 +163,13 @@
       <Filter>GameObject\Objects\Stage</Filter>
     </ClCompile>
     <ClCompile Include="GameObject\Objects\Player\Player.cpp">
-      <Filter>GameObject\Objects\Player</Filter>
+      <Filter>GameObject\Objects\Characters\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject\Objects\CharacterBase\CharacterBase.cpp">
+      <Filter>GameObject\Objects\Characters\CharacterBase</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject\Objects\Enemy\Mutant\Mutant.cpp">
+      <Filter>GameObject\Objects\Characters\Enemy\Mutant</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -219,7 +237,13 @@
       <Filter>GameObject\Objects\Stage</Filter>
     </ClInclude>
     <ClInclude Include="GameObject\Objects\Player\Player.h">
-      <Filter>GameObject\Objects\Player</Filter>
+      <Filter>GameObject\Objects\Characters\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\Objects\CharacterBase\CharacterBase.h">
+      <Filter>GameObject\Objects\Characters\CharacterBase</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\Objects\Enemy\Mutant\Mutant.h">
+      <Filter>GameObject\Objects\Characters\Enemy\Mutant</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

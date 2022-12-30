@@ -172,15 +172,24 @@ namespace Calculation
     void GameObjectManager::Collision()
     {
         //プレイヤーとエネミーの当たり判定
-        for (int enemynum = 0; enemynum < Instance->Objects[ObjectTag::Enemy].size(); enemynum++)
+        for (int enemyNum = 0; enemyNum < Instance->Objects[ObjectTag::Enemy].size(); enemyNum++)
         {
-            Instance->Objects[ObjectTag::Player][0]->OnCollisionEnter(Instance->Objects[ObjectTag::Enemy][enemynum]);
+            Instance->Objects[ObjectTag::Player][0]->OnCollisionEnter(Instance->Objects[ObjectTag::Enemy][enemyNum]);
         }
 
         //プレイヤーとステージの当たり判定
-        for (int bgnum = 0; bgnum < Instance->Objects[ObjectTag::Stage].size(); bgnum++)
+        for (int bgNum = 0; bgNum < Instance->Objects[ObjectTag::Stage].size(); bgNum++)
         {
-            Instance->Objects[ObjectTag::Player][0]->OnCollisionEnter(Instance->Objects[ObjectTag::Stage][bgnum]);
+            Instance->Objects[ObjectTag::Player][0]->OnCollisionEnter(Instance->Objects[ObjectTag::Stage][bgNum]);
+        }
+
+        //全エネミーとステージとの当たり判定
+        for (int bgNum = 0; bgNum < Instance->Objects[ObjectTag::Stage].size();bgNum++)
+        {
+            for (int enemyNum = 0; enemyNum < Instance->Objects[ObjectTag::Enemy].size(); enemyNum++)
+            {
+                Instance->Objects[ObjectTag::Enemy][enemyNum]->OnCollisionEnter(Instance->Objects[ObjectTag::Stage][bgNum]);
+            }
         }
     }
 

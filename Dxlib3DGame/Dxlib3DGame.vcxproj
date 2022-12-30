@@ -95,6 +95,8 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>DxLib_h</AdditionalLibraryDirectories>
+      <StackReserveSize>
+      </StackReserveSize>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -114,6 +116,8 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>DxLib_h</AdditionalLibraryDirectories>
+      <StackReserveSize>
+      </StackReserveSize>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -129,6 +133,8 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>DxLib_h</AdditionalLibraryDirectories>
+      <StackReserveSize>
+      </StackReserveSize>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -148,6 +154,8 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>DxLib_h</AdditionalLibraryDirectories>
+      <StackReserveSize>
+      </StackReserveSize>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -161,6 +169,8 @@
     <ClCompile Include="GameObject\GameObjectBase\GameObjectBase.cpp" />
     <ClCompile Include="GameObject\GameObjectManager\GameObjectManager.cpp" />
     <ClCompile Include="GameObject\Objects\Camera\Camera.cpp" />
+    <ClCompile Include="GameObject\Objects\CharacterBase\CharacterBase.cpp" />
+    <ClCompile Include="GameObject\Objects\Enemy\Mutant\Mutant.cpp" />
     <ClCompile Include="GameObject\Objects\Player\Player.cpp" />
     <ClCompile Include="GameObject\Objects\Stage\Stage.cpp" />
     <ClCompile Include="GameObject\VectorCalculation\VectorCalculation.cpp" />
@@ -185,6 +195,8 @@
     <ClInclude Include="GameObject\GameObjectBase\GameObjectBase.h" />
     <ClInclude Include="GameObject\GameObjectManager\GameObjectManager.h" />
     <ClInclude Include="GameObject\Objects\Camera\Camera.h" />
+    <ClInclude Include="GameObject\Objects\CharacterBase\CharacterBase.h" />
+    <ClInclude Include="GameObject\Objects\Enemy\Mutant\Mutant.h" />
     <ClInclude Include="GameObject\Objects\Player\Player.h" />
     <ClInclude Include="GameObject\Objects\Stage\Stage.h" />
     <ClInclude Include="GameObject\ObjectTag.h" />

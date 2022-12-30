@@ -3,28 +3,35 @@
 
 namespace Calculation
 {
-    /**
-    * 球同士の当たり判定
-    * @return 衝突している場合にはtrueを返す
-    */
+    /// <summary>
+    /// 球体同士の当たり判定処理
+    /// </summary>
+    /// <param name="sphereL">球体1</param>
+    /// <param name="sphereR">球体2</param>
+    /// <returns>衝突していればtrue、していなければfalse</returns>
     bool CollisionFunction::CollisionPair(const Sphere& sphereL, const Sphere& sphereR)
     {
         return HitCheck_Sphere_Sphere(sphereL.GetWorldCenter(),sphereL.GetRadius(), sphereR.GetWorldCenter(), sphereR.GetRadius());
     }
 
-    /**
-    * 線分と球の当たり判定
-    * @return 衝突している場合にはtrueを返す
-    */
+    /// <summary>
+    /// 線分と球体の当たり判定処理
+    /// </summary>
+    /// <param name="line">線分</param>
+    /// <param name="sphere">球体</param>
+    /// <returns>衝突していればtrue、していなければfalse</returns>
     bool CollisionFunction::CollisionPair(const LineSegment& line, const Sphere& sphere)
     {
         return HitCheck_Line_Sphere(line.GetWorldStart(), line.GetWorldEnd(), sphere.GetWorldCenter(), sphere.GetRadius());
     }
 
-    /**
-    * 球とメッシュの当たり判定
-    * @return 衝突している場合にはtrueを返す
-    */
+    /// <summary>
+    /// 球体とモデルの当たり判定処理
+    /// </summary>
+    /// <param name="sphere">球体</param>
+    /// <param name="modelHandle">モデルハンドル</param>
+    /// <param name="collisionInfo">コリジョン結果代入用ポリゴン配列</param>
+    /// <returns>衝突していればtrue、していなければfalse</returns>
     bool CollisionFunction::CollisionPair(const Sphere& sphere, const int modelHandle, MV1_COLL_RESULT_POLY_DIM& collisionInfo)
     {
         collisionInfo = MV1CollCheck_Sphere(modelHandle, -1, sphere.GetWorldCenter(), sphere.GetRadius());
@@ -35,20 +42,25 @@ namespace Calculation
         return true;
     }
 
-    /**
-    * 線分とメッシュの当たり判定
-    * @return 衝突している場合にはtrueを返す
-    */
+    /// <summary>
+    /// 線分とモデルの当たり判定処理
+    /// </summary>
+    /// <param name="line">線分</param>
+    /// <param name="modelHandle">モデルハンドル</param>
+    /// <param name="collisionInfo">コリジョン結果代入用ポリゴン配列</param>
+    /// <returns>衝突していればtrue、していなければfalse</returns>
     bool CollisionFunction::CollisionPair(const LineSegment& line, const int modelHandle, MV1_COLL_RESULT_POLY& collisionInfo)
     {
         collisionInfo = MV1CollCheck_Line(modelHandle, -1, line.GetWorldStart(), line.GetWorldEnd());
         return collisionInfo.HitFlag;
     }
 
-    /**
-    * 球とメッシュのめり込みを計算する
-    * @return VECTOR 球がメッシュから離れる向きの移動ベクトルを返す
-    */
+    /// <summary>
+    /// 球体とメッシュとの押し戻し量計算
+    /// </summary>
+    /// <param name="sphere">球体</param>
+    /// <param name="collisionInfo">コリジョン結果代入用ポリゴン配列</param>
+    /// <returns>押し戻し量</returns>
     VECTOR CollisionFunction::CalcSpherePushBackVecFormMesh(const Sphere& sphere, const MV1_COLL_RESULT_POLY_DIM& collisionInfo)
     {
         //衝突球

@@ -1,25 +1,24 @@
 #pragma once
-#include "../GameObject/GameObjectBase/GameObjectBase.h"
-#include "../GameObject/AnimationController/AnimationController.h"
+#include "../GameObject/Objects/CharacterBase/CharacterBase.h"
 
 namespace Calculation
 {
     /// <summary>
-    /// Player関連処理を行うクラス
+    /// プレイヤー関連処理を行うクラス
     /// </summary>
-    class Player : public GameObjectBase
+    class Player : public CharacterBase
     {
     public:
-        /// <summary>
-        /// Playerクラスのインスタンス生成
-        /// </summary>
-        /// <returns>Playerクラスのインスタンス</returns>
-        static Player* CreateInstance();
 
         /// <summary>
-        /// Playerクラスのインスタンス破棄
+    /// コンストラクタ（シングルトン）
+    /// </summary>
+        Player();
+
+        /// <summary>
+        /// デストラクタ
         /// </summary>
-        static void DestoryInstance();
+        ~Player();
 
         /// <summary>
         /// 初期化処理
@@ -45,44 +44,37 @@ namespace Calculation
 
     private:
         /// <summary>
-        /// コンストラクタ（シングルトン）
-        /// </summary>
-        Player();
-
-        /// <summary>
-        /// デストラクタ
-        /// </summary>
-        ~Player();
-        /// <summary>
         /// モデルの読み込み
         /// </summary>
-        void ModelLoad();
+        void ModelLoad()override;
 
         /// <summary>
         /// 入力処理
         /// </summary>
         /// <param name="deltaTime">1フレームの経過時間</param>
-        void Move(float deltaTime);
+        void Move(float deltaTime)override;
 
         /// <summary>
-        /// 回転処理
+        /// 攻撃関連処理
         /// </summary>
-        void Rotate();
+        /// <param name="deltaTime">1フレームの経過時間</param>
+        void Attack(float deltaTime);
 
-        /// <summary>
-        /// プレイヤーとステージの当たり判定
-        /// </summary>
-        /// <param name="other">当たっているオブジェクトのポインタ</param>
-        void OnCollisionStage(const GameObjectBase* other);
+        ///// <summary>
+        ///// プレイヤーとステージの当たり判定
+        ///// </summary>
+        ///// <param name="other">当たっているオブジェクトのポインタ</param>
+        //void OnCollisionStage(const GameObjectBase* other);
 
-        //Playerクラスのインスタンスを保持
-        static Player* Instance;
 
         //プレイヤーの大きさ
-        //const VECTOR PlayerScale = { 0.8f,0.8f, 0.8f };
-        const VECTOR PlayerScale = { 0.01f,0.01f, 0.01f };
+        const VECTOR PlayerScale = { 0.8f,0.8f, 0.8f };
+        //プレイヤーの初期座標
+        const VECTOR FirstPos = { 100.0f,0,0 };
+        //プレイヤーの初期向き
+        const VECTOR FirstDir = { 0,0,1 };
         //球の初期ローカル座標
-        const VECTOR firstLocalPos = { 0, 50.0f, 0 };
+        const VECTOR FirstLocalPos = { 0, 50.0f, 0 };
         //足元判定の線分の始点
         const VECTOR LineStart = { 0, 20.0f, 0 };
         //足元判定の線分の終点
@@ -99,19 +91,8 @@ namespace Calculation
 
         //ゲームパッド入力状態
         XINPUT_STATE gamePadState;
-        //向き
-        VECTOR dir;
-        //目標向き
-        VECTOR aimDir;
-        //速度
-        VECTOR velocity;
-
-        //アニメーション管理用
-        AnimationController* animControl;
-        //アニメーション種類ID
-        int animTypeID;
-
-        //回転中かどうか
-        bool rotateNow;
+        //入力状態
+        bool input;
+        bool attack;
     };
 }

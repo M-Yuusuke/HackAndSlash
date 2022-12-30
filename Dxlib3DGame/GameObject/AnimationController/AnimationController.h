@@ -46,7 +46,7 @@ namespace Calculation
         /// Œ»İÄ¶’†‚©
         /// </summary>
         /// <returns>Ä¶’†‚È‚çtrueA’â~‚µ‚Ä‚¢‚ê‚Îfalse</returns>
-        bool IsPlaying();
+        bool IsPlaying(int animID);
 
     private:
         struct AnimData

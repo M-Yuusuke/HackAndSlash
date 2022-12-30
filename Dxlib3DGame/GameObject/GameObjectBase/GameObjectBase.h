@@ -139,18 +139,30 @@ namespace Calculation
         //当たり判定の描画
         void DrawCollider();
 
+        //オブジェクトの種類を判別するためのタグ
         ObjectTag tag;
+        //現在座標
         VECTOR pos;
+        //モデルハンドル
         int modelHandle;
+        //可視化するか
         bool visible;
+        //生きているか
         bool alive;
 
         //当たり判定関連
+
+        //当たり判定の種類
         CollisionType collisionType;
+        //当たり判定関数クラスのインスタンス
         CollisionFunction collisionFunction;
+        //線分の当たり判定クラスのインスタンス
         LineSegment collisionLine;
+        //球体の当たり判定クラスのインスタンス
         Sphere collisionSphere;
+        //カプセルの当たり判定クラスのインスタンス
         Capsule collisionCapsule;
+        //メッシュの当たり判定
         int collisionModel;
     };
 }

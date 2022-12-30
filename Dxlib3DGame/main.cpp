@@ -47,7 +47,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		scene->Draw();
 		Rule::SetPrevTime();
 	}
-	
+	Rule::DestoryInstance();
 	Calculation::GameObjectManager::DestroyInstance();
 	Calculation::AssetManager::DestroyInstance();
 	SceneManager::DestroyInstance();

@@ -46,8 +46,7 @@ namespace Calculation
         Anim.animationTotalTime = MV1GetAnimTotalTime(Anim.animationHandle, Anim.animationIndex);
 
         //アニメーション解除
-        int Test;
-        Test = MV1DetachAnim(modelHandle, attachedIndex);
+        MV1DetachAnim(modelHandle, attachedIndex);
 
         //末尾にアニメーションデータを追加
         animDatas.push_back(Anim);
@@ -63,13 +62,14 @@ namespace Calculation
     void AnimationController::AddAnimaitonTime(float deltaTime)
      {
         nowAnimTime += deltaTime * animDatas[nowAnimTypeNum].animationPlayFps;
+        //アニメーションのループ再生
+        //loopフラグが立っていて、現在の再生時間がアニメーションの総再生時間を超えたら先頭に戻る
         if (animDatas[nowAnimTypeNum].loopAnimation &&
             nowAnimTime > animDatas[nowAnimTypeNum].animationTotalTime)
         {
             nowAnimTime = 0;
         }
-        int Test;
-        Test = MV1SetAttachAnimTime(modelHandle, attachedIndex, nowAnimTime);
+        MV1SetAttachAnimTime(modelHandle, attachedIndex, nowAnimTime);
     }
 
     /// <summary>
@@ -88,7 +88,7 @@ namespace Calculation
             }
             //新規アニメーションをセット
             nowAnimTypeNum = animID;
-            attachedIndex = MV1AttachAnim(modelHandle, animDatas[animID].animationIndex, animDatas[nowAnimTypeNum].animationHandle, TRUE);
+            attachedIndex = MV1AttachAnim(modelHandle, animDatas[nowAnimTypeNum].animationIndex, animDatas[nowAnimTypeNum].animationHandle, TRUE);
         }
         nowAnimTime = 0.0f;
         MV1SetAttachAnimTime(modelHandle, attachedIndex, nowAnimTime);
@@ -106,10 +106,9 @@ namespace Calculation
     /// 現在再生中か
     /// </summary>
     /// <returns>再生中ならtrue、停止していればfalse</returns>
-    bool AnimationController::IsPlaying()
+    bool AnimationController::IsPlaying(int animID)
     {
-        if (animDatas[nowAnimTypeNum].loopAnimation &&
-            nowAnimTime > animDatas[nowAnimTypeNum].animationTotalTime)
+        if (nowAnimTime > animDatas[animID].animationTotalTime) //animDatas[animID].loopAnimation &&
         {
             return false;
         }
