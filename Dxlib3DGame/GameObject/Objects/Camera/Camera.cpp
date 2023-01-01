@@ -66,5 +66,4 @@ namespace Calculation
             SetCameraPositionAndTarget_UpVecY(pos, lookPos);
         }
     }
-
 }

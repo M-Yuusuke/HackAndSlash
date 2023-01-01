@@ -21,6 +21,11 @@ namespace Calculation
     /// </summary>
     Mutant::~Mutant()
     {
+        AssetManager::ReleaseMesh(modelHandle);
+        AssetManager::ReleaseMesh(collisionModel);
+        delete animControl;
+        modelHandle = -1;
+        collisionModel = -1;
     }
 
     /// <summary>

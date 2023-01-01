@@ -31,7 +31,6 @@ namespace Calculation
     {
         AssetManager::ReleaseMesh(modelHandle);
         AssetManager::ReleaseMesh(collisionModel);
-        //GameObjectManager::Release(this);
         delete animControl;
         modelHandle = -1;
         collisionModel = -1;

@@ -32,3 +32,4 @@
 *.app
 Log.txt
 x64
+.vs

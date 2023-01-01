@@ -83,7 +83,7 @@ namespace Calculation
             //末尾から削除
             while (!Instance->Objects[tag].empty())
             {
-                delete Instance->Objects[tag].back();   //ステージの当たり判定のモデルをdeleteする際にアクセス違反を起こしている
+                delete Instance->Objects[tag].back();
                 Instance->Objects[tag].pop_back();
             }
         }

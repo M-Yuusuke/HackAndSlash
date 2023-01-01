@@ -10,15 +10,14 @@ namespace Calculation
     {
     public:
         /// <summary>
-        /// Stageクラスのインスタンスを生成
-        /// </summary>
-        /// <returns>Stageクラスのインスタンス</returns>
-        static Stage* CreateInstance();
+     /// コンストラクタ（シングルトン）
+     /// </summary>
+        Stage();
 
         /// <summary>
-        /// Stageクラスのインスタンスを破棄
+        /// デストラクタ
         /// </summary>
-        static void DestoryInstance();
+        ~Stage();
 
         /// <summary>
         /// 初期化処理
@@ -38,25 +37,12 @@ namespace Calculation
 
     private:
         /// <summary>
-        /// コンストラクタ（シングルトン）
-        /// </summary>
-        Stage();
-
-        /// <summary>
-        /// デストラクタ
-        /// </summary>
-        ~Stage();
-
-        /// <summary>
         /// モデルの読み込み
         /// </summary>
         void ModelLoad();
 
-        //Stageクラスのインスタンスを保持
-        static Stage* Instance;
-
         //ステージの初期座標
-        const VECTOR StagePos = VGet(0, -255, 0);
+        const VECTOR StagePos = VGet(0, 0, 0);
     };
 }
 

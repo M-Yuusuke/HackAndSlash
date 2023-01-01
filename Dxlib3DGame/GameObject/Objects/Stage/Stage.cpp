@@ -6,8 +6,6 @@
 
 namespace Calculation
 {
-    Stage* Stage::Instance = nullptr;
-
     /// <summary>
     /// コンストラクタ（シングルトン）
     /// </summary>
@@ -25,36 +23,8 @@ namespace Calculation
     {
         AssetManager::ReleaseMesh(modelHandle);
         AssetManager::ReleaseMesh(collisionModel);
-        //GameObjectManager::Release(Instance);
         modelHandle = -1;
         collisionModel = -1;
-    }
-
-    /// <summary>
-    /// Stageクラスのインスタンスを生成
-    /// </summary>
-    /// <returns>Stageクラスのインスタンスを返す</returns>
-    Stage* Stage::CreateInstance()
-    {
-        if (!Instance)
-        {
-            Instance = new Stage;
-            //ステージをゲームオブジェクトマネージャに登録
-            GameObjectManager::Entry(Instance);
-        }
-        return Instance;
-    }
-
-    /// <summary>
-    /// Stageクラスのインスタンスを破棄
-    /// </summary>
-    void Stage::DestoryInstance()
-    {
-        if (Instance)
-        {
-            delete Instance;
-            Instance = nullptr;
-        }
     }
 
     /// <summary>
@@ -63,17 +33,17 @@ namespace Calculation
     void Stage::ModelLoad()
     {
         //表示モデル読み込み&スケーリング&位置セット
-        modelHandle = AssetManager::GetMesh("../Data/Assets/Stage/maptest2.mv1");
-        MV1SetScale(modelHandle, VGet(1.0f, 1.0f, 1.0f));
+        modelHandle = AssetManager::GetMesh("../Data/Assets/Stage/Stage.mv1");
+        MV1SetScale(modelHandle, VGet(1.0f, 0.05f, 1.0f));
         MV1SetPosition(modelHandle, pos);
 
         //当たり判定モデル読み込み&スケーリング&当たり判定情報構築
-        collisionModel = AssetManager::GetMesh("../Data/Assets/Stage/HitMesh2rot.mv1");
+        collisionModel = AssetManager::GetMesh("../Data/Assets/Stage/StageHitMesh.mv1");
         MV1SetScale(collisionModel, VGet(1.0f, 1.0f, 1.0f));
         MV1SetOpacityRate(collisionModel, 0.3f);
 
         //表示モデルと当たり判定モデルの位置を調整
-        MV1SetPosition(collisionModel, pos + VGet(-45, 200, -35));
+        //MV1SetPosition(collisionModel, pos + VGet(-45, 200, -35));
         MV1SetupCollInfo(collisionModel);
     }
 
