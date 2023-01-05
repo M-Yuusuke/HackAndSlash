@@ -19,7 +19,6 @@ namespace Calculation
         animControl = nullptr;
         animTypeID = 0;
         rotateNow = false;
-        input = false;
         attack = false;
         ModelLoad();
     }
@@ -71,6 +70,8 @@ namespace Calculation
 
         //足元当たり判定線分セット
         collisionLine = LineSegment(LineStart, LineEnd);
+
+        MV1SetupCollInfo(modelHandle);
     }
 
     /// <summary>
@@ -78,6 +79,7 @@ namespace Calculation
     /// </summary>
     void Player::Initialize()
     {
+        HP = MaxHP;
     }
 
     /// <summary>
@@ -135,7 +137,28 @@ namespace Calculation
         }
         if (tag == ObjectTag::Enemy)
         {
+            VECTOR distance = pos - other->GetPos();
+            if (VSize(distance) >= 20.0f && VSize(distance) <= 300.0f)
+            {
+                //プレイヤーの間合いに入っていたらエネミーを死亡させる
+                //other->OnDamage();
+            }
+        }
+    }
 
+    /// <summary>
+    /// ダメージを受ける処理
+    /// </summary>
+    void Player::OnDamage()
+    {
+        if (HP > 0)
+        {
+            HP -= 2;
+        }
+        if (HP <= 0)
+        {
+            HP = 0;
+            alive = false;
         }
     }
 
@@ -153,7 +176,9 @@ namespace Calculation
         VECTOR RIGHT = { 1,0,0 };
 
         VECTOR inputVec = { 0,0,0 };
-        input = false;
+        //入力状態
+        bool input = false;
+
         if (!attack)
         {
             //上を入力していたら上に進む
@@ -181,7 +206,6 @@ namespace Calculation
                 input = true;
             }
         }
-
 
         //入力があったら加速
         if (input)
@@ -260,30 +284,30 @@ namespace Calculation
     /// プレイヤーとステージの当たり判定
     /// </summary>
     /// <param name="other">当たっているオブジェクトのポインタ</param>
-    //void Player::OnCollisionStage(const GameObjectBase* other)
-    //{
-    //    int ColModel = other->GetCollisionModel();
+    void Player::OnCollisionStage(const GameObjectBase* other)
+    {
+        int ColModel = other->GetCollisionModel();
 
-    //    //ステージと自分の境界球との当たり判定
-    //    MV1_COLL_RESULT_POLY_DIM colInfo;
-    //    if (collisionFunction.CollisionPair(collisionSphere, ColModel, colInfo))
-    //    {
-    //        //当たっている場合は押し戻し量を計算
-    //        VECTOR pushBackVec = collisionFunction.CalcSpherePushBackVecFormMesh(collisionSphere, colInfo);
-    //        pos += pushBackVec;
+        //ステージと自分の境界球との当たり判定
+        MV1_COLL_RESULT_POLY_DIM colInfo;
+        if (collisionFunction.CollisionPair(collisionSphere, ColModel, colInfo))
+        {
+            //当たっている場合は押し戻し量を計算
+            VECTOR pushBackVec = collisionFunction.CalcSpherePushBackVecFormMesh(collisionSphere, colInfo);
+            pos += pushBackVec;
 
-    //        //コリジョン情報の解放
-    //        MV1CollResultPolyDimTerminate(colInfo);
-    //        CollisionUpdate();
-    //    }
+            //コリジョン情報の解放
+            MV1CollResultPolyDimTerminate(colInfo);
+            CollisionUpdate();
+        }
 
-    //    //ステージと足元線分当たり判定
-    //    MV1_COLL_RESULT_POLY colInfoLine;
-    //    if (collisionFunction.CollisionPair(collisionLine, ColModel, colInfoLine))
-    //    {
-    //        //当たっている場合は足元を衝突点に合わせる
-    //        pos = colInfoLine.HitPosition;
-    //        CollisionUpdate();
-    //    }
-    //}
+        //ステージと足元線分当たり判定
+        MV1_COLL_RESULT_POLY colInfoLine;
+        if (collisionFunction.CollisionPair(collisionLine, ColModel, colInfoLine))
+        {
+            //当たっている場合は足元を衝突点に合わせる
+            pos = colInfoLine.HitPosition;
+            CollisionUpdate();
+        }
+    }
 }

@@ -2,7 +2,7 @@
 #include "Scene/SceneBase/SceneBase.h"
 #include "Scene/SceneManager/SceneManager.h"
 #include "GameObject/GameObjectBase/GameObjectBase.h"
-#include "../GameObject/GameObjectManager/GameObjectManager.h"
+#include "GameObject/GameObjectManager/GameObjectManager.h"
 #include "GameObject/AssetManager/AssetManager.h"
 #include "System/Rule/Rule.h"
 
@@ -31,8 +31,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	Calculation::GameObjectManager::CreateInstance();
 	//アセットマネージャを生成
 	Calculation::AssetManager::CreateInstance();
-	//ルールクラスの生成
-	Rule::CreateInstance();
 
 	SceneManager* sceneManager = SceneManager::CreateInstance();
 	SceneBase* scene = nullptr;
@@ -41,13 +39,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	//ゲームループ
 	while (!ProcessMessage() && !CheckHitKey(KEY_INPUT_ESCAPE))
 	{
-		Rule::SetNowTime();
-		Rule::SetDeltaTime();
 		scene = scene->Update();
 		scene->Draw();
-		Rule::SetPrevTime();
 	}
-	Rule::DestoryInstance();
 	Calculation::GameObjectManager::DestroyInstance();
 	Calculation::AssetManager::DestroyInstance();
 	SceneManager::DestroyInstance();

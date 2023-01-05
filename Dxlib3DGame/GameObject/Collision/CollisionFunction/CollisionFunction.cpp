@@ -88,7 +88,7 @@ namespace Calculation
             PlaneNormal = VCross(Edge1, Edge2);
             PlaneNormal = VNorm(PlaneNormal);
 
-            //球中心にもっとも違いポリゴン平面の点を求める
+            //球中心にもっとも近いポリゴン平面の点を求める
             VECTOR Distance = MoveCandidate - collisionInfo.Dim[i].Position[0];
             float Dot = VDot(PlaneNormal,Distance);
 

@@ -7,12 +7,13 @@ namespace Calculation
     /// <summary>
     /// このクラスのインスタンス生成
     /// </summary>
-    void GameObjectManager::CreateInstance()
+    GameObjectManager* GameObjectManager::CreateInstance()
     {
         if (!Instance)
         {
             Instance = new GameObjectManager;
         }
+        return Instance;
     }
 
     /// <summary>

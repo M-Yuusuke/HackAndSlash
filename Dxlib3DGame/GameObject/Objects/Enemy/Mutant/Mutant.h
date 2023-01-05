@@ -33,6 +33,10 @@ namespace Calculation
         /// <param name="other">当たっているオブジェクトのポインタ</param>
         void OnCollisionEnter(const GameObjectBase* other)override;
 
+        /// <summary>
+        /// ダメージを受ける処理
+        /// </summary>
+        void OnDamage() { alive = false; }
 
         /// <summary>
         /// 描画
@@ -63,9 +67,12 @@ namespace Calculation
         const VECTOR LineEnd = { 0, -30.0f, 0 };
         //球状の当たり判定の半径
         const float Radius = 50.0f;
-        //索敵範囲の半径
-        const float SearchRange = 300.0f;
         //移動速度
-        const float MoveVelocity = 300.0f;
+        const float MoveVelocity = 100.0f;
+
+        //移動中か
+        bool input;
+        //攻撃中か
+        bool attack;
     };
 }

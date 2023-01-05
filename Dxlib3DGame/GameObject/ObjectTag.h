@@ -8,9 +8,7 @@ namespace Calculation
     enum class ObjectTag : unsigned char
     {
         Player,
-        PlayerWeapon,
         Enemy,
-        EnemyWeapon,
         Stage,
         Camera,
         Effect
@@ -25,9 +23,7 @@ namespace Calculation
     constexpr static ObjectTag ObjectTagAll[] =
     {
         ObjectTag::Player,
-        ObjectTag::PlayerWeapon,
         ObjectTag::Enemy,
-        ObjectTag::EnemyWeapon,
         ObjectTag::Stage,
         ObjectTag::Camera,
         ObjectTag::Effect

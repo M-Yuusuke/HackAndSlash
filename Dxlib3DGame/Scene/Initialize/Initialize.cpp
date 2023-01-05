@@ -14,7 +14,7 @@ Initialize::Initialize()
     Calculation::GameObjectManager::Entry(new Calculation::Player);
     Calculation::GameObjectManager::Entry(new Calculation::Mutant);
     Calculation::GameObjectManager::Entry(new Calculation::Stage);
-    Calculation::GameObjectManager::Entry(Calculation::Camera::CreateInstance());
+    Calculation::GameObjectManager::Entry(new Calculation::Camera);
 }
 
 Initialize::~Initialize()

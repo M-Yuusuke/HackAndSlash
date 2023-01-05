@@ -42,6 +42,11 @@ namespace Calculation
         /// <param name="other">当たっているオブジェクトのポインタ</param>
         void OnCollisionEnter(const GameObjectBase* other)override;
 
+        /// <summary>
+        /// ダメージを受ける処理
+        /// </summary>
+        void OnDamage();
+
     private:
         /// <summary>
         /// モデルの読み込み
@@ -64,7 +69,7 @@ namespace Calculation
         ///// プレイヤーとステージの当たり判定
         ///// </summary>
         ///// <param name="other">当たっているオブジェクトのポインタ</param>
-        //void OnCollisionStage(const GameObjectBase* other);
+        void OnCollisionStage(const GameObjectBase* other);
 
 
         //プレイヤーの大きさ
@@ -88,11 +93,12 @@ namespace Calculation
         const float MoveVelocity = 200.0f;
         //回転速度
         const float RotateVelocity = 10.0f;
+        //体力の上限値
+        const int MaxHP = 100;
 
         //ゲームパッド入力状態
         XINPUT_STATE gamePadState;
-        //入力状態
-        bool input;
+        int HP;
         bool attack;
     };
 }

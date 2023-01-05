@@ -5,7 +5,7 @@
 
 namespace Calculation
 {
-    Camera* Camera::Instance = nullptr;
+    //Camera* Camera::Instance = nullptr;
     Camera::Camera():
     Calculation::GameObjectBase(ObjectTag::Camera),
     lookPos({0,0,0}),
@@ -20,32 +20,13 @@ namespace Calculation
     {
     }
 
-    Camera* Camera::CreateInstance()
-    {
-        if (!Instance)
-        {
-            Instance = new Camera;
-        }
-        return Instance;
-    }
-    void Camera::DestroyInstance()
-    {
-        if (Instance)
-        {
-            delete Instance;
-            Instance = nullptr;
-        }
-    }
-
     void Camera::Initialize()
     {
         //カメラの位置をセット
-        Instance->pos = firstCameraPos;
-        SetCameraNearFar(Instance->Near, Instance->Far);
+        pos = firstCameraPos;
+        SetCameraNearFar(Near, Far);
         //カメラのポジションの視点からプレイヤーの位置のターゲットを見る角度にカメラを設置
-        SetCameraPositionAndTarget_UpVecY(Instance->pos, GameObjectManager::GetFirstGameObject(ObjectTag::Player)->GetPos());
-        //ゲームオブジェクトマネージャーにカメラを登録
-        Calculation::GameObjectManager::Entry(Instance);
+        SetCameraPositionAndTarget_UpVecY(pos, GameObjectManager::GetFirstGameObject(ObjectTag::Player)->GetPos());
     }
     void Camera::Update(float deltaTime)
     {

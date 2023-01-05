@@ -12,7 +12,7 @@ namespace Calculation
         /// <summary>
         /// このクラスのインスタンス生成
         /// </summary>
-        static void CreateInstance();
+        static GameObjectManager* CreateInstance();
 
         /// <summary>
         /// このクラスのインスタンス破棄

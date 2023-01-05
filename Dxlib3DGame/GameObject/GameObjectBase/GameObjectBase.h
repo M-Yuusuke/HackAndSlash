@@ -133,9 +133,15 @@ namespace Calculation
         /// <returns>collisionModel</returns>
         int GetCollisionModel() const { return collisionModel; }
 
+        /// <summary>
+        /// ダメージを受ける処理
+        /// </summary>
+        virtual void OnDamage() {}
+
     protected:
         //当たり判定位置の更新
         void CollisionUpdate();
+
         //当たり判定の描画
         void DrawCollider();
 

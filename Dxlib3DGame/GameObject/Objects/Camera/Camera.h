@@ -10,15 +10,14 @@ namespace Calculation
     {
     public:
         /// <summary>
-        /// Cameraクラスのインスタンス生成
+        /// コンストラクタ（シングルトン）
         /// </summary>
-        /// <returns>Cameraクラスのインスタンス</returns>
-        static Camera* CreateInstance();
+        Camera();
 
         /// <summary>
-        /// Cameraクラスのインスタンス破棄
+        /// デストラクタ
         /// </summary>
-        static void DestroyInstance();
+        ~Camera();
 
         /// <summary>
         /// 初期化処理
@@ -32,17 +31,6 @@ namespace Calculation
         void Update(float deltaTime) override;
 
     private:
-        /// <summary>
-        /// コンストラクタ（シングルトン）
-        /// </summary>
-        Camera();
-
-        /// <summary>
-        /// デストラクタ
-        /// </summary>
-        ~Camera();
-        //Cameraクラスのインスタンスを保持
-        static Camera* Instance;
 
         //カメラのバネ定数
         const float CameraSpringStrength = 2.0f;
