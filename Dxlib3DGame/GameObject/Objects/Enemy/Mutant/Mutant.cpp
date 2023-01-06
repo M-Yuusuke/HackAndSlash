@@ -5,6 +5,7 @@
 #include "../GameObject/ObjectTag.h"
 #include "../GameObject/Collision/Sphere/Sphere.h"
 #include "../GameObject/Objects/Player/Player.h"
+#include "../GameObject/VectorCalculation/VectorCalculation.h"
 
 namespace Calculation
 {
@@ -79,10 +80,18 @@ namespace Calculation
         {
             OnCollisionStage(other);
         }
+        //プレイヤーとの当たり判定
         if (tag == ObjectTag::Player)
         {
-            //エネミーの攻撃があたったらプレイヤーダメージが入る
-            //other->OnDamage();
+            int ColModel = other->GetCollisionModel();
+
+            //自分の境界球とエネミーモデルとの当たり判定
+            MV1_COLL_RESULT_POLY_DIM colInfo;
+            //自分の境界球とプレイヤーのモデルが衝突していたらダメージを受ける
+            if (collisionFunction.CollisionPair(collisionCapsule, ColModel, colInfo))
+            {
+                OnDamage();
+            }
         }
     }
 
@@ -121,15 +130,18 @@ namespace Calculation
         dir = { 0,0,1 };
         aimDir = dir;
 
-        //当たり判定球セット
-        collisionType = CollisionType::Sphere;
-        collisionSphere.SetLocalCenter(FirstLocalPos);
-        collisionSphere.SetRadius(Radius);
+        ////当たり判定球セット
+        //collisionType = CollisionType::Sphere;
+        //collisionSphere.SetLocalCenter(FirstLocalPos);
+        //collisionSphere.SetRadius(Radius);
 
         //足元当たり判定線分セット
-        collisionLine = LineSegment(LineStart, LineEnd);
+        //collisionLine = LineSegment(LineStart, LineEnd);
 
-        MV1SetupCollInfo(modelHandle);
+        collisionType = CollisionType::Capsule;
+        collisionCapsule = Capsule(CapsuleStart, CapsuleEnd, Radius);
+
+        collisionModel = MV1SetupCollInfo(modelHandle);
     }
 
     /// <summary>
@@ -145,7 +157,7 @@ namespace Calculation
         VECTOR distance = playerPos - pos;
         dir = VNorm(distance) * deltaTime * MoveVelocity;
 
-        if (VSize(distance) >= 200.0f)
+        if (VSize(distance) > 200.0f)
         {
             velocity = dir;
             if (animTypeID != 1)
@@ -154,98 +166,15 @@ namespace Calculation
                 animControl->StartAnimaiton(animTypeID);
             }
         }
-        else if (VSize(distance) < 200.0f)
+        else if (VSize(distance) <= 200.0f)
         {
             velocity = { 0,0,0 };
-            animTypeID = 2;
-            animControl->StartAnimaiton(animTypeID);
+            if (animTypeID != 2)
+            {
+                animTypeID = 2;
+                animControl->StartAnimaiton(animTypeID);
+            }
         }
-
-        //VECTOR normVec = VNorm(distance);
-        ////プレイヤーの方向を向かせる
-        //RotateForAimVecYAxis(pos, normVec, RotateVelocity);
-        //dir = normVec;
-
-        ////VECTOR UP = { 0,0,1 };
-        ////VECTOR DOWN = { 0,0,-1 };
-        ////VECTOR LEFT = { -1,0,0 };
-        ////VECTOR RIGHT = { 1,0,0 };
-
-        //VECTOR inputVec = { 0,0,0 };
-        ////input = false;
-        ////if (VSize(distance) > 300.0f)
-        ////{
-        ////    inputVec = VNorm(distance) * deltaTime * MoveVelocity;
-        ////}
-        ////else if (VSize(distance) <= 300.0f)
-        ////{
-        ////    animTypeID = 2;
-        ////    animControl->StartAnimaiton(animTypeID);
-        ////}
-
-        //////一定距離まで接近する
-        ////if (VSize(distance) > 300.0f)
-        ////{
-        ////    if (distance.x >= 0)
-        ////    {
-        ////        inputVec += RIGHT;
-        ////        input = true;
-        ////    }
-        ////    if (distance.x < 0)
-        ////    {
-        ////        inputVec += LEFT;
-        ////        input = true;
-        ////    }
-        ////    if (distance.z >= 0)
-        ////    {
-        ////        inputVec += UP;
-        ////        input = true;
-        ////    }
-        ////    if (distance.z < 0)
-        ////    {
-        ////        inputVec += DOWN;
-        ////        input = true;
-        ////    }
-        ////}
-
-        //if(VSize(distance) <= 200.0f)
-        //{
-        //    //一定距離まで接近したら攻撃モーションに切り替える
-        //    attack = true;
-        //    animTypeID = 2;
-        //    animControl->StartAnimaiton(animTypeID);        
-        //}
-        //else
-        //{
-        //    attack = false;
-        //}
-        ////方向を正規化
-        //inputVec = VNorm(inputVec);
-
-        ////入力方向は現在向いてる向きと異なるか？
-        //if (IsNearAngle(inputVec, dir))
-        //{
-        //    dir = inputVec;
-        //}
-        //else
-        //{
-        //    rotateNow = true;
-        //    aimDir = inputVec;
-        //}
-        //velocity = inputVec + (inputVec * deltaTime * MoveVelocity);
-
-        ////もしほかのモーション中だったら走りモーションへ
-        //if (animTypeID != 1)
-        //{
-        //    animTypeID = 1;
-        //    animControl->StartAnimaiton(animTypeID);
-        //}
-        //if (input)
-        //{
-        //    
-
-        //}
-        
     }
 }
 

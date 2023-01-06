@@ -4,6 +4,7 @@
 #include "../GameObject/AssetManager/AssetManager.h"
 #include "../GameObject/GameObjectManager/GameObjectManager.h"
 #include "../GameObject/Collision/CollisionFunction/CollisionFunction.h"
+#include "../Enemy/Mutant/Mutant.h"
 
 namespace Calculation
 {
@@ -33,45 +34,6 @@ namespace Calculation
         delete animControl;
         modelHandle = -1;
         collisionModel = -1;
-    }
-
-    /// <summary>
-    /// モデルの読み込み
-    /// </summary>
-    void Player::ModelLoad()
-    {
-        //モデルロード
-        modelHandle = AssetManager::GetMesh("../Data/Assets/Player/Model.mv1");
-
-        //そのままだとステージに対してモデルが大きいので縮小
-        MV1SetScale(modelHandle, PlayerScale);
-
-        //アニメーションコントローラーの生成
-        animControl = new AnimationController(modelHandle);
-
-        //アニメーションロード
-        animControl->AddAnimation("../Data/Assets/Player/Idle.mv1");                                //待機モーション
-        animControl->AddAnimation("../Data/Assets/Player/Run.mv1");                                 //移動モーション
-        animControl->AddAnimation("../Data/Assets/Player/Damage.mv1");                              //ダメージモーション
-        animControl->AddAnimation("../Data/Assets/Player/Deth.mv1");                                //死亡モーション
-        animControl->AddAnimation("../Data/Assets/Player/Attack.mv1", 30.0f, false);                //通常攻撃モーション
-        animControl->AddAnimation("../Data/Assets/Player/FrontRangeAttack.mv1", 30.0f, false);      //範囲攻撃モーション
-
-        //待機モーションをセット
-        animControl->StartAnimaiton(animTypeID);
-        pos = FirstPos;
-        dir = FirstDir;
-        aimDir = dir;
-
-        //当たり判定球セット
-        collisionType = CollisionType::Sphere;
-        collisionSphere.SetLocalCenter(FirstLocalPos);
-        collisionSphere.SetRadius(Radius);
-
-        //足元当たり判定線分セット
-        collisionLine = LineSegment(LineStart, LineEnd);
-
-        MV1SetupCollInfo(modelHandle);
     }
 
     /// <summary>
@@ -137,29 +99,58 @@ namespace Calculation
         }
         if (tag == ObjectTag::Enemy)
         {
-            VECTOR distance = pos - other->GetPos();
-            if (VSize(distance) >= 20.0f && VSize(distance) <= 300.0f)
+            //OnCollisionEnemy((GameObjectBase*)other);
+            int ColModel = other->GetCollisionModel();
+
+            //自分の境界球とエネミーモデルとの当たり判定
+            MV1_COLL_RESULT_POLY_DIM colInfo;
+            if (collisionFunction.CollisionPair(collisionCapsule, ColModel, colInfo))
             {
-                //プレイヤーの間合いに入っていたらエネミーを死亡させる
-                //other->OnDamage();
+                OnDamage();
             }
         }
     }
 
     /// <summary>
-    /// ダメージを受ける処理
+    /// モデルの読み込み
     /// </summary>
-    void Player::OnDamage()
+    void Player::ModelLoad()
     {
-        if (HP > 0)
-        {
-            HP -= 2;
-        }
-        if (HP <= 0)
-        {
-            HP = 0;
-            alive = false;
-        }
+        //モデルロード
+        modelHandle = AssetManager::GetMesh("../Data/Assets/Player/Model.mv1");
+
+        //そのままだとステージに対してモデルが大きいので縮小
+        MV1SetScale(modelHandle, PlayerScale);
+
+        //アニメーションコントローラーの生成
+        animControl = new AnimationController(modelHandle);
+
+        //アニメーションロード
+        animControl->AddAnimation("../Data/Assets/Player/Idle.mv1");                                //待機モーション
+        animControl->AddAnimation("../Data/Assets/Player/Run.mv1");                                 //移動モーション
+        animControl->AddAnimation("../Data/Assets/Player/Damage.mv1");                              //ダメージモーション
+        animControl->AddAnimation("../Data/Assets/Player/Deth.mv1");                                //死亡モーション
+        animControl->AddAnimation("../Data/Assets/Player/Attack.mv1", 30.0f, false);                //通常攻撃モーション
+        animControl->AddAnimation("../Data/Assets/Player/FrontRangeAttack.mv1", 30.0f, false);      //範囲攻撃モーション
+
+        //待機モーションをセット
+        animControl->StartAnimaiton(animTypeID);
+        pos = FirstPos;
+        dir = FirstDir;
+        aimDir = dir;
+
+        //当たり判定球セット
+        //collisionType = CollisionType::Sphere;
+        //collisionSphere.SetLocalCenter(FirstLocalPos);
+        //collisionSphere.SetRadius(Radius);
+
+        collisionType = CollisionType::Capsule;
+        collisionCapsule = Capsule(CapsuleStart, CapsuleEnd,Radius);
+
+        //足元当たり判定線分セット
+        //collisionLine = LineSegment(LineStart, LineEnd);
+
+        collisionModel = MV1SetupCollInfo(modelHandle);
     }
 
     /// <summary>
@@ -290,7 +281,7 @@ namespace Calculation
 
         //ステージと自分の境界球との当たり判定
         MV1_COLL_RESULT_POLY_DIM colInfo;
-        if (collisionFunction.CollisionPair(collisionSphere, ColModel, colInfo))
+        if (collisionFunction.CollisionPair(collisionCapsule, ColModel, colInfo))
         {
             //当たっている場合は押し戻し量を計算
             VECTOR pushBackVec = collisionFunction.CalcSpherePushBackVecFormMesh(collisionSphere, colInfo);
@@ -301,13 +292,29 @@ namespace Calculation
             CollisionUpdate();
         }
 
-        //ステージと足元線分当たり判定
-        MV1_COLL_RESULT_POLY colInfoLine;
-        if (collisionFunction.CollisionPair(collisionLine, ColModel, colInfoLine))
+        ////ステージと足元線分当たり判定
+        //MV1_COLL_RESULT_POLY colInfoLine;
+        //if (collisionFunction.CollisionPair(collisionLine, ColModel, colInfoLine))
+        //{
+        //    //当たっている場合は足元を衝突点に合わせる
+        //    pos = colInfoLine.HitPosition;
+        //    CollisionUpdate();
+        //}
+    }
+
+    /// <summary>
+    /// ダメージを受ける処理
+    /// </summary>
+    void Player::OnDamage()
+    {
+        if (HP > 0)
         {
-            //当たっている場合は足元を衝突点に合わせる
-            pos = colInfoLine.HitPosition;
-            CollisionUpdate();
+            HP -= 2;
+        }
+        if (HP <= 0)
+        {
+            HP = 0;
+            alive = false;
         }
     }
 }

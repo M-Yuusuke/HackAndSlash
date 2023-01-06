@@ -42,11 +42,6 @@ namespace Calculation
         /// <param name="other">当たっているオブジェクトのポインタ</param>
         void OnCollisionEnter(const GameObjectBase* other)override;
 
-        /// <summary>
-        /// ダメージを受ける処理
-        /// </summary>
-        void OnDamage();
-
     private:
         /// <summary>
         /// モデルの読み込み
@@ -72,18 +67,30 @@ namespace Calculation
         void OnCollisionStage(const GameObjectBase* other);
 
 
+        /// <summary>
+        /// ダメージを受ける処理
+        /// </summary>
+        void OnDamage();
+
         //プレイヤーの大きさ
         const VECTOR PlayerScale = { 0.8f,0.8f, 0.8f };
         //プレイヤーの初期座標
         const VECTOR FirstPos = { 100.0f,0,0 };
         //プレイヤーの初期向き
         const VECTOR FirstDir = { 0,0,1 };
+
         //球の初期ローカル座標
-        const VECTOR FirstLocalPos = { 0, 50.0f, 0 };
-        //足元判定の線分の始点
-        const VECTOR LineStart = { 0, 20.0f, 0 };
-        //足元判定の線分の終点
-        const VECTOR LineEnd = { 0, -30.0f, 0 };
+        //const VECTOR FirstLocalPos = { 0, 50.0f, 0 };
+
+        //カプセルの始点
+        const VECTOR CapsuleStart = { 0, 100.0f, 0 };
+        //カプセルの終点 
+        const VECTOR CapsuleEnd = { 0, 20.0f, 0 };
+
+        ////足元判定の線分の始点
+        //const VECTOR LineStart = { 0,20.0f,0 };
+        ////足元判定の線分の終点
+        //const VECTOR LineEnd = { 0,-30.0f,0 };
 
         //球状の当たり判定の半径
         const float Radius = 30.0f;

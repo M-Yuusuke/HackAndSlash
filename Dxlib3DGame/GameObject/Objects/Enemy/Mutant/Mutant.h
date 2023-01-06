@@ -43,6 +43,12 @@ namespace Calculation
         /// </summary>
         void Draw()override;
 
+        /// <summary>
+        /// 攻撃中か返す
+        /// </summary>
+        /// <returns>攻撃中ならtrue、そうでなければfalse</returns>
+        bool GetAttack() { return attack; }
+
     private:
         /// <summary>
         /// モデル・アニメーションの読み込み
@@ -59,12 +65,20 @@ namespace Calculation
         const VECTOR Scale = { 1.0f,1.0f ,1.0f };
         //初期座標
         const VECTOR FirstPos = { 300.0f,0,0 };
-        //球の初期ローカル座標
-        const VECTOR FirstLocalPos = { 0, 50.0f, 0 };
-        //足元判定の線分の始点
-        const VECTOR LineStart = { 0, 20.0f, 0 };
-        //足元判定の線分の終点
-        const VECTOR LineEnd = { 0, -30.0f, 0 };
+
+        ////球の初期ローカル座標
+        //const VECTOR FirstLocalPos = { 0, 50.0f, 0 };
+
+        //カプセルの始点
+        const VECTOR CapsuleStart = { 0, 120.0f, 0 };
+        //カプセルの終点 
+        const VECTOR CapsuleEnd = { 0, 20.0f, 0 };
+
+        ////足元判定の線分の始点
+        //const VECTOR LineStart = { 0, 20.0f, 0 };
+        ////足元判定の線分の終点
+        //const VECTOR LineEnd = { 0, -30.0f, 0 };
+
         //球状の当たり判定の半径
         const float Radius = 50.0f;
         //移動速度

@@ -38,6 +38,16 @@ namespace Calculation
         /// <returns>衝突していればtrue、していなければfalse</returns>
         bool CollisionPair(const Sphere& sphere, const int modelHandle, MV1_COLL_RESULT_POLY_DIM& collisionInfo);
 
+
+        /// <summary>
+        /// カプセルとモデルの当たり判定処理
+        /// </summary>
+        /// <param name="capsule">カプセル</param>
+        /// <param name="modelHandle">モデルハンドル</param>
+        /// <param name="collisionInfo">コリジョン結果代入用ポリゴン配列</param>
+        /// <returns>衝突していればtrue、していなければfalse</returns>
+        bool CollisionPair(const Capsule& capsule, const int modelHandle, MV1_COLL_RESULT_POLY_DIM& collisionInfo);
+
         /// <summary>
         /// 線分とモデルの当たり判定処理
         /// </summary>

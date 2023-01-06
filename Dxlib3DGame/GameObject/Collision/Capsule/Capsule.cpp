@@ -9,6 +9,7 @@ namespace Calculation
         LocalEnd = end;
         WorldStart = start;
         WorldEnd = end;
+        Radius = radius;
     }
 
     /// <summary>

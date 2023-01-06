@@ -43,6 +43,23 @@ namespace Calculation
     }
 
     /// <summary>
+     /// カプセルとモデルの当たり判定処理
+     /// </summary>
+     /// <param name="capsule">カプセル</param>
+     /// <param name="modelHandle">モデルハンドル</param>
+     /// <param name="collisionInfo">コリジョン結果代入用ポリゴン配列</param>
+     /// <returns>衝突していればtrue、していなければfalse</returns>
+    bool CollisionFunction::CollisionPair(const Capsule& capsule, const int modelHandle, MV1_COLL_RESULT_POLY_DIM& collisionInfo)
+    {
+        collisionInfo = MV1CollCheck_Capsule(modelHandle, -1, capsule.GetWorldStart(), capsule.GetWorldEnd(), capsule.GetRadius());
+        if (collisionInfo.HitNum == 0)
+        {
+            return false;
+        }
+        return true;
+    }
+
+    /// <summary>
     /// 線分とモデルの当たり判定処理
     /// </summary>
     /// <param name="line">線分</param>
