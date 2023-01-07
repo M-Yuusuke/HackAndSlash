@@ -35,7 +35,7 @@ namespace Calculation
         //カメラのバネ定数
         const float CameraSpringStrength = 2.0f;
         //カメラの初期座標
-        const VECTOR firstCameraPos = { 0,500,-500 };
+        const VECTOR FirstCameraPos = { 0,500,-500 };
 
         //描画距離の下限
         const float Near = 10.0f;

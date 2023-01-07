@@ -13,7 +13,7 @@ namespace Calculation
     aimCameraPos({ 0,0,0 }),
     aimLookPos({ 0,0,0 })
     {
-        cameraOffset = firstCameraPos;
+        cameraOffset = FirstCameraPos;
     }
 
     Camera::~Camera()
@@ -23,7 +23,7 @@ namespace Calculation
     void Camera::Initialize()
     {
         //カメラの位置をセット
-        pos = firstCameraPos;
+        pos = FirstCameraPos;
         SetCameraNearFar(Near, Far);
         //カメラのポジションの視点からプレイヤーの位置のターゲットを見る角度にカメラを設置
         SetCameraPositionAndTarget_UpVecY(pos, GameObjectManager::GetFirstGameObject(ObjectTag::Player)->GetPos());

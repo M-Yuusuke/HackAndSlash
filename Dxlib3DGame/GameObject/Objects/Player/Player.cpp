@@ -1,4 +1,5 @@
 #include "Player.h"
+#include <math.h>
 #include "../GameObject/VectorCalculation/VectorCalculation.h"
 #include "../GameObject/ObjectTag.h"
 #include "../GameObject/AssetManager/AssetManager.h"
@@ -55,7 +56,7 @@ namespace Calculation
         Rotate();
         Move(deltaTime);
         Attack(deltaTime);
-
+        MV1RefreshCollInfo(modelHandle);
         //移動処理
         pos += velocity;
 
@@ -88,7 +89,7 @@ namespace Calculation
     /// 当たり判定処理
     /// </summary>
     /// <param name="other">当たっているオブジェクトのポインタ</param>
-    void Player::OnCollisionEnter(const GameObjectBase* other)
+    void Player::OnCollisionEnter(GameObjectBase* other)
     {
         ObjectTag tag = other->GetTag();
 
@@ -99,17 +100,30 @@ namespace Calculation
         }
         if (tag == ObjectTag::Enemy)
         {
-            //OnCollisionEnemy((GameObjectBase*)other);
-            int ColModel = other->GetCollisionModel();
-
-            //自分の境界球とエネミーモデルとの当たり判定
-            MV1_COLL_RESULT_POLY_DIM colInfo;
-            if (collisionFunction.CollisionPair(collisionCapsule, ColModel, colInfo))
+            if (attack)
             {
-                OnDamage();
+                VECTOR distance = other->GetPos() - pos;
+                float twoPointsDisatance = sqrt(pow(distance.x, 2.0f) + pow(distance.z, 2.0f));
+                //扇の範囲内に存在していたら
+                if (twoPointsDisatance < Range)
+                {
+                    //ベクトルの正規化
+                    VECTOR dirNorm = VNorm(dir);
+                    distance = VNorm(distance);
+                    //2つのベクトルの内積を求める
+                    float dot = (dirNorm.x * distance.x) + (dirNorm.z * distance.z);
+                    if (dot / 2 <= Theta)
+                    {
+                        dynamic_cast<CharacterBase*>(other)->OnDamage();
+                    }
+                }
             }
+
+            
         }
     }
+
+    
 
     /// <summary>
     /// モデルの読み込み
@@ -128,8 +142,8 @@ namespace Calculation
         //アニメーションロード
         animControl->AddAnimation("../Data/Assets/Player/Idle.mv1");                                //待機モーション
         animControl->AddAnimation("../Data/Assets/Player/Run.mv1");                                 //移動モーション
-        animControl->AddAnimation("../Data/Assets/Player/Damage.mv1");                              //ダメージモーション
-        animControl->AddAnimation("../Data/Assets/Player/Deth.mv1");                                //死亡モーション
+        animControl->AddAnimation("../Data/Assets/Player/Damage.mv1", 30.0f, false);                //ダメージモーション
+        animControl->AddAnimation("../Data/Assets/Player/Deth.mv1", 30.0f, false);                  //死亡モーション
         animControl->AddAnimation("../Data/Assets/Player/Attack.mv1", 30.0f, false);                //通常攻撃モーション
         animControl->AddAnimation("../Data/Assets/Player/FrontRangeAttack.mv1", 30.0f, false);      //範囲攻撃モーション
 
@@ -140,9 +154,9 @@ namespace Calculation
         aimDir = dir;
 
         //当たり判定球セット
-        //collisionType = CollisionType::Sphere;
-        //collisionSphere.SetLocalCenter(FirstLocalPos);
-        //collisionSphere.SetRadius(Radius);
+        collisionType = CollisionType::Sphere;
+        collisionSphere.SetLocalCenter(FirstLocalPos);
+        collisionSphere.SetRadius(Radius);
 
         collisionType = CollisionType::Capsule;
         collisionCapsule = Capsule(CapsuleStart, CapsuleEnd,Radius);
@@ -272,34 +286,29 @@ namespace Calculation
     }
 
     /// <summary>
-    /// プレイヤーとステージの当たり判定
+    /// エネミーとの当たり判定
     /// </summary>
-    /// <param name="other">当たっているオブジェクトのポインタ</param>
-    void Player::OnCollisionStage(const GameObjectBase* other)
+    /// <param name="other">エネミーのポインタ</param>
+    void Player::OnCollisionEnemy(CharacterBase* other)
     {
-        int ColModel = other->GetCollisionModel();
-
-        //ステージと自分の境界球との当たり判定
-        MV1_COLL_RESULT_POLY_DIM colInfo;
-        if (collisionFunction.CollisionPair(collisionCapsule, ColModel, colInfo))
+        if (attack)
         {
-            //当たっている場合は押し戻し量を計算
-            VECTOR pushBackVec = collisionFunction.CalcSpherePushBackVecFormMesh(collisionSphere, colInfo);
-            pos += pushBackVec;
-
-            //コリジョン情報の解放
-            MV1CollResultPolyDimTerminate(colInfo);
-            CollisionUpdate();
+            VECTOR distance = other->GetPos() - pos;
+            float twoPointsDisatance = sqrt(pow(distance.x, 2.0f) + pow(distance.z, 2.0f));
+            //扇の範囲内に存在していたら
+            if (twoPointsDisatance < Range)
+            {
+                //ベクトルの正規化
+                VECTOR dirNorm = VNorm(dir);
+                distance = VNorm(distance);
+                //2つのベクトルの内積を求める
+                float dot = (dirNorm.x * distance.x) + (dirNorm.z * distance.z);
+                if (dot / 2 <= Theta)
+                {
+                    other->OnDamage();
+                }
+            }
         }
-
-        ////ステージと足元線分当たり判定
-        //MV1_COLL_RESULT_POLY colInfoLine;
-        //if (collisionFunction.CollisionPair(collisionLine, ColModel, colInfoLine))
-        //{
-        //    //当たっている場合は足元を衝突点に合わせる
-        //    pos = colInfoLine.HitPosition;
-        //    CollisionUpdate();
-        //}
     }
 
     /// <summary>
@@ -310,11 +319,15 @@ namespace Calculation
         if (HP > 0)
         {
             HP -= 2;
+            animTypeID = 2;
+            animControl->StartAnimaiton(animTypeID);
         }
         if (HP <= 0)
         {
             HP = 0;
             alive = false;
+            animTypeID = 3;
+            animControl->StartAnimaiton(animTypeID);
         }
     }
 }

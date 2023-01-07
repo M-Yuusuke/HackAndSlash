@@ -1,4 +1,5 @@
 #include "GameObjectManager.h"
+#include "../Objects/CharacterBase/CharacterBase.h"
 
 namespace Calculation
 {
@@ -64,6 +65,8 @@ namespace Calculation
             //見つけたオブジェクトを末尾に移動し、削除
             std::iter_swap(itr, Instance->Objects[tag].end() - 1);
             delete Instance->Objects[tag].back();
+            //末尾に移動したコンテナを削除
+            Instance->Objects[tag].erase(Instance->Objects[tag].end() - 1);
         }
     }
 
@@ -95,6 +98,14 @@ namespace Calculation
     /// </summary>
     void GameObjectManager::Init()
     {
+        //ペンディング中のオブジェクトをアクティブリストに追加
+        for (auto pending : Instance->PendingObjects)
+        {
+            ObjectTag tag = pending->GetTag();
+            Instance->Objects[tag].emplace_back(pending);
+        }
+        Instance->PendingObjects.clear();
+
         for (auto& tag : ObjectTagAll)
         {
             for (int i = 0; i < Instance->Objects[tag].size(); i++)
@@ -174,7 +185,6 @@ namespace Calculation
         for (int enemyNum = 0; enemyNum < Instance->Objects[ObjectTag::Enemy].size(); enemyNum++)
         {
             Instance->Objects[ObjectTag::Player][0]->OnCollisionEnter(Instance->Objects[ObjectTag::Enemy][enemyNum]);
-            Instance->Objects[ObjectTag::Enemy][enemyNum]->OnCollisionEnter(Instance->Objects[ObjectTag::Player][0]);
         }
 
         //プレイヤーとステージの当たり判定

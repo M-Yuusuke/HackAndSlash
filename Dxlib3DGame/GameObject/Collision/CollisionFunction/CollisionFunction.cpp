@@ -51,6 +51,7 @@ namespace Calculation
      /// <returns>è’ìÀÇµÇƒÇ¢ÇÍÇŒtrueÅAÇµÇƒÇ¢Ç»ÇØÇÍÇŒfalse</returns>
     bool CollisionFunction::CollisionPair(const Capsule& capsule, const int modelHandle, MV1_COLL_RESULT_POLY_DIM& collisionInfo)
     {
+        MV1RefreshCollInfo(modelHandle);
         collisionInfo = MV1CollCheck_Capsule(modelHandle, -1, capsule.GetWorldStart(), capsule.GetWorldEnd(), capsule.GetRadius());
         if (collisionInfo.HitNum == 0)
         {

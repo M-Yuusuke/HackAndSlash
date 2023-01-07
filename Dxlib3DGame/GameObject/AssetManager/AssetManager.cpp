@@ -50,7 +50,7 @@ namespace Calculation
             }
             Instance->MeshMap.emplace(meshFileName, meshID);
         }
-        //新規読み込みも2回め読み込みも、複製したものを返す
+        //新規読み込みも2回目以降の読み込みも、複製したものを返す
         //メッシュを使うキャラクターが複数いた場合に、原本を消されると全員消えて困るため
         //メッシュのコピー削除用にDuplivateMashに保存
         meshID = MV1DuplicateModel(Instance->MeshMap[meshFileName]);

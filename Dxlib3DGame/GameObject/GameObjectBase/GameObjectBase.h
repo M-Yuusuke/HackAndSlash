@@ -6,6 +6,7 @@
 #include "../Collision/LineSegment/LineSegment.h"
 #include "../Collision/Capsule/Capsule.h"
 #include "../Collision/Sphere/Sphere.h"
+class CharacterBase;
 
 namespace Calculation
 {
@@ -95,7 +96,7 @@ namespace Calculation
         /// 他のオブジェクトと衝突したときのリアクション
         /// </summary>
         /// <param name="other"></param>
-        virtual void OnCollisionEnter(const GameObjectBase* other) {}
+        virtual void OnCollisionEnter(GameObjectBase* other) {}
         
         /// <summary>
         /// このオブジェクトとの当たり判定
@@ -132,11 +133,6 @@ namespace Calculation
         /// </summary>
         /// <returns>collisionModel</returns>
         int GetCollisionModel() const { return collisionModel; }
-
-        /// <summary>
-        /// ダメージを受ける処理
-        /// </summary>
-        virtual void OnDamage() {}
 
     protected:
         //当たり判定位置の更新

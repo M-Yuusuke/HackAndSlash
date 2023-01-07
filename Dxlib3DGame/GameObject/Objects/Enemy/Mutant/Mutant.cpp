@@ -20,6 +20,14 @@ namespace Calculation
         attack = false;
     }
 
+    Mutant::Mutant(VECTOR pos):
+        CharacterBase(ObjectTag::Enemy,pos)
+    {
+        ModelLoad();
+        input = false;
+        attack = false;
+    }
+
     /// <summary>
     /// デストラクタ
     /// </summary>
@@ -46,32 +54,41 @@ namespace Calculation
     void Mutant::Update(float deltaTime)
     {
         animControl->AddAnimaitonTime(deltaTime);
-        Rotate();
-        Move(deltaTime);
+        if (animTypeID == 3 && !animControl->IsPlaying(3))
+        {
+            GameObjectManager::Release(this);
+        }
+        else if(animTypeID != 3)
+        {
+            Rotate();
+            Move(deltaTime);
+            MV1RefreshCollInfo(modelHandle);
 
-        //移動処理
-        pos += velocity;
+            //移動処理
+            //pos += velocity;
 
-        //3Dモデルのポジション設定
-        MV1SetPosition(modelHandle, pos);
+            //3Dモデルのポジション設定
+            MV1SetPosition(modelHandle, pos);
 
-        //向きに合わせてモデルを回転
-        //mixamoのモデルはX軸が反対向きに出るのでまずベクトルを180度回転させる
-        MATRIX RotYMat = MGetRotY(180.0f * (float)(DX_PI / 180.0f));
-        VECTOR NegativeVec = VTransform(dir, RotYMat);
+            //向きに合わせてモデルを回転
+            //mixamoのモデルはX軸が反対向きに出るのでまずベクトルを180度回転させる
+            MATRIX RotYMat = MGetRotY(180.0f * (float)(DX_PI / 180.0f));
+            VECTOR NegativeVec = VTransform(dir, RotYMat);
 
-        //モデルに回転をセットする
-        MV1SetRotationZYAxis(modelHandle, NegativeVec, { 0,1.0f,0 }, 0);
+            //モデルに回転をセットする
+            MV1SetRotationZYAxis(modelHandle, NegativeVec, { 0,1.0f,0 }, 0);
 
-        //当たり判定モデルも位置更新
-        CollisionUpdate();
+            //当たり判定モデルも位置更新
+            CollisionUpdate();
+        }
+
     }
 
     /// <summary>
     /// 当たり判定処理
     /// </summary>
     /// <param name="other">当たっているオブジェクトのポインタ</param>
-    void Mutant::OnCollisionEnter(const GameObjectBase* other)
+    void Mutant::OnCollisionEnter(GameObjectBase* other)
     {
         ObjectTag tag = other->GetTag();
 
@@ -80,18 +97,31 @@ namespace Calculation
         {
             OnCollisionStage(other);
         }
-        //プレイヤーとの当たり判定
-        if (tag == ObjectTag::Player)
-        {
-            int ColModel = other->GetCollisionModel();
+        ////プレイヤーとの当たり判定
+        //if (tag == ObjectTag::Player)
+        //{
+        //    int ColModel = other->GetCollisionModel();
 
-            //自分の境界球とエネミーモデルとの当たり判定
-            MV1_COLL_RESULT_POLY_DIM colInfo;
-            //自分の境界球とプレイヤーのモデルが衝突していたらダメージを受ける
-            if (collisionFunction.CollisionPair(collisionCapsule, ColModel, colInfo))
-            {
-                OnDamage();
-            }
+        //    //自分の境界球とエネミーモデルとの当たり判定
+        //    MV1_COLL_RESULT_POLY_DIM colInfo;
+
+        //    //自分の境界球とプレイヤーのモデルが衝突していたらダメージを受ける
+        //    if (collisionFunction.CollisionPair(collisionCapsule, ColModel, colInfo))
+        //    {
+        //        OnDamage();
+        //    }
+        //}
+    }
+
+    /// <summary>
+    /// ダメージを受ける処理
+    /// </summary>
+    void Mutant::OnDamage()
+    {
+        if (animTypeID != 3)
+        {
+            animTypeID = 3;
+            animControl->StartAnimaiton(animTypeID);
         }
     }
 
@@ -120,12 +150,12 @@ namespace Calculation
         animControl = new AnimationController(modelHandle);
 
         //アニメーションロード
-        animControl->AddAnimation("../Data/Assets/Enemy/Mutant/Idle.mv1");      //待機モーション
-        animControl->AddAnimation("../Data/Assets/Enemy/Mutant/Run.mv1");       //移動モーション
-        animControl->AddAnimation("../Data/Assets/Enemy/Mutant/Punch.mv1");     //攻撃モーション
+        animControl->AddAnimation("../Data/Assets/Enemy/Mutant/Idle.mv1");                  //待機モーション
+        animControl->AddAnimation("../Data/Assets/Enemy/Mutant/Run.mv1");                   //移動モーション
+        animControl->AddAnimation("../Data/Assets/Enemy/Mutant/Punch.mv1");                 //攻撃モーション
+        animControl->AddAnimation("../Data/Assets/Enemy/Mutant/Dying.mv1",30.0f,false);     //死亡モーション
 
         animControl->StartAnimaiton(animTypeID);
-        pos = FirstPos;
         MV1SetPosition(modelHandle, pos);
         dir = { 0,0,1 };
         aimDir = dir;
@@ -157,7 +187,7 @@ namespace Calculation
         VECTOR distance = playerPos - pos;
         dir = VNorm(distance) * deltaTime * MoveVelocity;
 
-        if (VSize(distance) > 200.0f)
+        if (VSize(distance) > 100.0f)
         {
             velocity = dir;
             if (animTypeID != 1)
@@ -166,7 +196,7 @@ namespace Calculation
                 animControl->StartAnimaiton(animTypeID);
             }
         }
-        else if (VSize(distance) <= 200.0f)
+        else if (VSize(distance) <= 100.0f)
         {
             velocity = { 0,0,0 };
             if (animTypeID != 2)

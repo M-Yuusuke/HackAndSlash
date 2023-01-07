@@ -12,7 +12,10 @@ Initialize* Initialize::Instance = nullptr;
 Initialize::Initialize()
 {
     Calculation::GameObjectManager::Entry(new Calculation::Player);
-    Calculation::GameObjectManager::Entry(new Calculation::Mutant);
+    for (int i = 0; i < 20; i++)
+    {
+        Calculation::GameObjectManager::Entry(new Calculation::Mutant(VGet(200 + (GetRand(150) - GetRand(150)), 0, 200 + (GetRand(150) - GetRand(150)))));
+    }
     Calculation::GameObjectManager::Entry(new Calculation::Stage);
     Calculation::GameObjectManager::Entry(new Calculation::Camera);
 }
@@ -42,9 +45,7 @@ void Initialize::DestroyInstance()
 
 SceneBase* Initialize::Update()
 {
-    ClearDrawScreen();
     Calculation::GameObjectManager::Init();
-    ScreenFlip();
     return SceneManager::NextScene(this);
 }
 

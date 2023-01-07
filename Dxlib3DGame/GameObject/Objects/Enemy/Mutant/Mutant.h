@@ -10,6 +10,7 @@ namespace Calculation
         /// コンストラクタ
         /// </summary>
         Mutant();
+        Mutant(VECTOR pos);
 
         /// <summary>
         /// デストラクタ
@@ -31,12 +32,12 @@ namespace Calculation
         /// 当たり判定処理
         /// </summary>
         /// <param name="other">当たっているオブジェクトのポインタ</param>
-        void OnCollisionEnter(const GameObjectBase* other)override;
+        void OnCollisionEnter(GameObjectBase* other)override;
 
         /// <summary>
         /// ダメージを受ける処理
         /// </summary>
-        void OnDamage() { alive = false; }
+        void OnDamage();
 
         /// <summary>
         /// 描画
@@ -64,10 +65,10 @@ namespace Calculation
         //拡大率
         const VECTOR Scale = { 1.0f,1.0f ,1.0f };
         //初期座標
-        const VECTOR FirstPos = { 300.0f,0,0 };
+        //const VECTOR FirstPos = { 300.0f,0,0 };
 
         ////球の初期ローカル座標
-        //const VECTOR FirstLocalPos = { 0, 50.0f, 0 };
+        const VECTOR FirstLocalPos = { 0, 50.0f, 0 };
 
         //カプセルの始点
         const VECTOR CapsuleStart = { 0, 120.0f, 0 };
@@ -82,7 +83,7 @@ namespace Calculation
         //球状の当たり判定の半径
         const float Radius = 50.0f;
         //移動速度
-        const float MoveVelocity = 100.0f;
+        const float MoveVelocity = 150.0f;
 
         //移動中か
         bool input;

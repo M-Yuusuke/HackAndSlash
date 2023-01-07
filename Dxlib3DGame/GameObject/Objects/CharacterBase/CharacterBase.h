@@ -1,6 +1,7 @@
 #pragma once
 #include "../GameObject/GameObjectBase/GameObjectBase.h"
 #include "../GameObject/AnimationController/AnimationController.h"
+
 namespace Calculation
 {
     class CharacterBase : public GameObjectBase
@@ -16,6 +17,11 @@ namespace Calculation
         /// デストラクタ
         /// </summary>
         virtual ~CharacterBase() {}
+
+        /// <summary>
+        /// ダメージを受ける処理
+        /// </summary>
+        virtual void OnDamage() {}
 
     protected:
         /// <summary>

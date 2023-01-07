@@ -53,7 +53,7 @@ namespace Calculation
     void Stage::Initialize()
     {
         //モデルデータがなかったら読み込む
-        if (modelHandle == -1 && collisionModel == -1)
+        if (modelHandle == -1)
         {
             ModelLoad();
         }

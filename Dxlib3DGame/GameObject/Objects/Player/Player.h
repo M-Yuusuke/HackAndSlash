@@ -40,7 +40,9 @@ namespace Calculation
         /// 当たり判定処理
         /// </summary>
         /// <param name="other">当たっているオブジェクトのポインタ</param>
-        void OnCollisionEnter(const GameObjectBase* other)override;
+        void OnCollisionEnter(GameObjectBase* other)override;
+
+
 
     private:
         /// <summary>
@@ -60,32 +62,36 @@ namespace Calculation
         /// <param name="deltaTime">1フレームの経過時間</param>
         void Attack(float deltaTime);
 
-        ///// <summary>
-        ///// プレイヤーとステージの当たり判定
-        ///// </summary>
-        ///// <param name="other">当たっているオブジェクトのポインタ</param>
-        void OnCollisionStage(const GameObjectBase* other);
-
+        /// <summary>
+        /// エネミーとの当たり判定
+        /// </summary>
+        /// <param name="other">エネミーのポインタ</param>
+        void OnCollisionEnemy(CharacterBase* other);
 
         /// <summary>
         /// ダメージを受ける処理
         /// </summary>
-        void OnDamage();
+        void OnDamage()override;
 
         //プレイヤーの大きさ
         const VECTOR PlayerScale = { 0.8f,0.8f, 0.8f };
         //プレイヤーの初期座標
-        const VECTOR FirstPos = { 100.0f,0,0 };
+        const VECTOR FirstPos = { 0,0,0 };
         //プレイヤーの初期向き
         const VECTOR FirstDir = { 0,0,1 };
 
         //球の初期ローカル座標
-        //const VECTOR FirstLocalPos = { 0, 50.0f, 0 };
+        const VECTOR FirstLocalPos = { 0, 50.0f, 0 };
 
         //カプセルの始点
         const VECTOR CapsuleStart = { 0, 100.0f, 0 };
         //カプセルの終点 
         const VECTOR CapsuleEnd = { 0, 20.0f, 0 };
+
+        //扇の角度
+        const float Theta = 0.5f;  //cos60°
+        //通常攻撃の範囲
+        const float Range = 200.0f;
 
         ////足元判定の線分の始点
         //const VECTOR LineStart = { 0,20.0f,0 };
@@ -93,7 +99,7 @@ namespace Calculation
         //const VECTOR LineEnd = { 0,-30.0f,0 };
 
         //球状の当たり判定の半径
-        const float Radius = 30.0f;
+        const float Radius = 40.0f;
         //入力ベクトルの最小値
         const float InputVecMin = 0.5f;
         //移動速度

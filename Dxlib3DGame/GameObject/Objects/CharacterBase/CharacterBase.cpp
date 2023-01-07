@@ -77,14 +77,14 @@ namespace Calculation
             CollisionUpdate();
         }
 
-        //ステージと足元線分当たり判定
-        MV1_COLL_RESULT_POLY colInfoLine;
-        if (collisionFunction.CollisionPair(collisionLine, ColModel, colInfoLine))
-        {
-            //当たっている場合は足元を衝突点に合わせる
-            pos = colInfoLine.HitPosition;
-            CollisionUpdate();
-        }
+        ////ステージと足元線分当たり判定
+        //MV1_COLL_RESULT_POLY colInfoLine;
+        //if (collisionFunction.CollisionPair(collisionLine, ColModel, colInfoLine))
+        //{
+        //    //当たっている場合は足元を衝突点に合わせる
+        //    pos = colInfoLine.HitPosition;
+        //    CollisionUpdate();
+        //}
     }
     
 }
