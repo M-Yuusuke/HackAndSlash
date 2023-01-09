@@ -84,6 +84,10 @@ namespace Calculation
         const float Radius = 50.0f;
         //ˆÚ“®‘¬“x
         const float MoveVelocity = 150.0f;
+        //î‚ÌŠp“x
+        const float Theta = 0.5f;  //cos60‹
+        //’ÊíUŒ‚‚Ì”ÍˆÍ
+        const float Range = 150.0f;
 
         //ˆÚ“®’†‚©
         bool input;

@@ -9,6 +9,7 @@ namespace Calculation
     {
         Player,
         Enemy,
+        Crystal,
         Stage,
         Camera,
         Effect
@@ -24,6 +25,7 @@ namespace Calculation
     {
         ObjectTag::Player,
         ObjectTag::Enemy,
+        ObjectTag::Crystal,
         ObjectTag::Stage,
         ObjectTag::Camera,
         ObjectTag::Effect

@@ -6,7 +6,6 @@
 #include "../Collision/LineSegment/LineSegment.h"
 #include "../Collision/Capsule/Capsule.h"
 #include "../Collision/Sphere/Sphere.h"
-class CharacterBase;
 
 namespace Calculation
 {
@@ -37,7 +36,7 @@ namespace Calculation
         /// <summary>
         /// 初期化処理（純粋仮想関数）
         /// </summary>
-        virtual void Initialize() = 0;
+        virtual void Initialize() {}
         /// <summary>
         /// 更新処理（純粋仮想関数）
         /// </summary>

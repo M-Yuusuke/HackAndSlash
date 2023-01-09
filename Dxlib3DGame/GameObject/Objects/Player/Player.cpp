@@ -31,7 +31,6 @@ namespace Calculation
     Player::~Player()
     {
         AssetManager::ReleaseMesh(modelHandle);
-        AssetManager::ReleaseMesh(collisionModel);
         delete animControl;
         modelHandle = -1;
         collisionModel = -1;
@@ -134,7 +133,7 @@ namespace Calculation
         modelHandle = AssetManager::GetMesh("../Data/Assets/Player/Model.mv1");
 
         //そのままだとステージに対してモデルが大きいので縮小
-        MV1SetScale(modelHandle, PlayerScale);
+        MV1SetScale(modelHandle, PlayerScele);
 
         //アニメーションコントローラーの生成
         animControl = new AnimationController(modelHandle);

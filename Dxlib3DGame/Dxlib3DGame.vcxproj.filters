@@ -100,6 +100,9 @@
     <Filter Include="GameObject\Objects\Characters\Enemy\Mutant">
       <UniqueIdentifier>{42a2576c-0fba-4626-9ee9-9394a7b4e5ca}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\Objects\Crystal">
+      <UniqueIdentifier>{6832c712-bc83-4574-8820-c20d0756899b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -170,6 +173,9 @@
     </ClCompile>
     <ClCompile Include="GameObject\Objects\Enemy\Mutant\Mutant.cpp">
       <Filter>GameObject\Objects\Characters\Enemy\Mutant</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject\Objects\Crystal\Crystal.cpp">
+      <Filter>GameObject\Objects\Crystal</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -244,6 +250,9 @@
     </ClInclude>
     <ClInclude Include="GameObject\Objects\Enemy\Mutant\Mutant.h">
       <Filter>GameObject\Objects\Characters\Enemy\Mutant</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\Objects\Crystal\Crystal.h">
+      <Filter>GameObject\Objects\Crystal</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

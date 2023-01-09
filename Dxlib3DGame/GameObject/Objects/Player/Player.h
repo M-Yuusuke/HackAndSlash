@@ -74,7 +74,7 @@ namespace Calculation
         void OnDamage()override;
 
         //プレイヤーの大きさ
-        const VECTOR PlayerScale = { 0.8f,0.8f, 0.8f };
+        const VECTOR PlayerScele = { 0.8f,0.8f, 0.8f };
         //プレイヤーの初期座標
         const VECTOR FirstPos = { 0,0,0 };
         //プレイヤーの初期向き

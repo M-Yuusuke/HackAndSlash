@@ -6,6 +6,7 @@
 #include "../GameObject/Collision/Sphere/Sphere.h"
 #include "../GameObject/Objects/Player/Player.h"
 #include "../GameObject/VectorCalculation/VectorCalculation.h"
+#include "../GameObject/Objects/Crystal/Crystal.h"
 
 namespace Calculation
 {
@@ -34,7 +35,6 @@ namespace Calculation
     Mutant::~Mutant()
     {
         AssetManager::ReleaseMesh(modelHandle);
-        AssetManager::ReleaseMesh(collisionModel);
         delete animControl;
         modelHandle = -1;
         collisionModel = -1;
@@ -56,6 +56,7 @@ namespace Calculation
         animControl->AddAnimaitonTime(deltaTime);
         if (animTypeID == 3 && !animControl->IsPlaying(3))
         {
+            GameObjectManager::Entry(new Crystal(pos));
             GameObjectManager::Release(this);
         }
         else if(animTypeID != 3)
@@ -97,20 +98,28 @@ namespace Calculation
         {
             OnCollisionStage(other);
         }
-        ////プレイヤーとの当たり判定
-        //if (tag == ObjectTag::Player)
-        //{
-        //    int ColModel = other->GetCollisionModel();
-
-        //    //自分の境界球とエネミーモデルとの当たり判定
-        //    MV1_COLL_RESULT_POLY_DIM colInfo;
-
-        //    //自分の境界球とプレイヤーのモデルが衝突していたらダメージを受ける
-        //    if (collisionFunction.CollisionPair(collisionCapsule, ColModel, colInfo))
-        //    {
-        //        OnDamage();
-        //    }
-        //}
+        //プレイヤーとの当たり判定
+        if (tag == ObjectTag::Player)
+        {
+            if (attack)
+            {
+                VECTOR distance = other->GetPos() - pos;
+                float twoPointsDisatance = sqrt(pow(distance.x, 2.0f) + pow(distance.z, 2.0f));
+                //扇の範囲内に存在していたら
+                if (twoPointsDisatance < Range)
+                {
+                    //ベクトルの正規化
+                    VECTOR dirNorm = VNorm(dir);
+                    distance = VNorm(distance);
+                    //2つのベクトルの内積を求める
+                    float dot = (dirNorm.x * distance.x) + (dirNorm.z * distance.z);
+                    if (dot / 2 <= Theta)
+                    {
+                        dynamic_cast<CharacterBase*>(other)->OnDamage();
+                    }
+                }
+            }
+        }
     }
 
     /// <summary>
