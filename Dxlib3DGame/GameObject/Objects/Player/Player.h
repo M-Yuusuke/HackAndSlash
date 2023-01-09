@@ -42,7 +42,10 @@ namespace Calculation
         /// <param name="other">当たっているオブジェクトのポインタ</param>
         void OnCollisionEnter(GameObjectBase* other)override;
 
-
+        /// <summary>
+        /// 経験値を得る処理
+        /// </summary>
+        void OnExperience(int getEXP) { EXP = getEXP; }
 
     private:
         /// <summary>
@@ -112,6 +115,7 @@ namespace Calculation
         //ゲームパッド入力状態
         XINPUT_STATE gamePadState;
         int HP;
+        int EXP;
         bool attack;
     };
 }

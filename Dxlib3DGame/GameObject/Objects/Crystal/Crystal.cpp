@@ -1,5 +1,7 @@
 #include "Crystal.h"
 #include "../GameObject/AssetManager/AssetManager.h"
+#include "../GameObject/GameObjectManager/GameObjectManager.h"
+#include "../Player/Player.h"
 
 namespace Calculation
 {
@@ -44,7 +46,18 @@ namespace Calculation
         ObjectTag tag = other->GetTag();
         if (ObjectTag::Player == tag)
         {
+            VECTOR playerPos = other->GetPos();
+            float VX = pos.x - playerPos.x;
+            float VZ = pos.z - playerPos.z;
+            float Hypotenuse = (VX * VX) + (VZ * VZ);
+
             //プレイヤーと衝突した場合の処理
+            if (Hypotenuse <= Radius * Radius)
+            {
+                dynamic_cast<Player*>(other)->OnExperience(EXP);
+                //当たったら削除
+                GameObjectManager::Release(this);
+            }
         }
     }
 
@@ -60,5 +73,8 @@ namespace Calculation
         MV1SetScale(modelHandle, Scale);
         //モデルを配置
         MV1SetPosition(modelHandle, pos);
+
+        collisionType = CollisionType::Sphere;
+        collisionSphere = Sphere();
     }
 }

@@ -41,6 +41,9 @@ namespace Calculation
 
         //クリスタルのサイズ
         const VECTOR Scale = { 0.1f,0.1f,0.1f };
+
+        const int EXP = 5;
+        const float Radius = 50.0f;
     };
 }
 

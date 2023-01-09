@@ -201,6 +201,12 @@ namespace Calculation
                 Instance->Objects[ObjectTag::Enemy][enemyNum]->OnCollisionEnter(Instance->Objects[ObjectTag::Stage][bgNum]);
             }
         }
+
+        //経験値とプレイヤーの当たり判定
+        for (int CrystalNum = 0; CrystalNum < Instance->Objects[ObjectTag::Crystal].size(); CrystalNum++)
+        {
+            Instance->Objects[ObjectTag::Crystal][CrystalNum]->OnCollisionEnter(Instance->Objects[ObjectTag::Player][0]);
+        }
     }
 
     /// <summary>
