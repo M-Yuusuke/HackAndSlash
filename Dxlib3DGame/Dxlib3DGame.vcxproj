@@ -183,6 +183,8 @@
     <ClCompile Include="Scene\SceneManager\SceneManager.cpp" />
     <ClCompile Include="Scene\Title\Title.cpp" />
     <ClCompile Include="System\Rule\Rule.cpp" />
+    <ClCompile Include="System\UI\PlayerUI\PlayerUI.cpp" />
+    <ClCompile Include="System\UI\UIBase\UIBase.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject\AnimationController\AnimationController.h" />
@@ -210,6 +212,8 @@
     <ClInclude Include="Scene\SceneManager\SceneManager.h" />
     <ClInclude Include="Scene\Title\Title.h" />
     <ClInclude Include="System\Rule\Rule.h" />
+    <ClInclude Include="System\UI\PlayerUI\PlayerUI.h" />
+    <ClInclude Include="System\UI\UIBase\UIBase.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

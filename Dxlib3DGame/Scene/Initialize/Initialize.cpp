@@ -6,6 +6,7 @@
 #include "../GameObject/Objects/Stage/Stage.h"
 #include "../GameObject/Objects/Camera/Camera.h"
 #include "../GameObject/Objects/Enemy/Mutant/Mutant.h"
+#include "../../System/Rule/Rule.h"
 
 Initialize* Initialize::Instance = nullptr;
 
@@ -46,6 +47,9 @@ void Initialize::DestroyInstance()
 SceneBase* Initialize::Update()
 {
     Calculation::GameObjectManager::Init();
+    rule->SetNowTime();
+    rule->SetDeltaTime();
+    rule->SetPrevTime();
     return SceneManager::NextScene(this);
 }
 

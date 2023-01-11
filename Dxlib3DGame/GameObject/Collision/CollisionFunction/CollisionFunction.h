@@ -48,6 +48,8 @@ namespace Calculation
         /// <returns>Õ“Ë‚µ‚Ä‚¢‚ê‚ÎtrueA‚µ‚Ä‚¢‚È‚¯‚ê‚Îfalse</returns>
         bool CollisionPair(const Capsule& capsule, const int modelHandle, MV1_COLL_RESULT_POLY_DIM& collisionInfo);
 
+
+
         /// <summary>
         /// ü•ª‚Æƒ‚ƒfƒ‹‚Ì“–‚½‚è”»’èˆ—
         /// </summary>

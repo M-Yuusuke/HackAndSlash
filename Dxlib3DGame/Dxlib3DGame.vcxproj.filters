@@ -103,6 +103,15 @@
     <Filter Include="GameObject\Objects\Crystal">
       <UniqueIdentifier>{6832c712-bc83-4574-8820-c20d0756899b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="System\UI">
+      <UniqueIdentifier>{b6185b97-e893-4682-98f4-ff4e373c00c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System\UI\PlayerUI">
+      <UniqueIdentifier>{32490fd0-e02a-4d57-a95b-69199bca8ddd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System\UI\UIBase">
+      <UniqueIdentifier>{49573c1c-b805-4cb2-852c-e4b56d989adc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -176,6 +185,12 @@
     </ClCompile>
     <ClCompile Include="GameObject\Objects\Crystal\Crystal.cpp">
       <Filter>GameObject\Objects\Crystal</Filter>
+    </ClCompile>
+    <ClCompile Include="System\UI\UIBase\UIBase.cpp">
+      <Filter>System\UI\UIBase</Filter>
+    </ClCompile>
+    <ClCompile Include="System\UI\PlayerUI\PlayerUI.cpp">
+      <Filter>System\UI\PlayerUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -253,6 +268,12 @@
     </ClInclude>
     <ClInclude Include="GameObject\Objects\Crystal\Crystal.h">
       <Filter>GameObject\Objects\Crystal</Filter>
+    </ClInclude>
+    <ClInclude Include="System\UI\UIBase\UIBase.h">
+      <Filter>System\UI\UIBase</Filter>
+    </ClInclude>
+    <ClInclude Include="System\UI\PlayerUI\PlayerUI.h">
+      <Filter>System\UI\PlayerUI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -83,7 +83,7 @@ namespace Calculation
         //‹…ó‚Ì“–‚½‚è”»’è‚Ì”¼Œa
         const float Radius = 50.0f;
         //ˆÚ“®‘¬“x
-        const float MoveVelocity = 150.0f;
+        const float MoveVelocity = 100.0f;
         //î‚ÌŠp“x
         const float Theta = 0.5f;  //cos60‹
         //’ÊíUŒ‚‚Ì”ÍˆÍ

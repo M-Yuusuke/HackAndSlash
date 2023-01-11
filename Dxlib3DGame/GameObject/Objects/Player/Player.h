@@ -45,7 +45,7 @@ namespace Calculation
         /// <summary>
         /// 経験値を得る処理
         /// </summary>
-        void OnExperience(int getEXP) { EXP = getEXP; }
+        void OnExperience(int getEXP) { exp = getEXP; }
 
     private:
         /// <summary>
@@ -114,8 +114,15 @@ namespace Calculation
 
         //ゲームパッド入力状態
         XINPUT_STATE gamePadState;
-        int HP;
-        int EXP;
+        //残存HP
+        int hp;
+        //経験値
+        int exp;
+        //攻撃角度保存用
+        float theta;
+        //攻撃範囲保存用
+        float range;
         bool attack;
+
     };
 }

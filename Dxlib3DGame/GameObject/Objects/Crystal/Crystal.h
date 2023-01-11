@@ -3,6 +3,9 @@
 
 namespace Calculation
 {
+    /// <summary>
+    /// 経験値クリスタルに関する
+    /// </summary>
     class Crystal : public GameObjectBase
     {
     public:

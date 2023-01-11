@@ -41,7 +41,7 @@ namespace Calculation
     /// </summary>
     void Player::Initialize()
     {
-        HP = MaxHP;
+        hp = MaxHP;
     }
 
     /// <summary>
@@ -152,18 +152,16 @@ namespace Calculation
         dir = FirstDir;
         aimDir = dir;
 
-        //当たり判定球セット
-        collisionType = CollisionType::Sphere;
-        collisionSphere.SetLocalCenter(FirstLocalPos);
-        collisionSphere.SetRadius(Radius);
+        ////当たり判定球セット
+        //collisionType = CollisionType::Sphere;
+        //collisionSphere.SetLocalCenter(FirstLocalPos);
+        //collisionSphere.SetRadius(Radius);
 
         collisionType = CollisionType::Capsule;
         collisionCapsule = Capsule(CapsuleStart, CapsuleEnd,Radius);
 
         //足元当たり判定線分セット
         //collisionLine = LineSegment(LineStart, LineEnd);
-
-        collisionModel = MV1SetupCollInfo(modelHandle);
     }
 
     /// <summary>
@@ -315,15 +313,15 @@ namespace Calculation
     /// </summary>
     void Player::OnDamage()
     {
-        if (HP > 0)
+        if (hp > 0)
         {
-            HP -= 2;
+            hp -= 2;
             animTypeID = 2;
             animControl->StartAnimaiton(animTypeID);
         }
-        if (HP <= 0)
+        if (hp <= 0)
         {
-            HP = 0;
+            hp = 0;
             alive = false;
             animTypeID = 3;
             animControl->StartAnimaiton(animTypeID);

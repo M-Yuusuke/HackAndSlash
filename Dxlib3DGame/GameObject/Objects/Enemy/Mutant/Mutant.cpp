@@ -54,19 +54,24 @@ namespace Calculation
     void Mutant::Update(float deltaTime)
     {
         animControl->AddAnimaitonTime(deltaTime);
+        //死亡アニメーションが再生終了していたら経験値を生成してエネミーモデルを削除
         if (animTypeID == 3 && !animControl->IsPlaying(3))
         {
             GameObjectManager::Entry(new Crystal(pos));
             GameObjectManager::Release(this);
         }
+        //死亡アニメーションが再生されていなければ
         else if(animTypeID != 3)
         {
             Rotate();
             Move(deltaTime);
-            MV1RefreshCollInfo(modelHandle);
 
             //移動処理
-            //pos += velocity;
+            pos += velocity;
+            if (pos.x > 500.0f || pos.x < -500.0f)
+            {
+                ;
+            }
 
             //3Dモデルのポジション設定
             MV1SetPosition(modelHandle, pos);
@@ -179,8 +184,6 @@ namespace Calculation
 
         collisionType = CollisionType::Capsule;
         collisionCapsule = Capsule(CapsuleStart, CapsuleEnd, Radius);
-
-        collisionModel = MV1SetupCollInfo(modelHandle);
     }
 
     /// <summary>
@@ -194,11 +197,11 @@ namespace Calculation
         VECTOR playerPos = player->GetPos();
         //プレイヤーとエネミーの距離計算
         VECTOR distance = playerPos - pos;
-        dir = VNorm(distance) * deltaTime * MoveVelocity;
+        dir = VNorm(distance);
 
         if (VSize(distance) > 100.0f)
         {
-            velocity = dir;
+            velocity = dir * deltaTime * MoveVelocity;
             if (animTypeID != 1)
             {
                 animTypeID = 1;
