@@ -1,6 +1,6 @@
 #pragma once
 #include "../GameObject/Objects/CharacterBase/CharacterBase.h"
-
+#include "../System/UI/PlayerUI/PlayerUI.h"
 namespace Calculation
 {
     /// <summary>
@@ -123,6 +123,7 @@ namespace Calculation
         //UŒ‚”ÍˆÍ•Û‘¶—p
         float range;
         bool attack;
+        PlayerUI* playerUI;
 
     };
 }

@@ -22,6 +22,7 @@ namespace Calculation
         animTypeID = 0;
         rotateNow = false;
         attack = false;
+        playerUI = new PlayerUI;
         ModelLoad();
     }
 
@@ -82,6 +83,8 @@ namespace Calculation
         //3Dモデルの描画
         MV1DrawModel(modelHandle);
         DrawCollider();
+        //HPゲージとEXPゲージの描画
+        playerUI->Draw(hp, exp);
     }
 
     /// <summary>
@@ -116,13 +119,9 @@ namespace Calculation
                         dynamic_cast<CharacterBase*>(other)->OnDamage();
                     }
                 }
-            }
-
-            
+            }            
         }
     }
-
-    
 
     /// <summary>
     /// モデルの読み込み

@@ -68,10 +68,6 @@ namespace Calculation
 
             //移動処理
             pos += velocity;
-            if (pos.x > 500.0f || pos.x < -500.0f)
-            {
-                ;
-            }
 
             //3Dモデルのポジション設定
             MV1SetPosition(modelHandle, pos);
