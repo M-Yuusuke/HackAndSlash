@@ -55,21 +55,7 @@ namespace Calculation
         Rotate();
         Move(deltaTime);
         Attack(deltaTime);
-        MV1RefreshCollInfo(modelHandle);
-        //移動処理
-        pos += velocity;
 
-        //3Dモデルのポジション設定
-        MV1SetPosition(modelHandle, pos);
-
-        //向きに合わせてモデルを回転
-        //mixamoのモデルはX軸が反対向きに出るのでまずベクトルを180度回転させる
-        MATRIX RotYMat = MGetRotY(180.0f * (float)(DX_PI / 180.0f));
-        VECTOR NegativeVec = VTransform(dir,RotYMat);
-
-        //モデルに回転をセットする
-        MV1SetRotationZYAxis(modelHandle, NegativeVec, { 0,1.0f,0 }, 0);
-        
         //当たり判定モデルも位置更新
         CollisionUpdate();
     }
@@ -99,24 +85,7 @@ namespace Calculation
         }
         if (tag == ObjectTag::Enemy)
         {
-            if (attack)
-            {
-                VECTOR distance = other->GetPos() - pos;
-                float twoPointsDisatance = sqrt(pow(distance.x, 2.0f) + pow(distance.z, 2.0f));
-                //扇の範囲内に存在していたら
-                if (twoPointsDisatance < Range)
-                {
-                    //ベクトルの正規化
-                    VECTOR dirNorm = VNorm(dir);
-                    distance = VNorm(distance);
-                    //2つのベクトルの内積を求める
-                    float dot = (dirNorm.x * distance.x) + (dirNorm.z * distance.z);
-                    if (dot / 2 <= Theta)
-                    {
-                        dynamic_cast<CharacterBase*>(other)->OnDamage();
-                    }
-                }
-            }            
+            OnCollisionEnemy(other);
         }
     }
 
@@ -246,6 +215,12 @@ namespace Calculation
                 animControl->StartAnimaiton(animTypeID);
             }
         }
+
+        //移動処理
+        pos += velocity;
+
+        //3Dモデルのポジション設定
+        MV1SetPosition(modelHandle, pos);
     }
 
     /// <summary>
@@ -282,7 +257,7 @@ namespace Calculation
     /// エネミーとの当たり判定
     /// </summary>
     /// <param name="other">エネミーのポインタ</param>
-    void Player::OnCollisionEnemy(CharacterBase* other)
+    void Player::OnCollisionEnemy(GameObjectBase* other)
     {
         if (attack)
         {
@@ -298,7 +273,7 @@ namespace Calculation
                 float dot = (dirNorm.x * distance.x) + (dirNorm.z * distance.z);
                 if (dot / 2 <= Theta)
                 {
-                    other->OnDamage();
+                    static_cast<CharacterBase*>(other)->OnDamage();
                 }
             }
         }

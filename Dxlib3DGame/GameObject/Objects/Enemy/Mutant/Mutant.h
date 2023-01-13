@@ -37,7 +37,7 @@ namespace Calculation
         /// <summary>
         /// ƒ_ƒ[ƒW‚ğó‚¯‚éˆ—
         /// </summary>
-        void OnDamage();
+        void OnDamage()override;
 
         /// <summary>
         /// •`‰æ

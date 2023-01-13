@@ -5,7 +5,7 @@ namespace Calculation
     class Sphere : public CollisionBase
     {
     public:
-        Sphere() {}
+        Sphere() { WorldCenter = { 0, 0, 0 }, LocalCenter = { 0,0,0 } ;}
         Sphere(const VECTOR& center, float radius);
         void Move(const VECTOR& pos)override;
 

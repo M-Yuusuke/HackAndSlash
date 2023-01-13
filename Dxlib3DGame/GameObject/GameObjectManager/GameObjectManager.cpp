@@ -185,6 +185,7 @@ namespace Calculation
         for (int enemyNum = 0; enemyNum < Instance->Objects[ObjectTag::Enemy].size(); enemyNum++)
         {
             Instance->Objects[ObjectTag::Player][0]->OnCollisionEnter(Instance->Objects[ObjectTag::Enemy][enemyNum]);
+            Instance->Objects[ObjectTag::Enemy][enemyNum]->OnCollisionEnter(Instance->Objects[ObjectTag::Player][0]);
         }
 
         //プレイヤーとステージの当たり判定

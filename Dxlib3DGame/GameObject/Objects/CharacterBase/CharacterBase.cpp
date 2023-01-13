@@ -58,6 +58,13 @@ namespace Calculation
                 dir = interPolateDir;
             }
         }
+        //向きに合わせてモデルを回転
+        //mixamoのモデルはX軸が反対向きに出るのでまずベクトルを180度回転させる
+        MATRIX RotYMat = MGetRotY(180.0f * (float)(DX_PI / 180.0f));
+        VECTOR NegativeVec = VTransform(dir, RotYMat);
+
+        //モデルに回転をセットする
+        MV1SetRotationZYAxis(modelHandle, NegativeVec, { 0,1.0f,0 }, 0);
     }
 
     void CharacterBase::OnCollisionStage(const GameObjectBase* other)

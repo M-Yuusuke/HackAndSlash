@@ -43,6 +43,11 @@ namespace Calculation
         void OnCollisionEnter(GameObjectBase* other)override;
 
         /// <summary>
+        /// ダメージを受ける処理
+        /// </summary>
+        void OnDamage()override;
+
+        /// <summary>
         /// 経験値を得る処理
         /// </summary>
         void OnExperience(int getEXP) { exp = getEXP; }
@@ -73,12 +78,7 @@ namespace Calculation
         /// エネミーとの当たり判定
         /// </summary>
         /// <param name="other">エネミーのポインタ</param>
-        void OnCollisionEnemy(CharacterBase* other);
-
-        /// <summary>
-        /// ダメージを受ける処理
-        /// </summary>
-        void OnDamage()override;
+        void OnCollisionEnemy(GameObjectBase* other);
 
         //プレイヤーの大きさ
         const VECTOR PlayerScele = { 0.8f,0.8f, 0.8f };
