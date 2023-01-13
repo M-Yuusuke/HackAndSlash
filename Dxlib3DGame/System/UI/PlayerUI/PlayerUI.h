@@ -1,6 +1,7 @@
 #pragma once
 #include "DxLib.h"
 #include "../UIBase/UIBase.h"
+
 class PlayerUI : public UIBase
 {
 public:
@@ -15,9 +16,14 @@ public:
     ~PlayerUI();
 
     /// <summary>
+    /// 更新処理
+    /// </summary>
+    void Update();
+
+    /// <summary>
     /// 描画処理
     /// </summary>
-    void Draw(int hp, int exp);
+    void Draw();
 
 private:
     //PlayerUIのフォントサイズ
@@ -36,5 +42,8 @@ private:
     const int HpMeterPosY = 900;
     //ExpゲージのY座標
     const int ExpMeterPosY = HpMeterPosY + MeterHeight + 50;
+
+    int hp;
+    int exp;
 };
 

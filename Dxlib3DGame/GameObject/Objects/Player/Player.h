@@ -47,6 +47,10 @@ namespace Calculation
         /// </summary>
         void OnExperience(int getEXP) { exp = getEXP; }
 
+        int GetHP() { return hp; }
+
+        int GetEXP() { return exp; }
+
     private:
         /// <summary>
         /// ƒ‚ƒfƒ‹‚Ì“Ç‚İ‚İ
@@ -123,7 +127,5 @@ namespace Calculation
         //UŒ‚”ÍˆÍ•Û‘¶—p
         float range;
         bool attack;
-        PlayerUI* playerUI;
-
     };
 }

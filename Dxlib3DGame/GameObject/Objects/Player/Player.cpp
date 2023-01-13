@@ -22,7 +22,6 @@ namespace Calculation
         animTypeID = 0;
         rotateNow = false;
         attack = false;
-        playerUI = new PlayerUI;
         ModelLoad();
     }
 
@@ -83,8 +82,6 @@ namespace Calculation
         //3Dƒ‚ƒfƒ‹‚Ì•`‰æ
         MV1DrawModel(modelHandle);
         DrawCollider();
-        //HPƒQ[ƒW‚ÆEXPƒQ[ƒW‚Ì•`‰æ
-        playerUI->Draw(hp, exp);
     }
 
     /// <summary>

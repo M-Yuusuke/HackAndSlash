@@ -5,10 +5,12 @@
 #include "../../GameObject/GameObjectManager/GameObjectManager.h"
 #include "../../System/Rule/Rule.h"
 #include "../GameObject/WaveManager/WaveManager.h"
+#include "../System/UI/PlayerUI/PlayerUI.h"
 
 Play* Play::Instance = nullptr;
 
-Play::Play()
+Play::Play():
+    playerUI(new PlayerUI)
 {
 }
 
@@ -37,6 +39,7 @@ SceneBase* Play::Update()
     Calculation::GameObjectManager::Update(rule->GetDeltaTime());
     waveManager->Update();
     Calculation::GameObjectManager::Collision();
+    playerUI->Update();
     rule->SetPrevTime();
     return this;
 }
@@ -45,5 +48,7 @@ void Play::Draw()
 {
     ClearDrawScreen();
     Calculation::GameObjectManager::Draw();
+    //HPƒQ[ƒW‚ÆEXPƒQ[ƒW‚Ì•`‰æ
+    playerUI->Draw();
     ScreenFlip();
 }
