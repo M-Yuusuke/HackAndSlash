@@ -66,6 +66,13 @@ namespace Calculation
         /// <returns>対象のタグの一番最初に登録されているオブジェクトのポインタ</returns>
         static GameObjectBase* GetFirstGameObject(ObjectTag tag);
 
+        /// <summary>
+        /// 対象のタグの生きているオブジェクトの総数
+        /// </summary>
+        /// <param name="tag">検索したいオブジェクトのタグ</param>
+        /// <returns>対象のタグの総数</returns>
+        static int GetObjectSize(ObjectTag tag) { return Instance->Objects[tag].size(); }
+
     private:
         GameObjectManager() {}
         ~GameObjectManager() { ReleaseAllObj(); }

@@ -175,6 +175,7 @@
     <ClCompile Include="GameObject\Objects\Player\Player.cpp" />
     <ClCompile Include="GameObject\Objects\Stage\Stage.cpp" />
     <ClCompile Include="GameObject\VectorCalculation\VectorCalculation.cpp" />
+    <ClCompile Include="GameObject\WaveManager\WaveManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Scene\Initialize\Initialize.cpp" />
     <ClCompile Include="Scene\Play\Play.cpp" />
@@ -205,6 +206,7 @@
     <ClInclude Include="GameObject\Objects\Stage\Stage.h" />
     <ClInclude Include="GameObject\ObjectTag.h" />
     <ClInclude Include="GameObject\VectorCalculation\VectorCalculation.h" />
+    <ClInclude Include="GameObject\WaveManager\WaveManager.h" />
     <ClInclude Include="Scene\Initialize\Initialize.h" />
     <ClInclude Include="Scene\Play\Play.h" />
     <ClInclude Include="Scene\Result\Result.h" />

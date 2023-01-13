@@ -151,10 +151,10 @@ namespace Calculation
         dir = FirstDir;
         aimDir = dir;
 
-        ////当たり判定球セット
-        //collisionType = CollisionType::Sphere;
-        //collisionSphere.SetLocalCenter(FirstLocalPos);
-        //collisionSphere.SetRadius(Radius);
+        //当たり判定球セット
+        collisionType = CollisionType::Sphere;
+        collisionSphere.SetLocalCenter(FirstLocalPos);
+        collisionSphere.SetRadius(Radius);
 
         collisionType = CollisionType::Capsule;
         collisionCapsule = Capsule(CapsuleStart, CapsuleEnd,Radius);

@@ -1,8 +1,10 @@
 #include "SceneBase.h"
 #include "../../System/Rule/Rule.h"
+#include "../GameObject/WaveManager/WaveManager.h"
 
 SceneBase::SceneBase() :
-    rule(Rule::CreateInstance())
+    rule(Rule::CreateInstance()),
+    waveManager(new WaveManager)
 {
 }
 

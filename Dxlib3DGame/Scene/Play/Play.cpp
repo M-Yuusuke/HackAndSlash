@@ -4,6 +4,7 @@
 #include "../../GameObject/VectorCalculation/VectorCalculation.h"
 #include "../../GameObject/GameObjectManager/GameObjectManager.h"
 #include "../../System/Rule/Rule.h"
+#include "../GameObject/WaveManager/WaveManager.h"
 
 Play* Play::Instance = nullptr;
 
@@ -34,6 +35,7 @@ SceneBase* Play::Update()
     rule->SetNowTime();
     rule->SetDeltaTime();
     Calculation::GameObjectManager::Update(rule->GetDeltaTime());
+    waveManager->Update();
     Calculation::GameObjectManager::Collision();
     rule->SetPrevTime();
     return this;

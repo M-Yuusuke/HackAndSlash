@@ -15,6 +15,9 @@ namespace Calculation
         /// </summary>
         /// <param name="pos">対象のキャラクターの現在地</param>
         void Move(const VECTOR& pos)override;
+
+        VECTOR GetWorldStartPos() { return WorldStart; }
+        VECTOR GetWorldEndPos() { return WorldStart; }
     };
 }
 
