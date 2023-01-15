@@ -61,6 +61,7 @@ namespace Calculation
         //向きに合わせてモデルを回転
         //mixamoのモデルはX軸が反対向きに出るのでまずベクトルを180度回転させる
         MATRIX RotYMat = MGetRotY(180.0f * (float)(DX_PI / 180.0f));
+        dir.y = 0;
         VECTOR NegativeVec = VTransform(dir, RotYMat);
 
         //モデルに回転をセットする

@@ -6,11 +6,14 @@
 #include "../../System/Rule/Rule.h"
 #include "../GameObject/WaveManager/WaveManager.h"
 #include "../System/UI/PlayerUI/PlayerUI.h"
+#include "../System/UI/WaveUI/WaveUI.h"
+#include "../GameObject/Objects/Player/Player.h"
 
 Play* Play::Instance = nullptr;
 
 Play::Play():
-    playerUI(new PlayerUI)
+    playerUI(new PlayerUI),
+    waveUI(new WaveUI)
 {
 }
 
@@ -36,6 +39,12 @@ SceneBase* Play::Update()
 {
     rule->SetNowTime();
     rule->SetDeltaTime();
+    Calculation::GameObjectBase* player = Calculation::GameObjectManager::GetFirstGameObject(Calculation::ObjectTag::Player);
+    //ƒvƒŒƒCƒ„[‚Ì‘Ì—Í‚ªs‚«‚½‚çI—¹
+    if (player->IsAlive())
+    {
+        sceneManager->NextScene(this);
+    }
     Calculation::GameObjectManager::Update(rule->GetDeltaTime());
     waveManager->Update();
     Calculation::GameObjectManager::Collision();
@@ -50,5 +59,6 @@ void Play::Draw()
     Calculation::GameObjectManager::Draw();
     //HPƒQ[ƒW‚ÆEXPƒQ[ƒW‚Ì•`‰æ
     playerUI->Draw();
+    waveUI->Draw(waveManager->GetWaveNum());
     ScreenFlip();
 }

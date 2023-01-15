@@ -186,17 +186,19 @@ namespace Calculation
         {
             Instance->Objects[ObjectTag::Player][0]->OnCollisionEnter(Instance->Objects[ObjectTag::Enemy][enemyNum]);
             Instance->Objects[ObjectTag::Enemy][enemyNum]->OnCollisionEnter(Instance->Objects[ObjectTag::Player][0]);
+            for (int anotherEnemyNum = 0; anotherEnemyNum < Instance->Objects[ObjectTag::Enemy].size(); anotherEnemyNum++)
+            {
+                if (anotherEnemyNum != enemyNum)
+                {
+                    Instance->Objects[ObjectTag::Enemy][anotherEnemyNum]->OnCollisionEnter(Instance->Objects[ObjectTag::Enemy][enemyNum]);
+                }
+            }
         }
 
         //プレイヤーとステージの当たり判定
         for (int bgNum = 0; bgNum < Instance->Objects[ObjectTag::Stage].size(); bgNum++)
         {
             Instance->Objects[ObjectTag::Player][0]->OnCollisionEnter(Instance->Objects[ObjectTag::Stage][bgNum]);
-        }
-
-        //全エネミーとステージとの当たり判定
-        for (int bgNum = 0; bgNum < Instance->Objects[ObjectTag::Stage].size();bgNum++)
-        {
             for (int enemyNum = 0; enemyNum < Instance->Objects[ObjectTag::Enemy].size(); enemyNum++)
             {
                 Instance->Objects[ObjectTag::Enemy][enemyNum]->OnCollisionEnter(Instance->Objects[ObjectTag::Stage][bgNum]);

@@ -1,5 +1,6 @@
 #include "GameObjectBase.h"
 #include "../AssetManager/AssetManager.h"
+#include "../VectorCalculation/VectorCalculation.h"
 
 namespace Calculation
 {
@@ -59,6 +60,16 @@ namespace Calculation
     * 当たり判定がモデル(メッシュ)の場合、ポリゴンごとの当たり判定情報を再構築するため、呼び出し回数を減らす工夫が必要。
     * その他の当たり判定は毎フレーム呼び出しても問題ない。
     */
+
+    /// <summary>
+    /// 押し戻し
+    /// </summary>
+    /// <param name="pushBack">押し戻すベクトル</param>
+    void GameObjectBase::PushBack(VECTOR pushBack)
+    {
+        pos -= pushBack;
+        MV1SetPosition(modelHandle, pos);
+    }
     void GameObjectBase::CollisionUpdate()
     {
         collisionSphere.Move(pos);
@@ -76,17 +87,17 @@ namespace Calculation
     //コライダーの描画
     void GameObjectBase::DrawCollider()
     {
-        DrawLine3D(collisionLine.GetWorldStart(), collisionLine.GetWorldEnd(), GetColor(0, 0, 0));
-        DrawSphere3D(collisionSphere.GetWorldCenter(), collisionSphere.GetRadius(), 8, GetColor(255, 0, 0), GetColor(0, 0, 0), FALSE);
-        DrawCapsule3D(collisionCapsule.GetWorldStart(), collisionCapsule.GetWorldEnd(), collisionCapsule.GetRadius(), 8, GetColor(0, 255, 0), GetColor(0, 0, 0),FALSE);
-        //コリジョンモデルが存在していたら半透明描画
-        if (collisionModel != -1)
-        {
-            //半透明にする
-            SetDrawBlendMode(DX_BLENDMODE_ALPHA, 128);
-            MV1DrawModel(collisionModel);
-            //元に戻す
-            SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 255);
-        }
+        //DrawLine3D(collisionLine.GetWorldStart(), collisionLine.GetWorldEnd(), GetColor(0, 0, 0));
+        //DrawSphere3D(collisionSphere.GetWorldCenter(), collisionSphere.GetRadius(), 8, GetColor(255, 0, 0), GetColor(0, 0, 0), FALSE);
+        //DrawCapsule3D(collisionCapsule.GetWorldStart(), collisionCapsule.GetWorldEnd(), collisionCapsule.GetRadius(), 8, GetColor(0, 255, 0), GetColor(0, 0, 0),FALSE);
+        ////コリジョンモデルが存在していたら半透明描画
+        //if (collisionModel != -1)
+        //{
+        //    //半透明にする
+        //    SetDrawBlendMode(DX_BLENDMODE_ALPHA, 128);
+        //    MV1DrawModel(collisionModel);
+        //    //元に戻す
+        //    SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 255);
+        //}
     }
 }

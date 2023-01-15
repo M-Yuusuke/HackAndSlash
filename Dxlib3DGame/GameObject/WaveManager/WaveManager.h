@@ -22,6 +22,12 @@ public:
     /// </summary>
     void Update();
 
+    /// <summary>
+    /// ウェーブの状態を渡す
+    /// </summary>
+    /// <returns>ウェーブナンバー</returns>
+    int GetWaveNum() { return WaveState; }
+
 private:
     /// <summary>
     /// 必要数のエネミーを生成

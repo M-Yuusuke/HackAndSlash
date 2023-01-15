@@ -1,3 +1,4 @@
+#pragma warning(disable:4244)   //int→float変換のワーニング抑制
 #include "WaveManager.h"
 #include "../GameObjectManager/GameObjectManager.h"
 #include "../Objects/Enemy/Mutant/Mutant.h"
@@ -79,7 +80,7 @@ void WaveManager::EntryEnemy(int entryNum)
         //現在出現しているエネミーが出現上限よりも少なかった場合のみ生成
         if (wave[WaveState].aliveEnemyNum <= aliveEnemyLimit)
         {
-            Calculation::GameObjectManager::Entry(new Calculation::Mutant(VGet(-GetRand(1000) + GetRand(1000), 0, -GetRand(1000) + GetRand(1000))));
+            Calculation::GameObjectManager::Entry(new Calculation::Mutant(VGet((-GetRand(1000) + GetRand(1000)), 0, (-GetRand(1000) + GetRand(1000)))));
         }
     }
 }

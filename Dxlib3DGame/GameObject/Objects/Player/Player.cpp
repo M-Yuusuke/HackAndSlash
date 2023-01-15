@@ -50,11 +50,11 @@ namespace Calculation
     /// <param name="deltaTime">1フレームの経過時間</param>
     void Player::Update(float deltaTime)
     {
-        animControl->AddAnimaitonTime(deltaTime);
 
         Rotate();
         Move(deltaTime);
         Attack(deltaTime);
+        animControl->AddAnimaitonTime(deltaTime);
 
         //当たり判定モデルも位置更新
         CollisionUpdate();

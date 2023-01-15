@@ -71,7 +71,7 @@ namespace Calculation
         /// </summary>
         /// <param name="tag">検索したいオブジェクトのタグ</param>
         /// <returns>対象のタグの総数</returns>
-        static int GetObjectSize(ObjectTag tag) { return Instance->Objects[tag].size(); }
+        static int GetObjectSize(ObjectTag tag) { return (int)Instance->Objects[tag].size(); }
 
     private:
         GameObjectManager() {}

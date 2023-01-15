@@ -1,6 +1,7 @@
 #pragma once
 #include "../SceneBase/SceneBase.h"
 class PlayerUI;
+class WaveUI;
 class Play : public SceneBase
 {
 public:
@@ -17,5 +18,6 @@ private:
     ~Play();
     static Play* Instance;
     PlayerUI* playerUI;
+    WaveUI* waveUI;
 };
 

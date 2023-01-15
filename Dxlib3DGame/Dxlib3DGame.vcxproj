@@ -186,6 +186,7 @@
     <ClCompile Include="System\Rule\Rule.cpp" />
     <ClCompile Include="System\UI\PlayerUI\PlayerUI.cpp" />
     <ClCompile Include="System\UI\UIBase\UIBase.cpp" />
+    <ClCompile Include="System\UI\WaveUI\WaveUI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject\AnimationController\AnimationController.h" />
@@ -216,6 +217,7 @@
     <ClInclude Include="System\Rule\Rule.h" />
     <ClInclude Include="System\UI\PlayerUI\PlayerUI.h" />
     <ClInclude Include="System\UI\UIBase\UIBase.h" />
+    <ClInclude Include="System\UI\WaveUI\WaveUI.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

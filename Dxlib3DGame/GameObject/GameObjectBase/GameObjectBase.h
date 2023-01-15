@@ -133,6 +133,12 @@ namespace Calculation
         /// <returns>collisionModel</returns>
         int GetCollisionModel() const { return collisionModel; }
 
+        /// <summary>
+        /// 押し戻し
+        /// </summary>
+        /// <param name="pushBack">押し戻すベクトル</param>
+        void PushBack(VECTOR pushBack);
+
     protected:
         //当たり判定位置の更新
         void CollisionUpdate();

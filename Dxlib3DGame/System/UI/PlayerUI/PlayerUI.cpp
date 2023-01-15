@@ -34,8 +34,7 @@ void PlayerUI::Update()
 /// 描画処理
 /// </summary>
 void PlayerUI::Draw()
-{
-
+{ 
     SetFontSize(FontSize);
     DrawString(HpStringPosX, HpMeterPosY, "HP", GetColor(White.x, White.y, White.z));
     //HPゲージフレーム

@@ -66,6 +66,14 @@ namespace Calculation
         /// <param name="collisionInfo">ƒRƒŠƒWƒ‡ƒ“Œ‹‰Ê‘ã“ü—pƒ|ƒŠƒSƒ“”z—ñ</param>
         /// <returns>‰Ÿ‚µ–ß‚µ—Ê</returns>
         VECTOR CalcSpherePushBackVecFormMesh(const Sphere& sphere, const MV1_COLL_RESULT_POLY_DIM& collisionInfo);
+
+        /// <summary>
+        /// ‰~“¯Žm‚Ì‰Ÿ‚µ–ß‚µ—ÊŒvŽZ
+        /// </summary>
+        /// <param name="sphereL"></param>
+        /// <param name="sphereR"></param>
+        /// <returns></returns>
+        VECTOR CirclePushBackVec(const Sphere& sphereL, const Sphere& sphereR);
     };
 }
 

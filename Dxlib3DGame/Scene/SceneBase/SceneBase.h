@@ -1,5 +1,6 @@
 #pragma once
 #include "DxLib.h"
+class SceneManager;
 class Rule;
 class WaveManager;
 class SceneBase
@@ -11,6 +12,7 @@ public:
     virtual void Draw() {};
 
 protected:
+    SceneManager* sceneManager;
     Rule* rule;
     WaveManager* waveManager;
     XINPUT_STATE gamePadState;

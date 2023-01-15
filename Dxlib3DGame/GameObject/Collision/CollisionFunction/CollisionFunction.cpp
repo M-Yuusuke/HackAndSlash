@@ -1,3 +1,4 @@
+#include <math.h>
 #include "CollisionFunction.h"
 #include "../../VectorCalculation/VectorCalculation.h"
 
@@ -133,5 +134,41 @@ namespace Calculation
 
         //‰Ÿ‚µ–ß‚µ—Ê‚ð•Ô‚·
         return NewCenter - sphere.GetWorldCenter();
+    }
+
+    /// <summary>
+    /// ‰~“¯Žm‚Ì‰Ÿ‚µ–ß‚µ—ÊŒvŽZ
+    /// </summary>
+    /// <param name="sphereL"></param>
+    /// <param name="sphereR"></param>
+    /// <returns></returns>
+    VECTOR CollisionFunction::CirclePushBackVec(const Sphere& sphereL, const Sphere& sphereR)
+    {
+        VECTOR a = sphereL.GetWorldCenter();
+        VECTOR b = sphereR.GetWorldCenter();
+        //”¼Œa‚Ì‡Œv
+        float r = sphereL.GetRadius() + sphereR.GetRadius();
+        float VX = a.x - b.x;
+        float VZ = a.z - b.z;
+        
+        VECTOR sub = VGet( 0,0,0 );
+        float squareVX = VX * VX;
+        float squareVZ = VZ * VZ;
+        //Õ“Ë‚µ‚Ä‚¢‚½‚ç
+        if (squareVX + squareVZ >= r * r)
+        {
+            float len = sqrt(squareVX + squareVZ);
+            float distance = r - len;
+            if (len > 0)
+            {
+                len = 1 / len;
+                VX *= len;
+                VZ *= len;
+            }
+            sub.x = VX * (distance / 2);
+            sub.y = 0;
+            sub.z = VZ * (distance / 2);
+        }
+        return sub;
     }
 }

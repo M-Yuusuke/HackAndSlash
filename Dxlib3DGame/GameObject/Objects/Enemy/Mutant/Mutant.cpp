@@ -107,6 +107,21 @@ namespace Calculation
                 }
             }
         }
+        if (tag == ObjectTag::Enemy)
+        {
+            ////衝突していた場合のみ押し戻しを計算
+            //if (collisionFunction.CollisionPair(collisionSphere, other->GetCollisionSphere()))
+            //{
+            //    VECTOR sub = { 0,0,0 };
+            //    //押し戻し量計算
+            //    sub = collisionFunction.CirclePushBackVec(collisionSphere, other->GetCollisionSphere());
+            //    //自分を押し戻す
+            //    pos += sub;
+            //    MV1SetPosition(modelHandle, pos);
+            //    //相手を押し戻す
+            //    other->PushBack(sub);
+            //}
+        }
     }
 
     /// <summary>
@@ -156,16 +171,16 @@ namespace Calculation
         dir = { 0,0,1 };
         aimDir = dir;
 
-        ////当たり判定球セット
-        //collisionType = CollisionType::Sphere;
-        //collisionSphere.SetLocalCenter(FirstLocalPos);
-        //collisionSphere.SetRadius(Radius);
+        //当たり判定球セット
+        collisionType = CollisionType::Sphere;
+        collisionSphere.SetLocalCenter(FirstLocalPos);
+        collisionSphere.SetRadius(Radius);
 
         //足元当たり判定線分セット
         //collisionLine = LineSegment(LineStart, LineEnd);
 
-        collisionType = CollisionType::Capsule;
-        collisionCapsule = Capsule(CapsuleStart, CapsuleEnd, Radius);
+        //collisionType = CollisionType::Capsule;
+        //collisionCapsule = Capsule(CapsuleStart, CapsuleEnd, Radius);
     }
 
     /// <summary>

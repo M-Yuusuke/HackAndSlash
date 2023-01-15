@@ -50,7 +50,7 @@ namespace Calculation
         /// <summary>
         /// ŒoŒ±’l‚ğ“¾‚éˆ—
         /// </summary>
-        void OnExperience(int getEXP) { exp = getEXP; }
+        void OnExperience(int getEXP) { exp += getEXP; }
 
         int GetHP() { return hp; }
 

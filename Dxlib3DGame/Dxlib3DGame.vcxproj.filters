@@ -115,6 +115,9 @@
     <Filter Include="GameObject\WaveManager">
       <UniqueIdentifier>{37148865-4e11-4946-8513-c672c27ee527}</UniqueIdentifier>
     </Filter>
+    <Filter Include="System\UI\WaveUI">
+      <UniqueIdentifier>{de511d31-9fde-47e6-a01f-c71632f95ca9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -197,6 +200,9 @@
     </ClCompile>
     <ClCompile Include="GameObject\WaveManager\WaveManager.cpp">
       <Filter>GameObject\WaveManager</Filter>
+    </ClCompile>
+    <ClCompile Include="System\UI\WaveUI\WaveUI.cpp">
+      <Filter>System\UI\WaveUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -283,6 +289,9 @@
     </ClInclude>
     <ClInclude Include="GameObject\WaveManager\WaveManager.h">
       <Filter>GameObject\WaveManager</Filter>
+    </ClInclude>
+    <ClInclude Include="System\UI\WaveUI\WaveUI.h">
+      <Filter>System\UI\WaveUI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
